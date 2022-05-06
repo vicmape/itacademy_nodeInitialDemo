@@ -88,7 +88,7 @@ app.post('/upload', (req, res) => {
         let type = req.files[key].mimetype;
 
         // Check the type of the image
-        if (!type.match(/image\/(png|jpg|gif)$/)) return res.status(400).send(`Incorrect format ${type}`);
+        if (!type.match(/image\/(png|jpg||jpeg|gif)$/)) return res.status(400).send(`Incorrect format ${type}`);
 
         // File successfully uploaded
         res.send(`FILE UPLOADED: ${req.files[key].name}`);
@@ -100,6 +100,9 @@ app.post('/upload', (req, res) => {
 
 
 function checkAuth(req, res, next){
+    if (!req.body.username) return res.status(400).send("'username' not found"); // 400 - Bad request
+    if (!req.body.password) return res.status(400).send("'password' not found"); // 400 - Bad request
+
     if (req.body.username !== "victor") return res.status(401).send("wrong user"); // 401 - Unauthorized
     if (req.body.password !== "1234") return res.status(401).send("wrong password"); // 401 - Bad request
 
@@ -108,8 +111,6 @@ function checkAuth(req, res, next){
 
 // N2 Ex1 && N2 Ex2
 app.post('/time', checkAuth, (req, res) => {
-    if (!req.body.username) return res.status(400).send("'username' not found"); // 400 - Bad request
-    if (!req.body.password) return res.status(400).send("'password' not found"); // 400 - Bad request
 
     const obj = {
         username: req.body.username,
@@ -123,22 +124,32 @@ app.post('/time', checkAuth, (req, res) => {
 // N3 Ex1
 app.get('/pokemon/:id', (req, res) => {
 
+    // Check if req.params.id is a natural number
+    let isnum = /^\d+$/.test(req.params.id);
+
+    if (!isnum) return res.status(400).send("Pokemon ID must be a natural number");
+
     fetch('https://pokeapi.co/api/v2/pokemon/'+req.params.id)
     .then(res => {
       if (res.status >= 400) {
-        throw new Error("Bad response from server");
+        throw new Error(res.status);
       }
       return res.json();
     })
     .then(data => {
-      res.send({
-          name: data.name,
-          height: data.height,
-          weight: data.weight
-      });
+        res.send({
+            name: data.name,
+            height: data.height,
+            weight: data.weight
+        });
     })
     .catch(err => {
-      console.error(err);
+
+        let num = parseInt(err.message);
+
+        if (num === 400) res.status(num).send(`Bad request`);
+        if (num === 404) res.status(num).send(`Resource not found`);
+        else res.status(500).send("Internal error"); // 500 - Internal error
     });
 });
 
