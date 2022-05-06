@@ -57,30 +57,33 @@ app.use(function (req, res, next) {
 
 // N1 Ex1
 app.get('/user', (req, res) => {
-    try{
-        const data = {
-            nom: "Victor",
-            edat: "34",
-            url: 'http://' + req.rawHeaders[1] + req.url
-        };
-        
-        res.send(data);
-        
-    } catch (err){
-       res.status(500).send(err.message);
+    try {
+        res.send( {
+            status: "success",
+            data: {
+                nom: "Victor",
+                edat: "34",
+                url: 'http://' + req.rawHeaders[1] + req.url
+            }
+        });
+
+    } catch (err) {
+        res.status(500).send({
+            status: "error",
+            message: err.message
+        });
     }
 });
 
 // N1 Ex2
 app.post('/upload', (req, res) => {
+    // Check if there is no req.file object
+    if (!req.files) return res.status(400).send({ status: "fail", message: "File not found"}); // 400 - Bad request
+    
+    // Check if there is more than 1 image
+    if (Object.keys(req.files).length > 1) return res.status(400).send({ status: "fail", message: "One file allowed"}); // 400 - Bad request
+    
     try {
-
-        // Check if there is no req.file object
-        if (!req.files) return res.status(400).send("File not found"); // 400 - Bad request
-
-        // Check if there is more than 1 image
-        if (Object.keys(req.files).length > 1) return res.status(400).send("Only one file allowed"); // 400 - Bad request
-
         // Get the key of the object
         let key = Object.keys(req.files);
 
@@ -88,74 +91,95 @@ app.post('/upload', (req, res) => {
         let type = req.files[key].mimetype;
 
         // Check the type of the image
-        if (!type.match(/image\/(png|jpg||jpeg|gif)$/)) return res.status(400).send(`Incorrect format ${type}`);
+        if (!type.match(/image\/(png|jpg|jpeg|gif)$/)) return res.status(415).send({ status: "fail", message: `Unsupported media type ${type}`});
 
         // File successfully uploaded
-        res.send(`FILE UPLOADED: ${req.files[key].name}`);
+        res.send({
+            status: "success",
+            data: {
+                file_uploaded: `${req.files[key].name}`
+            }
+        });
+
     
     } catch (err) {
-        res.status(500).send(err.message); // 500 - Internal error
+        res.status(500).send({
+            status: "error",
+            message: err.message
+        });
     }
 });
 
 
 function checkAuth(req, res, next){
-    if (!req.body.username) return res.status(400).send("'username' not found"); // 400 - Bad request
-    if (!req.body.password) return res.status(400).send("'password' not found"); // 400 - Bad request
+    if (!req.body.username) return res.status(400).send({ status: "fail", message: "'username' not found"}); // 400 - Bad request
+    if (!req.body.password) return res.status(400).send({ status: "fail", message: "'password' not found"}); // 400 - Bad request
 
-    if (req.body.username !== "victor") return res.status(401).send("wrong user"); // 401 - Unauthorized
-    if (req.body.password !== "1234") return res.status(401).send("wrong password"); // 401 - Bad request
+    if (req.body.username !== "victor") return res.status(401).send({ status: "fail", message: "wrong user"}); // 401 - Unauthorized
+    if (req.body.password !== "1234") return send({ status: "fail", message: "wrong password"}); // 401 - Unauthorized
 
     next();
 }
 
 // N2 Ex1 && N2 Ex2
 app.post('/time', checkAuth, (req, res) => {
-
-    const obj = {
-        username: req.body.username,
-        date: new Date()
+    try {
+        res.send({
+            status: "success",
+            data: {
+                username: req.body.username,
+                date: new Date()
+            }
+        });
+    } catch (err) {
+        res.status(500).send({
+            status: "error",
+            message: err.message
+        });
     }
-
-    res.send(obj);
 });
 
 
 // N3 Ex1
 app.get('/pokemon/:id', (req, res) => {
 
-    // Check if req.params.id is a natural number
-    let isnum = /^\d+$/.test(req.params.id);
+    try {
+        // Check if req.params.id is a natural number
+        let isnum = /^\d+$/.test(req.params.id);
 
-    if (!isnum) return res.status(400).send("Pokemon ID must be a natural number");
+        if (!isnum) return res.status(400).send({ status: "fail", message: "Pokemon id must be a natural number"});
 
-    fetch('https://pokeapi.co/api/v2/pokemon/'+req.params.id)
-    .then(res => {
-      if (res.status >= 400) {
-        throw new Error(res.status);
-      }
-      return res.json();
-    })
-    .then(data => {
-        res.send({
-            name: data.name,
-            height: data.height,
-            weight: data.weight
-        });
-    })
-    .catch(err => {
+        fetch('https://pokeapi.co/api/v2/pokemon/'+req.params.id)
+        .then(res => {
+        if (res.status >= 400) {
+            throw new Error(res.status);
+        }
+        return res.json();
+        })
+        .then(data => {
+            res.send({
+                status: "success",
+                data: {
+                    name: data.name,
+                    height: data.height,
+                    weight: data.weight
+                }
+            });
+        })
+
+    } catch(err) {
 
         let num = parseInt(err.message);
 
-        if (num === 400) res.status(num).send(`Bad request`);
-        if (num === 404) res.status(num).send(`Resource not found`);
-        else res.status(500).send("Internal error"); // 500 - Internal error
-    });
+        if (num === 400) res.status(num).send({ status: "fail", message: "Bad request"});
+        else if (num === 404) res.status(num).send({ status: "fail", message: "Resource not found"});
+        else res.status(500).send({ status: "error", message: err.message });
+    }
 });
 
 // Default route
 app.get("*", (req, res) => {
-    res.status(404).send("PAGE NOT FOUND"); // 404 - Resource not found
+    res.status(404).send({ status: "fail", message: "PAGE NOT FOUND"});
 });
 
 const port = process.env.PORT || 3000;
