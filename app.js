@@ -9,7 +9,12 @@ db.authenticate()
 
 const app = express();
 
-app.get('/', (req, res) => res.send("INDEX"));
+// Routes
+require('./startup/routes')(app);
+
+app.use(function(req,res){
+    res.send(404);
+});
 
 const PORT = process.env.API_PORT || 3000;
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
