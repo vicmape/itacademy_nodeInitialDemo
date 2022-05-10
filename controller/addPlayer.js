@@ -1,13 +1,13 @@
 
-const Players = require('../models/dices');
+const {Players} = require ('../models/dices');
 
 module.exports = async function addPlayers(req, res) {
 
-    if (!req.body || !req.body.username) {
-        return res.status(400).send({ status: "fail", message: "username not found"}); // 400 - Bad request
-    }
-
     try {
+
+        if (!req.body.username) {
+            return res.status(400).send({ status: "fail", message: "username property not found"}); // 400 - Bad request
+        }
 
         const alreadyRegistered = await Players.findOne({
             where: { username: req.body.username },
@@ -26,7 +26,6 @@ module.exports = async function addPlayers(req, res) {
                 username: player.username,
             }
         });
-
 
      } catch (err) {
         res.status(500).send({

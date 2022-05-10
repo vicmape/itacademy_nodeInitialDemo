@@ -9,31 +9,25 @@ const Players = db.define('players', {
     }
 })
 
-// const Rolls = db.define('rolls', {
-//     dice1: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false
-//     },
-//     dice2: {
-//         type: Sequelize.INTEGER,
-//         allowNull: false
-//     },
-//     player_id: {
-//         type: Sequelize.INTEGER,
-//         references: {
-//             model: 'players', 
-//             key: 'id', 
-//          }
-//     }
-// })
+const Rolls = db.define('rolls', {
+    dice1: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    dice2: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    }
+})
 
-// Players.hasMany(Rolls); // one-to-many relationship
+Players.hasMany(Rolls); // one-to-many relationship
 
-// (async () => {
-//     await Players.sync();
-//     await Rolls.sync();
-// })().catch(err => {
-//     console.error(err);
-// });
+Players.sync()
+.then()
+.catch(err => console.log(err));
 
-module.exports = Players;
+Rolls.sync()
+.then()
+.catch(err => console.log(err));
+
+module.exports = {Players, Rolls};

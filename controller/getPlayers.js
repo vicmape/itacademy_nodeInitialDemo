@@ -1,23 +1,24 @@
-
-const Players = require('../models/dices');
+const {Players} = require ('../models/dices');
 
 module.exports = async function getPlayers(req, res) {
+    try {
+        let players = await Players.findAll();
 
-    // Query all players
-    Players.findAll()
-        .then(players => {
-            //Get id and usernames
-            let playerData = players.map(i => {
-                return {id: i.dataValues.id, username:i.dataValues.username}
-            });
+        let playersData = players.map(i => {
+            return {id: i.dataValues.id, username:i.dataValues.username}
+        });
 
-              res.status(200).send({
-                  status: "success",
-                  data:  {
-                      players: playerData
-                  }
-              });
+        res.status(200).send({
+            status: "success",
+            data:  {
+                players: playersData
+            }
+        });
 
+    } catch (err) {
+        res.status(500).send({
+            status: 'error',
+            message: err.message
         })
-        .catch(err => console.log(err))
+    }
 }
