@@ -4,7 +4,7 @@ module.exports = async function (req, res) {
     try {
         // Check if user exists
         const user = await Players.findOne({
-            where: { username: req.params.id },
+            where: { id: parseInt(req.params.id) },
             });
         if(!user) return res.status(400).send({ status: "fail", message: "user not found"}); // 400 - Bad request
 

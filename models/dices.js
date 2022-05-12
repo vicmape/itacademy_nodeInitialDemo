@@ -17,10 +17,15 @@ const Rolls = db.define('rolls', {
     dice2: {
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+    win: {
+        type: Sequelize.SMALLINT,
+        allowNull: false
     }
 })
 
 Players.hasMany(Rolls); // one-to-many relationship
+Rolls.belongsTo(Players);
 
 Players.sync()
 .then()
