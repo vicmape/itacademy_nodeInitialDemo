@@ -7,6 +7,9 @@ const updatePlayer = require('../controller/updatePlayer');
 const rollDices = require('../controller/rollDices');
 const deleteRolls = require('../controller/deleteRolls');
 const getRolls = require('../controller/getRolls');
+const getRanking = require('../controller/getRanking');
+const getLoser = require('../controller/getLoser');
+const getWinner = require('../controller/getWinner');
 
 router.post('/', addPlayer);
 router.put('/', updatePlayer);
@@ -14,8 +17,8 @@ router.post('/:id/games', rollDices);
 router.delete('/:id/games', deleteRolls);
 router.get('/', getPlayers);
 router.get('/:id/games', getRolls);
-router.get('/ranking', (req, res) => res.send('GET /players/ranking'));
-router.get('/ranking/loser', (req, res) => res.send('GET /players/ranking/loser'));
-router.get('/ranking/winner', (req, res) => res.send('GET /players/ranking/winner'));
+router.get('/ranking', getRanking);
+router.get('/ranking/loser', getLoser);
+router.get('/ranking/winner', getWinner);
 
 module.exports = router;
