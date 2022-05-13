@@ -8,6 +8,7 @@ module.exports = async function (req, res) {
             });
         if(!user) return res.status(400).send({ status: "fail", message: "user not found"}); // 400 - Bad request
 
+        // Roll dices
         //Math.floor(Math.random()*(max-min+1)+min) for number between [1,6]
         let dice1 = Math.floor(Math.random()*(6-1+1)+1);
         let dice2 = Math.floor(Math.random()*(6-1+1)+1);

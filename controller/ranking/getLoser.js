@@ -1,14 +1,14 @@
 const {Players, Rolls} = require ('../../models/dices');
 const Sequelize = require('sequelize');
 
-module.exports = async function getPlayers(req, res) {
+module.exports = async (req, res) => {
     try {
         let players = await Players.findAll({
             include: [{
                 model: Rolls,
                 required: false
                }],
-            attributes: ['id',[Sequelize.fn('AVG', Sequelize.col('win')), 'win']],
+            attributes: ['id', 'username',[Sequelize.fn('AVG', Sequelize.col('win')), 'win']],
             group: 'id'
         });
 
@@ -18,21 +18,35 @@ module.exports = async function getPlayers(req, res) {
 
         let rank = 1;
 
-        let playersData = players.map(i => {
-            return {
-                playerId: i.dataValues.id,
-                percentage: (i.dataValues.win) ? i.dataValues.win:0,
-                rankingPosition: rank++}
-        });
+        let player =
+            players
+                .filter(p => p.dataValues.win)
+                .map(i => {
+                    return {
+                        playerId: i.dataValues.id,
+                        username: i.dataValues.username,
+                        percentage: i.dataValues.win,
+                        rankingPosition: rank++
+                    }
+                });
 
-        playersData = playersData[playersData.length - 1];
+        // Check if there is no rolls yet
+        if (Object.keys(player).length === 0) {
+            res.status(404).send({
+                status: "fail",
+                data:  {
+                    message: "There is no ranking yet"
+                }
+            });
+        } else {
 
-        res.status(200).send({
-            status: "success",
-            data:  {
-                players: playersData
-            }
-        });
+            player = player[player.length - 1];
+            
+            res.status(200).send({
+                status: "success",
+                player
+            });
+        }
 
     } catch (err) {
         res.status(500).send({

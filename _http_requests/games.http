@@ -1,0 +1,8 @@
+### Get rolls of one player
+GET http://localhost:5000/games/7
+
+### A player rolls dices
+POST http://localhost:5000/games/7
+
+### Delete all rolls of a given player
+DELETE http://localhost:5000/games/7

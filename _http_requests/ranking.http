@@ -1,0 +1,8 @@
+### Get ranking
+GET http://localhost:5000/ranking
+
+### Get winner
+GET http://localhost:5000/ranking/winner
+
+### Get loser
+GET http://localhost:5000/ranking/loser
