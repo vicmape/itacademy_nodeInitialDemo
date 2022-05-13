@@ -1,7 +1,11 @@
-### Get players list
+###################################################
+### GET PLAYERS ###################################
+###################################################
 GET http://localhost:5000/players
 
-### Add player with username
+###################################################
+### ADD PLAYER ####################################
+###################################################
 POST http://localhost:5000/players
 Content-Type: application/json
 
@@ -9,11 +13,15 @@ Content-Type: application/json
     "username": "victor"
 }
 
-### Add player ANONIM
+###################################################
+### ADD ANONIM ####################################
+###################################################
 POST http://localhost:5000/players
 
 
-### Modify players username
+###################################################
+### MODIFY PLAYER #################################
+###################################################
 PUT http://localhost:5000/players/1
 Content-Type: application/json
 
@@ -21,7 +29,9 @@ Content-Type: application/json
     "username": "javi"
 }
 
-### Delete player
-DELETE http://localhost:5000/players/5
+###################################################
+### DELETE PLAYER #################################
+###################################################
+DELETE http://localhost:5000/players/3
 
 

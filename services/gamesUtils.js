@@ -1,7 +1,7 @@
 const database = require('../config/database');
 const {Players, Rolls} = require ('../models/dices');
 
-async function rollDices (req, res) {
+async function runGame (req, res) {
 
     // Check if user exists
     const user = await Players.findOne({
@@ -28,7 +28,7 @@ async function rollDices (req, res) {
     return roll;
 };
 
-async function getRolls(req, res) {
+async function getGames(req, res) {
     console.log(1)
     // Check if user exists
     const user = await Players.findOne({
@@ -46,7 +46,7 @@ async function getRolls(req, res) {
     return rolls;
 }
 
-async function deleteRolls(req, res) {
+async function deleteGames(req, res) {
     const user = await Players.findOne({
         where: { id: parseInt(req.params.id) },
         });
@@ -55,7 +55,5 @@ async function deleteRolls(req, res) {
     let result = await Rolls.destroy({
         where: { playerId: user.id },
         });
-
-    return result;
 }
-module.exports = {rollDices, getRolls, deleteRolls}
+module.exports = {runGame, getGames, deleteGames}

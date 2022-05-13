@@ -1,9 +1,9 @@
-const {deleteRolls} = require('../../services/gamesUtils')
+const {deleteGames} = require('../../services/gamesUtils')
 
 module.exports = async function (req, res) {
     try {
         // Check if user exists
-        let result = await deleteRolls(req,res);
+        let result = await deleteGames(req,res);
 
         // I know this is not the best way of doing this but I dont want to build a cool loggin system right now...
         if (result === 1) return res.status(400).send({ status: "fail", message: "user not found"}); // 400 - Bad request
@@ -12,7 +12,7 @@ module.exports = async function (req, res) {
             status: "success",
             data: {
                 playerId: parseInt(req.params.id),
-                message: "Rolls deleted"
+                message: "Games deleted"
             }
         });
 

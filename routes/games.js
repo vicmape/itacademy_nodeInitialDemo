@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/:id', require('../controller/games/getRolls'));
-router.post('/:id', require('../controller/games/rollDices'));
-router.delete('/:id', require('../controller/games/deleteRolls'));
+router.get('/:id', require('../controller/games/getGames'));
+router.post('/:id', require('../controller/games/runGame'));
+router.delete('/:id', require('../controller/games/deleteGames'));
 
 module.exports = router;
