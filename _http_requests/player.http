@@ -32,6 +32,6 @@ Content-Type: application/json
 ###################################################
 ### DELETE PLAYER #################################
 ###################################################
-DELETE http://localhost:5000/players/3
+DELETE http://localhost:5000/players/
 
 

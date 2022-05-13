@@ -29,7 +29,7 @@ async function runGame (req, res) {
 };
 
 async function getGames(req, res) {
-    console.log(1)
+
     // Check if user exists
     const user = await Players.findOne({
     where: { id: parseInt(req.params.id) },

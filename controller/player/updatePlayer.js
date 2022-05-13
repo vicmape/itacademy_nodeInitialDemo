@@ -7,8 +7,9 @@ module.exports = async (req, res)  => {
         const player = await Players.findOne({where: { id: parseInt(req.params.id) }});
 
         // Check if player ID does exist
-        if (!player) return res.status(400).send({ status: "fail", message: "player id not found"}); // 400 - Bad request
-        
+        if (!player) {
+            return res.status(400).send({ status: "fail", message: "player id not found"}); // 400 - Bad request
+        }
 
         // Check if username is provided
         if (!req.body.username) return res.status(400).send({ status: "fail", message: "username not provided"}); // 400 - Bad request
