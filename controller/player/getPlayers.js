@@ -1,20 +1,13 @@
-const {Players, Rolls} = require ('../models/dices');
+const {Players, Rolls} = require ('../../models/dices');
 const Sequelize = require('sequelize');
 
-module.exports = async function getPlayers(req, res) {
+module.exports = async (req, res) => {
     try {
 
-        let players = await Players.findAll({
-            include: [{
-                model: Rolls,
-                required: false
-               }],
-            attributes: ['id',[Sequelize.fn('AVG', Sequelize.col('win')), 'win']],
-            group: 'id'
-         });
+        let players = await Players.findAll();
 
         let playersData = players.map(i => {
-            return {playerId: i.dataValues.id, percentage: (i.dataValues.win) ? i.dataValues.win:0}
+            return {id: i.dataValues.id, username:i.dataValues.username}
         });
 
         res.status(200).send({

@@ -1,37 +1,40 @@
 const {Players} = require ('../../models/dices');
 
-module.exports = async function updatePlayer(req, res) {
+module.exports = async (req, res)  => {
     try {
-        // Check if username is provided
-        if (!req.body.username) return res.status(400).send({ status: "fail", message: "username property not found"}); // 400 - Bad request
-        // Check if new username is provided
-        if (!req.body.newUsername) return res.status(400).send({ status: "fail", message: "newUsername property not found"}); // 400 - Bad request
-        // Check if username and new username are different
-        if (req.body.username === req.body.newUsername) return res.status(400).send({ status: "fail", message: "newUsername must be different"}); // 400 - Bad request
 
+        // Find the user
+        const player = await Players.findOne({where: { id: parseInt(req.params.id) }});
+
+        // Check if player ID does exist
+        if (!player) return res.status(400).send({ status: "fail", message: "player id not found"}); // 400 - Bad request
+        
+
+        // Check if username is provided
+        if (!req.body.username) return res.status(400).send({ status: "fail", message: "username not provided"}); // 400 - Bad request
+
+        // Check if username is different from previous one
+        if (player.dataValues.username === req.body.username) return res.status(400).send({ status: "fail", message: "new username must be different"}); // 400 - Bad request
 
         // Check if username is already registered
-        const usernameRegistered = await Players.findOne({
+        const alreadyRegistered = await Players.findOne({
             where: { username: req.body.username },
-          });
-        if(!usernameRegistered) return res.status(400).send({ status: "fail", message: "username not found"}); // 400 - Bad request
+        });
 
-        // Check if new username is already registered
-        const newUsernameRegistered = await Players.findOne({
-            where: { username: req.body.newUsername },
-          });
-        if(newUsernameRegistered) return res.status(400).send({ status: "fail", message: "newUsername already registered"}); // 400 - Bad request
+        if (alreadyRegistered) {
+            return res.status(400).send({ status: "fail", message: "username already registered"}); // 400 - Bad request
+        }
 
         // Update record
         await Players.update(
-            { username: req.body.newUsername},
-            { where: { username: req.body.username } }
+            { username: req.body.username.toLowerCase()},
+            { where: { username: player.dataValues.username } }
         );
 
         res.status(200).send({
             status: "success",
             data: {
-                username: req.body.newUsername
+                username: req.body.username.toLowerCase()
             }
         });
 

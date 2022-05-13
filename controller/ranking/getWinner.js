@@ -1,4 +1,4 @@
-const {Players, Rolls} = require ('../models/dices');
+const {Players, Rolls} = require ('../../models/dices');
 const Sequelize = require('sequelize');
 
 module.exports = async function getPlayers(req, res) {
@@ -24,6 +24,8 @@ module.exports = async function getPlayers(req, res) {
                 percentage: (i.dataValues.win) ? i.dataValues.win:0,
                 rankingPosition: rank++}
         });
+
+        playersData = playersData[0];
 
         res.status(200).send({
             status: "success",

@@ -1,7 +1,8 @@
 
 const {Players} = require ('../../models/dices');
+const Sequelize = require('sequelize')
 
-module.exports = async function addPlayers(req, res) {
+module.exports = async (req, res) => {
 
     try {
 
@@ -12,12 +13,13 @@ module.exports = async function addPlayers(req, res) {
             const alreadyRegistered = await Players.findOne({
                 where: { username: req.body.username },
             });
-            
+
             if(alreadyRegistered){
                 return res.status(400).send({ status: "fail", message: "username already registered"}); // 400 - Bad request
             }
-            
-            player = await Players.create({ username: req.body.username })
+
+            player = await Players.create({ username: req.body.username.toLowerCase() })
+
         } else {
             player = await Players.create({ username: 'ANONIM' })
         }

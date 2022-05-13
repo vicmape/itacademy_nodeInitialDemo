@@ -1,23 +1,18 @@
+// use .env file variables
+require('dotenv').config()
+
 // Express server
 const express = require('express');
 const app = express();
 
-// Routes
-const players = require('./routes/players');
-const login = require('./routes/login');
-const invalidRoute = require('./routes/invalidRoute');
-
-// JWT
-const jwt = require('jsonwebtoken');
-
-// use .env file variables
-require('dotenv').config()
-
 // Middlewares of express server
 app.use(express.json());
-app.use('/players', players);
-app.use('/login', login)
-app.use(invalidRoute);
+app.use('/players', require('./routes/players'));
+app.use('/login', require('./routes/login'))
+app.use(require('./routes/invalidRoute'));
+
+// Create database if not exists
+require('./services/createDatabase')();
 
 // Start server
 const PORT = process.env.API_PORT || 3000;

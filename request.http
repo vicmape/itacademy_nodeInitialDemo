@@ -1,11 +1,26 @@
+### Get players list
 GET http://localhost:5000/players
 
-###
-
+### Add player with username
 POST http://localhost:5000/players
 Content-Type: application/json
 
 {
-    "username": "Victor"
+    "username": "victor"
 }
 
+### Add player ANONIM
+POST http://localhost:5000/players
+
+
+### Modify players username
+PUT http://localhost:5000/players/2
+Content-Type: application/json
+
+{
+    "username": "javi"
+}
+
+
+### Delete player
+DELETE http://localhost:5000/players/5

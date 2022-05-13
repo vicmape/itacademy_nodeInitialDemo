@@ -1,4 +1,4 @@
-const {Players, Rolls} = require ('../models/dices');
+const {Players, Rolls} = require ('../../models/dices');
 const Sequelize = require('sequelize');
 
 module.exports = async function getPlayers(req, res) {
