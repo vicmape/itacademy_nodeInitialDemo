@@ -1,15 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const getPlayers = require('../controller/getPlayers');
-const addPlayer = require('../controller/addPlayer');
-const updatePlayer = require('../controller/updatePlayer');
-const rollDices = require('../controller/rollDices');
-const deleteRolls = require('../controller/deleteRolls');
-const getRolls = require('../controller/getRolls');
-const getRanking = require('../controller/getRanking');
-const getLoser = require('../controller/getLoser');
-const getWinner = require('../controller/getWinner');
+const getPlayers = require('../controller/player/getPlayers');
+const addPlayer = require('../controller/player/addPlayer');
+const updatePlayer = require('../controller/player/updatePlayer');
+const rollDices = require('../controller/player/rollDices');
+const deleteRolls = require('../controller/player/deleteRolls');
+const getRolls = require('../controller/player/getRolls');
 
 router.post('/', addPlayer);
 router.put('/', updatePlayer);

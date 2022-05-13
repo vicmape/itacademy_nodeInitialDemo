@@ -1,4 +1,4 @@
-const {Players} = require ('../models/dices');
+const {Players} = require ('../../models/dices');
 
 module.exports = async function updatePlayer(req, res) {
     try {

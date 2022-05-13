@@ -1,0 +1,11 @@
+GET http://localhost:5000/players
+
+###
+
+POST http://localhost:5000/players
+Content-Type: application/json
+
+{
+    "username": "Victor"
+}
+

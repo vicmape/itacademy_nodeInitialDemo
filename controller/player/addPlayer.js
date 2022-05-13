@@ -1,5 +1,5 @@
 
-const {Players} = require ('../models/dices');
+const {Players} = require ('../../models/dices');
 
 module.exports = async function addPlayers(req, res) {
 
