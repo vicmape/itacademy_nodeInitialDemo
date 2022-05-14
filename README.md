@@ -1,50 +1,47 @@
 
-# Node Initial Project
+# Sprint 4 - Ex 4.2 
 
-### Project Structure
+Niveles 1 y 3 solucionados. El nivel 2 no lo haré ya que con el chat usaré mongoose en vez de sequelize.
 
-Main structure of node.js project. Folders / files:
+## Inicialización proyecto
 
-- <b>\_\_tests__</b>. Tests folder. See [Jest Docs](https://jestjs.io/es-ES/docs/configuration) and [Chai Docs](https://www.chaijs.com/)
-- <b>app</b>:
-    - <b>config</b>
-    - <b>controllers</b>
-    - <b>crons</b>
-    - <b>middleware</b>
-    - <b>models</b>
-    - <b>routes</b>
-    - <b>tmp</b>
-    - <b>app.js</b>. Entry point.
-- <b>.env</b>. Environment descriptor. See [dotenv doc](https://www.npmjs.com/package/dotenv).
-- <b>.eslintrc</b>. Linter JS, static code analyzer. See [EsLint Docs](https://eslint.org/docs/user-guide/configuring/configuration-files).
-- <b>.prettierignore</b>. Code formatter. See [Prettier Config](https://prettier.io/docs/en/configuration.html) and [Prettier Ignore](https://prettier.io/docs/en/ignore.html).
-- <b>.ecosystem.config.js</b>. Process Manage at runtime. See [PM2 Docs](https://pm2.keymetrics.io/).
-- <b>package.json</b>.
+1- Renombrar/copiar el fichero .env-template -> .env
+2- Setear los valores de tu servidor de MySQL (DB_USER, DB_PASS) y el puerto en el que se quiere ejectuar la API (API_PORT)
+3- Instalar dependencias ejecutando en linea de comandos
 
-### Import project for use with WebStorm
+  npm i
 
-Follow the steps below:
-* Clone the project from the Github Platform. Execute:
-  ```
-  git clone [url project]
-  ```
-* Open the project downloaded.
-![Open Project](img/webstorm_open.png)
+4- Ejectuar el proyecto
+
+  npm start
+
+## Testeo de la solución
+
+Para testear NO he usado postman. 
+He usado una extension de Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+Muy intuitiva y facil de utilizar. 
+
+*Los ficheros con todos las requests a enviar las puedes encontrar en la carpeta _http_request* 
+
+Para enviar las requests verás que, una vez instalada la extensión, aparece un pequeño botón "send request" encima de cada request.
 
 
-### Import project for use with Visual Studio Code
+## Notas sobre la solución
 
-Follow the steps below:
-* Clone the project from the Github Platform. Execute:
-  ```
-  git clone [url project]
-  ```
-* Open the project downloaded.
-  ![Open Project](img/VSC_open.png)
+He creado los siguientes endpoints. Pienso que tienen más sentido que los que pide el enunciado
 
+get /players        -> Devuelve listado de jugadores con su id
+post /players       -> Agrega un player (username = ANONIMO por defecto)
+put /players/:id    -> Cambia el username del player con :id
+delete /players/:id -> Borra el player con :id (Habilitado solo a usuario administrador que proporciona JWT)
 
-### Utilities
+get /games/:id      -> Devuelve todos los lanzamientos del player :id
+post /games/:id     -> El player :id realiza un lanzamiento de dados
+delete /games/:id   -> Se borran todos los lanzamientos del player :id (Habilitado solo a usuario administrador que proporciona JWT)
 
-* [Node Developers Guide](https://nodejs.dev/learn)
-* **.gitignore file** configuration. See [Official Docs](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files).
-* **Git branches**. See [Official Docs](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
+get /ranking        -> Devuelve el ranking de todos los jugadores
+get /ranking/winner -> Devuelve el jugador que tiene mayor porcentage de victorias
+get /ranking/loser  -> Devuelve el jugador que tiene menor porcentage de victorias
+
+post /login/register -> Registra un usuario como administrador en el sistema. Utiliza la libreria bcrypt para guardar el password hasheado en base de datos
+post /login          -> Obtencion del JWT si se autentica un usuario previamente registrado como administrador.
