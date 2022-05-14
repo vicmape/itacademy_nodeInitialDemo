@@ -1,11 +1,20 @@
 require('dotenv').config()
-const bcrypt = require('bcrypt')
+
+const jwt = require('jsonwebtoken')
+const {Admins} = require('../../models/dices')
+
+//require('crypto').randomBytes(64).toString('hex')
 
 module.exports = async (req, res) => {
 
     try {
+        const user = {
+            username: req.body.username
+        }
 
-        res.status(200).send("Success");
+        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+
+        res.json(accessToken);
 
      } catch (err) {
         res.status(500).send({

@@ -24,6 +24,18 @@ const Rolls = db.define('rolls', {
     }
 })
 
+const Admins = db.define('admins', {
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }
+})
+
+
 Players.hasMany(Rolls); // one-to-many relationship
 Rolls.belongsTo(Players);
 
@@ -35,4 +47,8 @@ Rolls.sync()
 .then()
 .catch(err => console.log(err));
 
-module.exports = {Players, Rolls};
+Admins.sync()
+.then()
+.catch(err => console.log(err));
+
+module.exports = {Players, Rolls, Admins};

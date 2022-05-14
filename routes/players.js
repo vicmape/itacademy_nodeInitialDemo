@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check, body } = require('express-validator');
-const {validation} = require('../middlewares/middlewares');
+const {validation, authJWT} = require('../middlewares/middlewares');
 
 router.get('/', require('../controller/player/getPlayers'));
 
@@ -17,6 +17,7 @@ router.put( '/:id',
 router.delete( '/:id',
                check('id','Invalid ID').isInt(),
                validation,
+               authJWT,
                require('../controller/player/deletePlayer'));
 
 module.exports = router;

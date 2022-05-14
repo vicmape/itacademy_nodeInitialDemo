@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { check } = require('express-validator');
-const {validation} = require('../middlewares/middlewares');
+const {validation, authJWT} = require('../middlewares/middlewares');
 
 router.get( '/:id',
             check('id','Invalid ID').isInt(),
@@ -16,6 +16,7 @@ router.post( '/:id',
 router.delete( '/:id',
                check('id','Invalid ID').isInt(),
                validation,
+               authJWT,
                require('../controller/games/deleteGames'));
 
 module.exports = router;
