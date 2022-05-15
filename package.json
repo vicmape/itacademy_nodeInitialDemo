@@ -1,16 +1,27 @@
 {
-  "name": "nodeinitialdemo",
+  "name": "xat-victor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Main structure of node.js project. Folders / files:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/main.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Victor Machado",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vicmape/itacademy_nodeInitialDemo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vicmape/itacademy_nodeInitialDemo/issues"
+  },
+  "homepage": "https://github.com/vicmape/itacademy_nodeInitialDemo#readme",
   "dependencies": {
-    "dotenv": "^9.0.2",
-    "nodemon": "^2.0.7",
-    "pm2": "^4.5.6"
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "socket.io": "^4.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
