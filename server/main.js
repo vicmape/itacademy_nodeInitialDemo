@@ -18,6 +18,4 @@ io.on('connection', (socket) => {
     })
 });
 
-//app.get('/', (req, res) => res.status(200).send("Hola Mundo!"))
-
 server.listen(8080, console.log('Servidor corriendo en http://localhost:8080'));
