@@ -6,23 +6,40 @@
     <meta name="keywords" content="HTML, CSS, JavaScript, Node">
     <meta name="description" content="This is my first xat">
     <link rel="icon" href="img/whatsapp.png" type="image/png" sizes="16x16">
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="main.js"></script> 
+    <!--script src="/socket.io/socket.io.js"></script-->
   </head>
   <body>
     <h1>Register</h1>
     <nav>
-      <a href="index.html">Index</a> |
       <a href="Login.html">Login</a> |
       <a href="Register.html">Register</a>
     </nav>
     <br/>
-    <form onsubmit="">
+    <form onsubmit="return registerUser(this)">
       <p><label>Username: <input type="text" name="username" placeholder="Username... " maxlength="15"></label></p>
       <p><label>Password: <input type="password" name="password" placeholder="Password... "  maxlength="15"></label></p>
+      <p><label>Repeat Password: <input type="password" name="password" placeholder="Repeat Password... " maxlength="15" autocomplete="on" spellcheck="false"></label></p>
       <input type="submit" value="Register">
-      <input type="button" name="cancel" value="Cancel" onclick="window.location='index.html'" />
     </form>
-
+    
   </body>
-</html>
+  </html>
+  <!-- <script src="main.js"></script> -->
+  <script>
+    function registerUser(form){
+       fetch('http://localhost:8080/register', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({username: form.username.value, password: form.password.value})
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        if (data.status === "success") {
+          window.location.assign('login.html')
+        }
+      });
+
+        return false;
+    }
+  </script>
