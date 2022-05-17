@@ -6,11 +6,7 @@ const express = require('express');
 const cors = require('cors')
 const app = express(); 
 const server = require('http').Server(app); 
-const io = require('socket.io')(server, {
-  cors: {
-    origin: "*"
-  }
-});
+const {socketsInit} = require('../controller/sockets/sockets');
 
 // Create Database if not exists
 require('../models/models.js')();
@@ -23,20 +19,11 @@ app.use(cors())
 app.use('/register', require('../routes/register'))
 app.use('/login', require('../routes/login'))
 app.use('/auth', require('../routes/auth'))
+app.use('/rooms', require('../routes/rooms'))
 app.use((req, res) => res.status(404).send({ status: "fail", message: "PAGE NOT FOUND"}));
 
-// Socket connection
-io.on('connection', (socket) => {
-    console.log('user connected');
-
-    socket.on('new-message', data => {
-      io.sockets.emit('messages', data); 
-    })
-
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-});
+// Sockets initialization
+socketsInit(server);
 
 PORT = process.env.API_PORT || 8080
 server.listen(PORT, console.log(`Server running at http://localhost:${PORT}...`));

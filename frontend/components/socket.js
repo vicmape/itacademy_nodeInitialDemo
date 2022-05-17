@@ -15,8 +15,15 @@ form.addEventListener('submit', function(e) {
 
 socket.on('messages', function(msg) {
     var item = document.createElement('li');
+    let objDiv = document.getElementById("messages");
     item.textContent = msg;
     messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
+    // window.scrollTo(0, document.getElementById('messages').scrollHeight);
+    objDiv.scrollTop = objDiv.scrollHeight;
+
 });
 
+socket.on('rooms', function(msg) {
+    console.log("NEW ROOM")
+    getRooms();
+});
