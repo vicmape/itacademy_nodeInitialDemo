@@ -8,6 +8,12 @@ module.exports = () => {
     mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
     
     const usersSchema = new mongoose.Schema({ username: String, password: String }, { timestamps: true });
+    const salasSchema = new mongoose.Schema({
+        name: String,
+        usersConnected: [String],
+        messages: [{ user: String, text: String }]
+    }, { timestamps: true });
 
     mongoose.model('Users', usersSchema);
+    mongoose.model('Salas', salasSchema);
 }
