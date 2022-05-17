@@ -24,6 +24,5 @@ socket.on('messages', function(msg) {
 });
 
 socket.on('rooms', function(msg) {
-    console.log("NEW ROOM")
     getRooms();
 });

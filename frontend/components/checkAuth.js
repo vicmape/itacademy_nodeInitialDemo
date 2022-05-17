@@ -5,11 +5,9 @@ fetch('http://localhost:8080/auth', {
 .then(response => response.json())
 .then(data => {
     if (data.status !== "success") {
-    sessionStorage.clear();
-    window.location.assign('index.html')
+        logout()
     }
 })
 .catch(err => {
-    sessionStorage.clear();
-    window.location.assign('index.html')
+    logout();
 });

@@ -7,8 +7,8 @@ function login(form){
     .then(response => response.json())
     .then(data => {
         if (data.status === "success") {
-        sessionStorage.accessToken = data.accessToken
-        window.location.assign('chat.html')
+            sessionStorage.accessToken = data.accessToken
+            window.location.assign('chat.html')
         }
     }).catch(err => console.log(err));
 
