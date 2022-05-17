@@ -1,5 +1,5 @@
 {
-  "name": "xat-victor",
+  "name": "chat-victor",
   "version": "1.0.0",
   "description": "Main structure of node.js project. Folders / files:",
   "main": "index.js",
@@ -18,7 +18,6 @@
   "homepage": "https://github.com/vicmape/itacademy_nodeInitialDemo#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-validator": "^6.14.0",
