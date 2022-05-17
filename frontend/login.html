@@ -53,7 +53,7 @@
         sessionStorage.accessToken = data.accessToken
         window.location.assign('chat.html')
       }
-    });
+    }).catch(err => console.log(err));
 
       return false;
   }
