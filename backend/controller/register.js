@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     try {
         const user = await Users.find({username: req.body.username});
     
-        if(user.length) return res.status(400).send({ status: "fail", message: `user ${req.body.username.toLowerCase()} already registered`});
+        if(user.length) return res.status(400).send({ status: "fail", message: `user already registered`});
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 

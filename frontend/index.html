@@ -8,15 +8,16 @@
     <link rel="icon" href="img/whatsapp.png" type="image/png" sizes="16x16">
   </head>
   <body>
-    <h1>REGISTER</h1>
+    <h1>LOGIN</h1>
     <br/>
-    <form onsubmit="return register(this)">
-      <p><label><input type="text" name="username" placeholder="Username... " maxlength="15" autofocus spellcheck="false" required></label></p>
+    <form onsubmit="return login(this)">
+      <p><label><input type="text" name="username" placeholder="Username... " maxlength="15" autocomplete="on" autofocus spellcheck="false" required></label></p>
       <p><label><input type="password" name="password" placeholder="Password... "  maxlength="15" spellcheck="false" required></label></p>
-      <input type="submit" value="Register">
+      <input type="submit" value="Login">
     </form>
-    <p>Not registered yet? <a href="./index.html"> Sign-up</a></p>
+    <p>Don't have an account? <a href="./register.html"> Sign up</a></p>
+    
   </body>
 </html>
 
-<script src="./components/register.js"></script>
+<script src="./components/login.js"></script>

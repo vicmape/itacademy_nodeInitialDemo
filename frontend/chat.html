@@ -18,38 +18,25 @@
   </head>
   <body>
     <h1>CHAT</h1>
-    <nav>
-      <a href="login.html">Login</a> |
-      <a href="register.html">Register</a> |
-      <a href="chat.html">Chat</a>
-    </nav>
+    <br/>
+    <button type="button" onclick="logout()">Logout</button>
+    <br/>
     <ul id="messages"></ul>
     <form id="form" action="">
-      <input id="input" autocomplete="off" />
+      <input id="input" autocomplete="off" autofocus/>
       <button>Send</button>
     </form>
   </body>
 </html>
 
-<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="./components/logout.js"></script>
+<script src="./components/checkAuth.js"></script>
 
-<script>
-  fetch('http://localhost:8080/auth', {
-    method: 'post',
-    headers: { 'Authorization': `Bearer ${sessionStorage.accessToken}` }
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.status !== "success") {
-      sessionStorage.clear();
-      window.location.assign('login.html')
-    }
-  })
-  .catch(err => {
-    sessionStorage.clear();
-    window.location.assign('login.html')
-  });
-</script>
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="./components/socket.js"></script>
+
+<!-- 
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
 
 <script>
   var socket = io.connect('http://localhost:8080'); 
@@ -73,4 +60,4 @@
     window.scrollTo(0, document.body.scrollHeight);
   });
 
-</script>
+</script> -->
