@@ -22,9 +22,7 @@ const validation = ( req, res, next ) => {
 const authentication = async (req, res, next) => {
 
     // Check if user exists
-    console.log(req.body.username)
     const user = await Users.find({username: req.body.username});
-    console.log(user)
     if(!user.length) return res.status(400).send({ status: "fail", message: `user ${req.body.username.toLowerCase()} not registered`});
 
     // Check if the password is right

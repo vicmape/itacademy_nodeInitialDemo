@@ -34,22 +34,29 @@
     </form>
     
   </body>
-  </html>
-  <!-- <script src="main.js"></script> -->
-  <script>
-    function registerUser(form){
-       fetch('http://localhost:8080/register', {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({username: form.username.value, password: form.password.value})
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === "success") {
-          window.location.assign('login.html')
-        }
-      });
+</html>
 
-      return false;
-    }
-  </script>
+<!-- <script src="main.js"></script> -->
+
+<script>
+  
+  sessionStorage.clear();
+  console.log("Register")
+
+  function registerUser(form){
+      fetch('http://localhost:8080/register', {
+      method: 'post',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({username: form.username.value, password: form.password.value})
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
+        window.location.assign('login.html')
+      }
+    });
+
+    return false;
+  }
+</script>
