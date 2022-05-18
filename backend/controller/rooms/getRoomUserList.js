@@ -1,20 +1,17 @@
 require('dotenv').config()
+
 const Rooms = require('mongoose').model("Rooms")
 
 module.exports = async (req, res) => {
     try {
-        let rooms = await Rooms.find({});
 
-        console.log(rooms)
-        rooms = rooms.map(({_id, roomName})=> { 
-            return {roomId:_id, roomName};
-          });
+        let room = await Rooms.findOne({ _id: req.params.id });
 
-        console.log(rooms)
+        if (room.length === 0) return res.status(400).send({ status: "fail", message: `This room does not exists`});
 
         res.status(201).send({
             status: "success", 
-            rooms
+            room
         });
 
      } catch (err) {

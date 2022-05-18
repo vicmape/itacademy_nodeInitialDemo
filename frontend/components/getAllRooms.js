@@ -7,17 +7,12 @@ function getAllRooms(){
     .then(response => response.json())
     .then(data => {
         if (data.status === "success") {
-            
             let roomList = document.getElementById("rooms")
             roomList.innerHTML = "";
-            data.rooms.forEach(elem => {
-               addRoom(elem)
-            })
+            data.rooms.forEach(elem => addRoom(elem))
         }
     })
     .catch(err => {
         console.log(err.message)
     });
 }
-
-getAllRooms();

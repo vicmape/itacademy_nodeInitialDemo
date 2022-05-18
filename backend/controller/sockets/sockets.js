@@ -30,4 +30,10 @@ function socketsDeleteRoom(deleteRoom) {
   io.sockets.emit('rooms', deleteRoom);
 }
 
-module.exports  = {socketsInit, socketsCreateRoom, socketsDeleteRoom}
+
+function socketEmit(socket, data){
+  io.sockets.emit(socket, data);
+}
+
+
+module.exports  = {socketsInit, socketsCreateRoom, socketsDeleteRoom, socketEmit}

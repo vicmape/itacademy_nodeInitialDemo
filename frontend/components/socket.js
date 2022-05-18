@@ -21,11 +21,13 @@ socket.on('messages', function(msg) {
 
 });
 
-socket.on('rooms', function(data) {
-    if (data.cmd === "add") {
-        addRoom(data)
-    } else if (data.cmd === "delete"){
-        var item = document.getElementById(data._id);
-        item.parentNode.removeChild(item);
-    }
-});
+function socketRooms(){
+
+    socket.on('rooms', function(data) {
+        if (data.cmd === "add") {
+            addRoom(data)
+        } else if (data.cmd === "delete"){
+            deleteRoom(data);
+        }
+    });
+}

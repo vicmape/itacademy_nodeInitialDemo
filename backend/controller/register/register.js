@@ -4,17 +4,17 @@ const Users = require('mongoose').model("Users")
 
 module.exports = async (req, res) => {
     try {
-        const user = await Users.find({username: req.body.username});
+        const user = await Users.find({userName: req.body.userName});
     
         if(user.length) return res.status(400).send({ status: "fail", message: `user already registered`});
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-        await Users.create({ username: req.body.username, password: hashedPassword })
+        await Users.create({ userName: req.body.userName, password: hashedPassword })
 
         res.status(201).send({
             status: "success", 
-            message: `user ${req.body.username} registered`
+            message: `user ${req.body.userName} registered`
         });
 
      } catch (err) {

@@ -5,13 +5,14 @@ const {socketsCreateRoom} = require('../sockets/sockets');
 
 module.exports = async (req, res) => {
     try {
-        const rooms = await Rooms.find({name: req.body.name});
 
-        if(rooms.length) return res.status(400).send({ status: "fail", message: `room already created`});
-
-        const room = await Rooms.create({ name: req.body.name })
+        const rooms = await Rooms.find({roomName: req.body.roomName});
         
-        const newRoom = {_id: room._id, name: room.name, cmd: "add"};
+        if(rooms.length) return res.status(400).send({ status: "fail", message: `room already created`});
+        
+        const room = await Rooms.create({ roomName: req.body.roomName })
+
+        const newRoom = {roomId: room._id, name: room.roomName, cmd: "add"};
 
         socketsCreateRoom(newRoom);
 
