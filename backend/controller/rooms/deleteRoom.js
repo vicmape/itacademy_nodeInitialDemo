@@ -1,21 +1,21 @@
 require('dotenv').config()
-const bcrypt = require('bcrypt')
+const {socketsDeleteRoom} = require('../sockets/sockets')
 const Rooms = require('mongoose').model("Rooms")
 
 module.exports = async (req, res) => {
     try {
-        // const user = await Users.find({username: req.body.username});
-    
-        // if(user.length) return res.status(400).send({ status: "fail", message: `user already registered`});
+        const room = await Rooms.deleteOne({ _id: req.body._id });
 
-        // const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        if (room.deletedCount === 0) return res.status(400).send({ status: "fail", message: `room already deleted`});
 
-        // await Users.create({ username: req.body.username.toLowerCase(), password: hashedPassword })
+        const deleteRoom = {_id: req.body._id, cmd: "delete"};
 
-        // res.status(201).send({
-        //     status: "success", 
-        //     message: `user ${req.body.username.toLowerCase()} registered`
-        // });
+        socketsDeleteRoom(deleteRoom)
+
+        res.status(201).send({
+            status: "success", 
+            message: `user ${req.body.username} registered`
+        });
 
      } catch (err) {
         res.status(500).send({

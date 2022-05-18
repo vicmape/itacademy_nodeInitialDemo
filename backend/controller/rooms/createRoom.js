@@ -1,17 +1,19 @@
 require('dotenv').config()
 const bcrypt = require('bcrypt')
 const Rooms = require('mongoose').model("Rooms")
-const {newRoom} = require('../sockets/sockets');
+const {socketsCreateRoom} = require('../sockets/sockets');
 
 module.exports = async (req, res) => {
     try {
-        const room = await Rooms.find({name: req.body.name});
+        const rooms = await Rooms.find({name: req.body.name});
 
-        if(room.length) return res.status(400).send({ status: "fail", message: `room already created`});
+        if(rooms.length) return res.status(400).send({ status: "fail", message: `room already created`});
 
-        await Rooms.create({ name: req.body.name })
+        const room = await Rooms.create({ name: req.body.name })
+        
+        const newRoom = {_id: room._id, name: room.name, cmd: "add"};
 
-        newRoom(req.body.name);
+        socketsCreateRoom(newRoom);
 
         res.status(201).send({
             status: "success", 

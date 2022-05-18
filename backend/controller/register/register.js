@@ -10,11 +10,11 @@ module.exports = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-        await Users.create({ username: req.body.username.toLowerCase(), password: hashedPassword })
+        await Users.create({ username: req.body.username, password: hashedPassword })
 
         res.status(201).send({
             status: "success", 
-            message: `user ${req.body.username.toLowerCase()} registered`
+            message: `user ${req.body.username} registered`
         });
 
      } catch (err) {

@@ -20,12 +20,14 @@ function socketsInit(server) {
           console.log(`user disconnected`);
         });
     });
-
-
 }
 
-function newRoom(name) {
-    io.sockets.emit('rooms', name);
+function socketsCreateRoom(newRoom) {
+  io.sockets.emit('rooms', newRoom);
 }
 
-module.exports  = {socketsInit, newRoom}
+function socketsDeleteRoom(deleteRoom) {
+  io.sockets.emit('rooms', deleteRoom);
+}
+
+module.exports  = {socketsInit, socketsCreateRoom, socketsDeleteRoom}

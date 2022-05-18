@@ -23,7 +23,7 @@ const authentication = async (req, res, next) => {
 
     // Check if user exists
     const user = await Users.find({username: req.body.username});
-    if(!user.length) return res.status(400).send({ status: "fail", message: `user ${req.body.username.toLowerCase()} not registered`});
+    if(!user.length) return res.status(400).send({ status: "fail", message: `user ${req.body.username} not registered`});
 
     // Check if the password is right
     if ( ! await bcrypt.compare(req.body.password, user[0].password)) {

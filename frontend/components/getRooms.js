@@ -6,7 +6,6 @@ function getRooms(){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         if (data.status === "success") {
             document.getElementById("rooms").innerHTML = "";
             data.rooms.forEach(elem => {

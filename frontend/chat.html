@@ -77,6 +77,10 @@
           <p><label><input type="text" name="name" placeholder="Room name " maxlength="15" spellcheck="false" required></label></p>
           <input type="submit" value="Create Room">
         </form>
+        <form id="roomForm" onsubmit="return deleteRoom(this)">
+          <p><label><input type="text" name="_id" placeholder="Room id " maxlength="32" spellcheck="false" required></label></p>
+          <input type="submit" value="Delete Room">
+        </form>
       </aside>
       
       <main class="chat__messages lime">
@@ -99,6 +103,7 @@
 <script src="./components/checkAuth.js"></script>
 <script src="./components/getRooms.js"></script>
 <script src="./components/createRoom.js"></script>
+<script src="./components/deleteRoom.js"></script>
 
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
 <script src="./components/socket.js"></script>
