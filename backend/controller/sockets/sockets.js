@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var io;
 
 function socketsInit(server) {
@@ -11,13 +13,15 @@ function socketsInit(server) {
         console.log('user connected');
         
         socket.on('new-message', data => {
-            io.sockets.emit('messages', data); 
+          io.sockets.emit('messages', data); 
         })
         
         socket.on('disconnect', () => {
-            console.log('user disconnected');
+          console.log(`user disconnected`);
         });
     });
+
+
 }
 
 function newRoom(name) {

@@ -11,7 +11,8 @@ function getRooms(){
             document.getElementById("rooms").innerHTML = "";
             data.rooms.forEach(elem => {
                 let item = document.createElement('li');
-                item.textContent = elem;
+                item.textContent = elem.name;
+                item.setAttribute("id", elem._id);
                 rooms.appendChild(item);
             })
         }

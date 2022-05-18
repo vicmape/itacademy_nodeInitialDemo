@@ -1,5 +1,4 @@
-
-var socket = io.connect('http://localhost:8080');
+const socket = io.connect('http://localhost:8080');
 
 var messages = document.getElementById('messages');
 var form = document.getElementById('form');
@@ -18,7 +17,6 @@ socket.on('messages', function(msg) {
     let objDiv = document.getElementById("messages");
     item.textContent = msg;
     messages.appendChild(item);
-    // window.scrollTo(0, document.getElementById('messages').scrollHeight);
     objDiv.scrollTop = objDiv.scrollHeight;
 
 });
