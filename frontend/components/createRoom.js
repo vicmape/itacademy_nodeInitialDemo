@@ -7,7 +7,6 @@ function createRoom(roomForm) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         if (data.status === "success") {
         }
     })

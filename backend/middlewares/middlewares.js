@@ -41,12 +41,13 @@ const authJWT = async (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1] // "Bearer TOKEN"
     if (token === null) return res.sendStatus(401)
 
-    // Here we could     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)
-    // and then set req.user = user to have the req.user in the future route
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) return res.sendStatus(403)
+        req.userName = decoded.userName;
+        req.userId = decoded.userId;
         next()
     })
+    
 }
 
 

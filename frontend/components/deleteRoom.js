@@ -6,11 +6,11 @@ function deleteRoom(room) {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         if (data.status === "success") {
-            if (sessionStorage.currentRoom === room.name){
+            if (sessionStorage.currentRoomName === room.name){
                 document.getElementById("roomName").innerHTML = '';
-                sessionStorage.currentRoom = '';
+                sessionStorage.currentRoomName = '';
+                sessionStorage.currentRoomId = '';
             }
         }
     })

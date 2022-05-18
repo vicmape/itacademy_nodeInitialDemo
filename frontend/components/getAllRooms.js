@@ -1,4 +1,4 @@
-function getRooms(){
+function getAllRooms(){
 
     fetch('http://localhost:8080/rooms', {
         method: 'get',
@@ -20,4 +20,4 @@ function getRooms(){
     });
 }
 
-getRooms();
+getAllRooms();
