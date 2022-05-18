@@ -27,7 +27,17 @@ socket.on('rooms', function(data) {
         let item = document.createElement('li');
         item.textContent = data.name;
         item.setAttribute("id", data._id);
+
+        let btn = document.createElement("button");
+        btn.innerHTML = "x";
+        btn.onclick = function (){
+            deleteRoom(data._id);
+        }
+        item.append(btn)
+
         roomList.appendChild(item);
+
+        sortUlList("rooms");
     } else if (data.cmd === "delete"){
         var item = document.getElementById(data._id);
         item.parentNode.removeChild(item);

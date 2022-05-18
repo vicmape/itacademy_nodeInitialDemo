@@ -7,13 +7,24 @@ function getRooms(){
     .then(response => response.json())
     .then(data => {
         if (data.status === "success") {
-            document.getElementById("rooms").innerHTML = "";
+            
+            let roomList = document.getElementById("rooms")
+            roomList.innerHTML = "";
             data.rooms.forEach(elem => {
                 let item = document.createElement('li');
                 item.textContent = elem.name;
                 item.setAttribute("id", elem._id);
-                rooms.appendChild(item);
+
+                let btn = document.createElement("button");
+                btn.innerHTML = "x";
+                btn.onclick = function (){
+                    deleteRoom(elem._id);
+                }
+                item.append(btn)
+                
+                roomList.appendChild(item);
             })
+            sortUlList("rooms");
         }
     })
     .catch(err => {
