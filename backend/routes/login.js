@@ -6,7 +6,7 @@ const {validation, authentication} = require('../middlewares/middlewares');
 const login = require('../controller/login/login');
 
 router.post( '/',
-             body('username').exists(),
+             body('userName').exists(),
              body('password').exists(),
              validation,
              authentication,

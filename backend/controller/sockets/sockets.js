@@ -22,18 +22,9 @@ function socketsInit(server) {
     });
 }
 
-function socketsCreateRoom(newRoom) {
-  io.sockets.emit('rooms', newRoom);
-}
-
-function socketsDeleteRoom(deleteRoom) {
-  io.sockets.emit('rooms', deleteRoom);
-}
-
-
 function socketEmit(socket, data){
   io.sockets.emit(socket, data);
 }
 
 
-module.exports  = {socketsInit, socketsCreateRoom, socketsDeleteRoom, socketEmit}
+module.exports  = {socketsInit, socketEmit}

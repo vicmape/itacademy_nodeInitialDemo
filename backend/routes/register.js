@@ -6,7 +6,7 @@ const {validation} = require('../middlewares/middlewares');
 const register = require('../controller/register/register');
 
 router.post( '/',
-             body('username').exists(),
+             body('userName').exists(),
              body('password').exists(),
              validation,
              register);

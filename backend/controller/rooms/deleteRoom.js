@@ -1,19 +1,19 @@
 require('dotenv').config()
-const {socketsDeleteRoom} = require('../sockets/sockets')
+const {socketEmit} = require('../sockets/sockets')
 const Rooms = require('mongoose').model("Rooms")
 
 module.exports = async (req, res) => {
     try {
-        console.log("DELETING ", room)
+
         const room = await Rooms.deleteOne({ _id: req.params.id });
+        
+        if (room.deletedCount === 0) return res.status(400).send({ status: "fail", message: `room already deleted`});
+        
         console.log("DELETED ", room)
 
-        if (room.deletedCount === 0) return res.status(400).send({ status: "fail", message: `room already deleted`});
+        const deleteRoom = {roomId: req.params.id, cmd: "delete"};
 
-
-        const deleteRoom = {roomId: "", cmd: "delete"};
-
-        socketsDeleteRoom(deleteRoom)
+        socketEmit('rooms', deleteRoom)
 
         res.status(201).send({
             status: "success", 

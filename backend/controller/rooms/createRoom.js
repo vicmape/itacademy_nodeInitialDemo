@@ -1,7 +1,6 @@
 require('dotenv').config()
-const bcrypt = require('bcrypt')
 const Rooms = require('mongoose').model("Rooms")
-const {socketsCreateRoom} = require('../sockets/sockets');
+const {socketEmit} = require('../sockets/sockets');
 
 module.exports = async (req, res) => {
     try {
@@ -12,13 +11,13 @@ module.exports = async (req, res) => {
         
         const room = await Rooms.create({ roomName: req.body.roomName })
 
-        const newRoom = {roomId: room._id, name: room.roomName, cmd: "add"};
+        const newRoom = {roomId: room._id, roomName: room.roomName, cmd: "add"};
 
-        socketsCreateRoom(newRoom);
+        socketEmit('rooms', newRoom);
 
         res.status(201).send({
             status: "success", 
-            message: `room ${req.body.name} created`
+            message: `room created`
         });
 
      } catch (err) {

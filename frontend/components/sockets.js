@@ -21,13 +21,32 @@ socket.on('messages', function(msg) {
 
 });
 
-function socketRooms(){
+function socketRoomList(){
 
     socket.on('rooms', function(data) {
         if (data.cmd === "add") {
             addRoom(data)
         } else if (data.cmd === "delete"){
-            deleteRoom(data);
+            removeRoom(data);
+        }
+    });
+}
+
+function socketRoomUserList(room) {
+
+    const socketRoomUserList = `room_${room.roomId}_users`;
+    console.log("SOCKET ON", socketRoomUserList);
+
+    socket.on(socketRoomUserList, function(data) {
+        console.log("SOCKET ROOM USER LIST", data)
+        if (data.cmd === "add") {
+
+            console.log("ADD USER", data)
+            addUser(data);
+
+        } else if (data.cmd === "delete") {
+            console.log("DELETE USER", data);
+            removeUser(data);
         }
     });
 }

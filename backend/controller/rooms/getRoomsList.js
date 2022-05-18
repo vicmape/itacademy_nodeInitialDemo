@@ -5,12 +5,9 @@ module.exports = async (req, res) => {
     try {
         let rooms = await Rooms.find({});
 
-        console.log(rooms)
         rooms = rooms.map(({_id, roomName})=> { 
             return {roomId:_id, roomName};
           });
-
-        console.log(rooms)
 
         res.status(201).send({
             status: "success", 
