@@ -23,21 +23,7 @@ socket.on('messages', function(msg) {
 
 socket.on('rooms', function(data) {
     if (data.cmd === "add") {
-        let roomList = document.getElementById("rooms");
-        let item = document.createElement('li');
-        item.textContent = data.name;
-        item.setAttribute("id", data._id);
-
-        let btn = document.createElement("button");
-        btn.innerHTML = "x";
-        btn.onclick = function (){
-            deleteRoom(data._id);
-        }
-        item.append(btn)
-
-        roomList.appendChild(item);
-
-        sortUlList("rooms");
+        addRoom(data)
     } else if (data.cmd === "delete"){
         var item = document.getElementById(data._id);
         item.parentNode.removeChild(item);

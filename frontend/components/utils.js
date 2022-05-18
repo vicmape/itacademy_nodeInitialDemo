@@ -1,7 +1,8 @@
 function sortUlList(ul) {
-    console.log("Sorting list")
     var ul = document.getElementById(ul);
     Array.from(ul.getElementsByTagName("LI"))
-      .sort((a, b) => a.textContent.localeCompare(b.textContent))
-      .forEach(li => ul.appendChild(li));
-  }
+        .sort((a, b) => {
+        return a.textContent.localeCompare(b.textContent)
+        })
+        .forEach(li => ul.appendChild(li));
+}

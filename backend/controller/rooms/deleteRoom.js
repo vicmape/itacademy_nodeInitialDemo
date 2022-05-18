@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
         res.status(201).send({
             status: "success", 
-            message: `user ${req.body.username} registered`
+            message: `room deleted`
         });
 
      } catch (err) {

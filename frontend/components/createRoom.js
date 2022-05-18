@@ -17,3 +17,29 @@ function createRoom(roomForm) {
 
     return false;
 }
+
+function addRoom(data){
+    let roomList = document.getElementById("rooms");
+    let item = document.createElement('li');
+    item.textContent = data.name;
+    item.setAttribute("id", data._id);
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.classList.add('chat__rooms__button__delete');
+    deleteBtn.onclick = function (){
+        deleteRoom(data._id);
+    }
+
+    let selectBtn = document.createElement("button");
+    selectBtn.classList.add('chat__rooms__button__select');
+    selectBtn.onclick = function (){
+        selectRoom(data);
+    }
+
+    item.append(deleteBtn)
+    item.append(selectBtn)
+
+    roomList.appendChild(item);
+
+    sortUlList("rooms");
+}

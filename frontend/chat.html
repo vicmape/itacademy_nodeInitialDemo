@@ -51,6 +51,30 @@
       .chat__rooms {
         width: 20%;
       }
+      .chat__rooms__button__delete {
+        background-color: red;
+        border: none;
+        color: red;
+        padding: 7px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1px;
+        margin: 4px 2px;
+        border-radius: 80%; 
+      }
+      .chat__rooms__button__select {
+        background-color: pink;
+        border: none;
+        color: pink;
+        padding: 7px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1px;
+        margin: 4px 2px;
+        border-radius: 80%; 
+      }
       .chat__messages {
         width: 60%;
         display: flex;
@@ -66,6 +90,7 @@
   <body>
     <header class="flex header pink">
       <h1>CHAT</h1>
+      <h1 id="roomName"></h1>
       <button class="header__button" type="button" onclick="logout()">Logout</button>
       <button class="header__button" type="button" onclick="clearStorage()">Clear storage</button>
     </header>
@@ -99,6 +124,7 @@
 <script src="./components/logout.js"></script>
 <script src="./components/checkAuth.js"></script>
 <script src="./components/deleteRoom.js"></script>
+<script src="./components/selectRoom.js"></script>
 <script src="./components/getRooms.js"></script>
 <script src="./components/createRoom.js"></script>
 
