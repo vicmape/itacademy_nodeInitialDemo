@@ -18,22 +18,22 @@ function createRoom(roomForm) {
     return false;
 }
 
-function addRoom(data){
+function addRoom(room){
     let roomList = document.getElementById("rooms");
     let item = document.createElement('li');
-    item.textContent = data.name;
-    item.setAttribute("id", data._id);
+    item.textContent = room.name;
+    item.setAttribute("id", room._id);
 
     let deleteBtn = document.createElement("button");
     deleteBtn.classList.add('chat__rooms__button__delete');
     deleteBtn.onclick = function (){
-        deleteRoom(data._id);
+        deleteRoom(room);
     }
 
     let selectBtn = document.createElement("button");
     selectBtn.classList.add('chat__rooms__button__select');
     selectBtn.onclick = function (){
-        selectRoom(data);
+        selectRoom(room);
     }
 
     item.append(deleteBtn)
