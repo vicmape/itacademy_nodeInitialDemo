@@ -42,6 +42,7 @@ function getRoomUsers(room) {
     .catch(err => alert(err.message));
 }
 
+
 function createRoom(roomForm) {
 
     fetch('http://localhost:8080/rooms', {
@@ -82,6 +83,9 @@ function deleteRoom(room) {
 
 
 function selectRoom(room) {
+    
+    // If we are in the same room do nothing
+    if (sessionStorage.currentRoomName === room.roomName) return;
 
     document.getElementById("roomName").innerHTML = `ROOM: ${room.roomName}`;
 
@@ -95,6 +99,7 @@ function selectRoom(room) {
             console.log(data.message)
             sessionStorage.currentRoomName = room.roomName
             sessionStorage.currentRoomId = room.roomId
+            removeRoomUsers();
             getRoomUsers(room);
             socketRoomUserList(room);
         } else {

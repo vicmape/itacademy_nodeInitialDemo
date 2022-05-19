@@ -88,7 +88,7 @@
     <link rel="icon" href="img/whatsapp.png" type="image/png" sizes="16x16">
   </head>
   <body>
-    <header class="flex header pink">
+    <header class="flex header">
       <h1>CHAT</h1>
       <h1 id="userName">USER:</h1>
       <h1 id="roomName">ROOM:</h1>
@@ -96,8 +96,8 @@
       <button class="header__button" type="button" onclick="clearStorage()">Clear storage</button>
     </header>
 
-    <div class="flex chat orange">
-      <aside class="chat__rooms blue">
+    <div class="flex chat">
+      <aside class="chat__rooms">
         <ul id="roomList"></ul>
         <form id="roomForm" onsubmit="return createRoom(this)">
           <p><label><input type="text" name="roomName" placeholder="Room name " maxlength="15" spellcheck="false" required></label></p>
@@ -105,7 +105,7 @@
         </form>
       </aside>
       
-      <main class="chat__messages lime">
+      <main class="chat__messages">
         <ul id="messages"></ul>
         <form id="form" action="">
           <input id="input" autocomplete="off" autofocus/>
@@ -113,7 +113,7 @@
         </form>
       </main>
 
-      <aside class="chat__users red">
+      <aside class="chat__users">
         <ul id="roomUsers"></ul>
       </aside>
     </div>

@@ -9,17 +9,49 @@ function socketsInit(server) {
         }
       });
 
+      // io.on('connection', socket => {
+      //   console.log('user connected');
+
+      //   socket.on('')
+      //   // socket.on('canvi-sala', () => {
+      //   //   socket.leave(salaOut)
+      //   //   socket.join(salaIn)
+      //   // });
+
+      //   socket.on('custom-event', (data) => {
+      //     console.log(data)
+      //   })
+
+      //   socket.on('disconnect', () => {
+      //     console.log(`user disconnected`);
+      //   });
+      // });
+
       io.on('connection', (socket) => {
         console.log('user connected');
         
-        socket.on('new-message', data => {
-          io.sockets.emit('messages', data); 
+        socket.on('new-message', (message, room) => {
+          if (room === '') {
+            socket.broadcast.emit('receive-message', message)
+          } else {
+            socket.to(room).emit('receive-message', message)
+          } 
         })
+
+        socket.on('new-room', (oldRoom, newRoom, cb) => {
+          socket.leave(oldRoom);
+          socket.join(newRoom);
+          cb(`Left ${oldRoom} Join ${newRoom}`);
+        })
+
+        // socket.on('custom-event', (data) => {
+        //   console.log(data)
+        // })
         
         socket.on('disconnect', () => {
           console.log(`user disconnected`);
         });
-    });
+      });
 }
 
 function socketEmit(socket, data){

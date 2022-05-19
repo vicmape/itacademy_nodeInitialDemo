@@ -29,15 +29,16 @@ module.exports = async (req, res) => {
         const userNewRoom = await Rooms.findOne({ "usersConnected.userId": req.userId });
 
         // Delete use from older room
-        if (userOldRoom) {
-            const socketOldRoom = `room_${userOldRoom._id}_users`;
-            const userToDelete = {userName: req.userName, userId: req.userId, cmd: "delete"};
-            socketEmit(socketOldRoom, userToDelete);
-        }
-
+        const socketOldRoom = `room_${userOldRoom._id}_users`;
+        const userToDelete = {userName: req.userName, userId: req.userId, cmd: "delete"};
+        console.log(`SOCKET OLD ${socketOldRoom}`)
+        console.log(`USER DELETE`, userToDelete)
+        socketEmit(socketOldRoom, userToDelete);
+        
         const socketNewRoom = `room_${userNewRoom._id}_users`;
         const userToAdd = {userName: req.userName, userId: req.userId, cmd: "add"};
-
+        console.log(`SOCKET NEW ${socketNewRoom}`)
+        console.log(`USER ADD`, userToAdd)
         socketEmit(socketNewRoom, userToAdd);
 
         res.status(201).send({

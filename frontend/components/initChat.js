@@ -12,6 +12,3 @@ sessionStorage.roomId = '';
 
 // Get all the available rooms
 getRoomsList();
-
-// Listen the room socket for room changes
-socketRoomList();

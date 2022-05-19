@@ -12,41 +12,56 @@ form.addEventListener('submit', function(e) {
     }
 });
 
+socket.on('connect', () => console.log(`You connected with socket id: ${socket.id}`));
+
 socket.on('messages', function(msg) {
     var item = document.createElement('li');
     let objDiv = document.getElementById("messages");
     item.textContent = msg;
     messages.appendChild(item);
     objDiv.scrollTop = objDiv.scrollHeight;
-
 });
 
-function socketRoomList(){
 
-    socket.on('rooms', function(data) {
-        if (data.cmd === "add") {
-            addRoom(data)
-        } else if (data.cmd === "delete"){
-            removeRoom(data);
-        }
-    });
-}
+socket.on('rooms', function(data) {
+    if (data.cmd === "add") {
+        addRoom(data)
+    } else if (data.cmd === "delete"){
+        removeRoom(data);
+    }
+});
+
 
 function socketRoomUserList(room) {
 
-    const socketRoomUserList = `room_${room.roomId}_users`;
-    console.log("SOCKET ON", socketRoomUserList);
+    // // Leave old room
+    // socket.leave(sessionStorage.socketRoomUser);
 
-    socket.on(socketRoomUserList, function(data) {
-        console.log("SOCKET ROOM USER LIST", data)
-        if (data.cmd === "add") {
+    // // Build the new room name
+    // const socketRoomUserList = `room_${room.roomId}_users`;
 
-            console.log("ADD USER", data)
-            addUser(data);
+    // // Update stored room user socket
+    // sessionStorage.socketRoomUser = socketRoomUserList;
 
-        } else if (data.cmd === "delete") {
-            console.log("DELETE USER", data);
-            removeUser(data);
-        }
+    // // Join new room
+    // socket.join(socketRoomUserList, function());
+
+
+    // // Remove the old socket
+    // socket.off( sessionStorage.socketRoomUser, data => {
+    //     console.log(`SOCKET OFF: ${socketRoomUserList}`)
+    // });
+
+
+
+
+
+    console.log(`SOCKET ON: ${socketRoomUserList}`)
+    socket.once(socketRoomUserList, function(data) {
+        console.log("CURRENT SOCKET", socketRoomUserList);
+
+        if (data.cmd === "add") addUser(data);  
+        else if (data.cmd === "delete") removeUser(data);
+        else alert("socketRoomUserList error")
     });
 }

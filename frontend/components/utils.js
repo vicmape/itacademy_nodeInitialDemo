@@ -6,3 +6,8 @@ function sortUlList(ul) {
         })
         .forEach(li => ul.appendChild(li));
 }
+
+function removeRoomUsers() {
+    var roomUsers = document. getElementById('roomUsers');
+    roomUsers. innerHTML = '';
+}
