@@ -1,3 +1,5 @@
+const {instrument} = require('@socket.io/admin-ui')
+
 require('dotenv').config()
 
 var io;
@@ -5,7 +7,7 @@ var io;
 function socketsInit(server) {
     io = require('socket.io')(server, {
         cors: {
-          origin: "*"
+          origin: ["http://localhost:8080", "http://admin.socket.io"]
         }
       });
 
@@ -52,6 +54,9 @@ function socketsInit(server) {
           console.log(`user disconnected`);
         });
       });
+
+      // TODO: remove this
+      instrument(io, {auth: false})
 }
 
 function socketEmit(socket, data){
