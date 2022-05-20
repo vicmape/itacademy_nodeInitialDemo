@@ -18,7 +18,7 @@
     padding: 0 1rem;
     border-radius: 2rem;
     margin: 0;
-    margin-left: 1rem;
+    margin-left: 0.75rem;
     outline: none;
     
 }
@@ -48,7 +48,22 @@
 .chat__rooms {
     border-right: solid;
     width: 20%;
+    /* position: relative; */
 }
+
+
+.chat__roomCreate {
+    display: flex;
+    padding: 0.75rem 0.3rem;
+}
+
+.chat__roomCreate input {
+    width: 100%;
+    border-radius: 2rem;
+    border: solid;
+    padding: 0rem 0.25rem;
+}
+
 
 .chat__headers {
     border-bottom: solid;
@@ -83,7 +98,7 @@
     padding: 0.50rem 1rem;;
 }
 
-.chat__textarea {
+.chat__message {
     width: 100%;
     height: auto;
     border-radius: 2rem;
@@ -91,7 +106,7 @@
     padding: 0 1rem;
 }
 
-.chat__textarea:focus {
+.chat__message:focus {
     box-shadow: 0px 0px 20px lime;
     outline: none;
 }

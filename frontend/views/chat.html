@@ -18,10 +18,10 @@
         <div class="chat">
             <aside class="chat__rooms">
                 <h1 class="chat__headers">ROOMS</h1>
-                <form id="createRoomForm">
-                    <p><input type="text" name="roomName" placeholder="Room name " maxlength="15" spellcheck="false" required></p>
-                    <input type="submit" value="Create Room" class="button">
-                </form>
+                <div class="chat__roomCreate">
+                    <input class="" type="text" id="message-input" name="message-input" placeholder="Room name... ">
+                    <button class="button" type="button" onclick="createRoom()">Create</button>
+                </div>
                 <ul id="roomList">
                     <li>Room1</li>
                     <li>Room2</li>
@@ -36,8 +36,7 @@
                     <li>message1</li>
                 </ul>
                 <div class="chat__keyboard">
-                    <input class="chat__textarea" type="text" id="message-input" name="message-input">
-                </input>
+                    <input class="chat__message" type="text" id="message-input" name="message-input">
                     <button class="button" type="button" onclick="sendMessage()">Send</button>
                 </div>
             </main>
