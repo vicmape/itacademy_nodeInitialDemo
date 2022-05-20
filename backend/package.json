@@ -1,33 +1,23 @@
 {
-  "name": "chat-victor",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Main structure of node.js project. Folders / files:",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/main.js"
+    "dev": "nodemon app.js"
   },
-  "author": "Victor Machado",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vicmape/itacademy_nodeInitialDemo.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vicmape/itacademy_nodeInitialDemo/issues"
-  },
-  "homepage": "https://github.com/vicmape/itacademy_nodeInitialDemo#readme",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@socket.io/admin-ui": "^0.3.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.3.3",
-    "socket.io": "^4.5.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.16"
+    "mongoose": "^6.3.4",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1"
   }
 }
