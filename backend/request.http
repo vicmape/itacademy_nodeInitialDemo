@@ -1,0 +1,17 @@
+### REGISTER
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+    "userName": "victor",
+    "password": "1234"
+}
+
+### LOGIN
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "userName": "victor",
+    "password": "1234"
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>4CHAT</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="HTML, CSS, JavaScript, Node">
+        <meta name="description" content="This is my first 4chat">
+        <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
+        <link rel="stylesheet" href="../css/stylesheet.css">
+        <script src="script.js" type="module"></script>
+    </head>
+    <body>
+        <h1>4CHAT</h1>
+        <nav class="navBar">
+            <div class="navBar__login">
+                <h2>LOGIN</h2>
+                <form id="loginForm" >
+                    <p><input type="text" name="loginFormUsername" placeholder="Username... " spellcheck="false" required autofocus></p>
+                    <p><input type="password" name="loginFormPassword" placeholder="Password... " spellcheck="false" required></p>
+                    <input type="submit" value="Login">
+                </form>
+                <p>Don't have an account? <a href="">Sign up</a></p>
+            </div>
+
+            <div class="navBar__register">
+                <h2>REGISTER</h2>
+                <form id="registerForm">
+                    <p><input type="text" name="registerFormUsername" placeholder="Username... " spellcheck="false" required autofocus></p>
+                    <p><input type="password" name="registerFormPassword" placeholder="Password... " spellcheck="false" required></p>
+                    <input type="submit" value="Register">
+                </form>
+                <p>Have an account? <a href="">Login</a></p>
+            </div>
+        </nav>
+
+
+        <main class="main">
+            <div class="main__aside">
+                <div class="main__rooms">
+                    <h2>ROOMS</h2>
+                </div>
+                <div class="main__users">
+                    <h2>USERS</h2>
+                </div>
+            </div>
+            <div class="main__chat">
+                <h2>CHAT</h2>
+                <ul id="messagesReceived" class="main__messagesReceived">
+                </ul>
+                <textarea name="message"></textarea>
+                <button type="button" id="messageSendButton">Send</button>
+            </div>
+        </main>
+
+
+        <!-- <ul id="message-container"></ul>
+        <form id="form">
+            <label for="message-input">Message</label>
+            <input type="text" id="message-input">
+            <button type="submit" id="send-button">Send</button>
+            <label for="room-input">Room</label>
+            <input type="text" id="room-input">
+            <button type="button" id="room-button">Join</button>
+        </form> -->
+    </body>
+</html>

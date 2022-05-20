@@ -1,0 +1,68 @@
+
+@font-face {
+    font-family: "Hack";
+    src: url('../css/font/hack/ttf/Hack-Regular.ttf') format("truetype");
+}
+
+* {
+    font-size: 100%;
+    font-family: 'Hack';
+}
+
+/* NavBar*/
+.navBar {
+    display:flex;
+}
+
+.navBar__login {
+    border-style: solid;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.navBar__register {
+    border-style: solid;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.navBar__buttons {
+
+}
+
+/* Main */
+.main {
+    border-style: solid;
+    display:flex;
+}
+
+.main__aside {
+    border-style: solid;
+    width: 30%;
+    height: 100%;
+}
+
+.main__chat {
+    border-style: solid;
+    width: 70%;
+    height: 100%;
+
+}
+
+.main__rooms {
+    border-style: solid;
+    width: 100%;
+    height: 100%;
+}
+
+.main__users {
+    border-style: solid;
+    width: 100%;
+    height: 100%;
+}
+
+.main__messagesReceived {
+    border-style: solid;
+}
