@@ -22,6 +22,7 @@ app.use(cors())
 
 app.use('/register', require('./routes/register'));
 app.use('/login', require('./routes/login'))
+app.use('/auth', require('./routes/auth'))
 app.use((req, res) => res.status(404).send({ status: "fail", message: "PAGE NOT FOUND"}));
 
 PORT = process.env.API_PORT || 8080

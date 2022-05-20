@@ -39,7 +39,6 @@ const authJWT = async (req, res, next) => {
         req.userId = decoded.userId;
         next()
     })
-    
 }
 
 module.exports = {authentication, authJWT};
