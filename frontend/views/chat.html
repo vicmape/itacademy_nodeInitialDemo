@@ -5,62 +5,58 @@
         <meta charset="UTF-8">
         <meta name="keywords" content="HTML, CSS, JavaScript, Node">
         <meta name="description" content="This is my first 4chat">
-        <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
+        <link rel="icon" href="../img/icon.png" type="image/png" sizes="16x16">
         <link rel="stylesheet" href="../css/stylesheet.css">
-        <script src="script.js" type="module"></script>
     </head>
     <body>
-        <h1>4CHAT</h1>
-        <nav class="navBar">
-            <div class="navBar__login">
-                <h2>LOGIN</h2>
-                <form id="loginForm" >
-                    <p><input type="text" name="loginFormUsername" placeholder="Username... " spellcheck="false" required autofocus></p>
-                    <p><input type="password" name="loginFormPassword" placeholder="Password... " spellcheck="false" required></p>
-                    <input type="submit" value="Login">
+        <header class="header">
+            <div>
+                <h1 id="userName"></h1>
+                <h1 id="roomName"></h1>
+            </div>
+          <button class="button" type="button" onclick="logout()">Logout</button>
+        </header>
+    
+        <div class="chat">
+            <aside class="chat__rooms">
+                <h2>Rooms</h2>
+                <form id="createRoomForm">
+                    <p><input type="text" name="roomName" placeholder="Room name " maxlength="15" spellcheck="false" required></p>
+                    <input type="submit" value="Create Room">
                 </form>
-                <p>Don't have an account? <a href="">Sign up</a></p>
-            </div>
-
-            <div class="navBar__register">
-                <h2>REGISTER</h2>
-                <form id="registerForm">
-                    <p><input type="text" name="registerFormUsername" placeholder="Username... " spellcheck="false" required autofocus></p>
-                    <p><input type="password" name="registerFormPassword" placeholder="Password... " spellcheck="false" required></p>
-                    <input type="submit" value="Register">
-                </form>
-                <p>Have an account? <a href="">Login</a></p>
-            </div>
-        </nav>
-
-
-        <main class="main">
-            <div class="main__aside">
-                <div class="main__rooms">
-                    <h2>ROOMS</h2>
-                </div>
-                <div class="main__users">
-                    <h2>USERS</h2>
-                </div>
-            </div>
-            <div class="main__chat">
-                <h2>CHAT</h2>
-                <ul id="messagesReceived" class="main__messagesReceived">
+                <ul id="roomList">
+                    <li>Room1</li>
+                    <li>Room2</li>
                 </ul>
-                <textarea name="message"></textarea>
-                <button type="button" id="messageSendButton">Send</button>
-            </div>
-        </main>
+            </aside>
+          
+            <main class="chat__messages">
+                <ul id="messages">
+                    <li>message1</li>
+                    <li>message1</li>
+                    <li>message1</li>
+                    <li>message1</li>
+                </ul>
+                <div class="chat__keyboard">
+                    <input class="chat__textarea" type="text" id="message-input" name="message-input">
+                </input>
+                    <button class="button" type="button" onclick="sendMessage()">Send</button>
+                </div>
+            </main>
 
+            <aside class="chat__users">
+                <h2>Users connected</h2>
+                <ul id="userList">
+                    <li>User1</li>
+                    <li>User2</li>
+                </ul>
+            </aside>
 
-        <!-- <ul id="message-container"></ul>
-        <form id="form">
-            <label for="message-input">Message</label>
-            <input type="text" id="message-input">
-            <button type="submit" id="send-button">Send</button>
-            <label for="room-input">Room</label>
-            <input type="text" id="room-input">
-            <button type="button" id="room-button">Join</button>
-        </form> -->
-    </body>
+        </div>
+    
+      </body>
 </html>
+
+<script src="../scripts/createRoom.js"></script>
+<script src="../scripts/logout.js"></script>
+<script src="../scripts/initChat.js"></script>
