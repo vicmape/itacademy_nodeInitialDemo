@@ -1,7 +1,11 @@
-createRoomForm.addEventListener("submit", e => {
-    e.preventDefault();
+function createRoom(form) {
+    const newRoomName = form.newRoom.value
 
-    const roomName = loginForm.roomName.value;
-    console.log(`Creating ${roomName}...`)
+    if (newRoomName) {
+        console.log(`Creating ${newRoomName}`)
 
-})
+        form.newRoom.value = '';
+    }
+
+    return false;
+}

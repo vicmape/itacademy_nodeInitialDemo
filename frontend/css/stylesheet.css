@@ -48,22 +48,24 @@
 .chat__rooms {
     border-right: solid;
     width: 20%;
-    /* position: relative; */
 }
 
-
-.chat__roomCreate {
+.chat__roomForm {
     display: flex;
     padding: 0.75rem 0.3rem;
 }
 
-.chat__roomCreate input {
+.chat__roomInput {
     width: 100%;
     border-radius: 2rem;
     border: solid;
     padding: 0rem 0.25rem;
 }
 
+.chat__roomInput:focus {
+    box-shadow: 0px 0px 20px lime;
+    outline: none;
+}
 
 .chat__headers {
     border-bottom: solid;

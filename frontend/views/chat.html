@@ -18,27 +18,21 @@
         <div class="chat">
             <aside class="chat__rooms">
                 <h1 class="chat__headers">ROOMS</h1>
-                <div class="chat__roomCreate">
-                    <input class="" type="text" id="message-input" name="message-input" placeholder="Room name... ">
-                    <button class="button" type="button" onclick="createRoom()">Create</button>
-                </div>
+                <form class="chat__roomForm" id="roomForm" onsubmit="return createRoom(this)">
+                    <input class="chat__roomInput" type="text" id="newRoom" name="newRoom" placeholder="New room... " required>
+                    <input class="button" type="submit" value="Create">
+                </form>
                 <ul id="roomList">
-                    <li>Room1</li>
-                    <li>Room2</li>
                 </ul>
             </aside>
           
             <main class="chat__messages">
                 <ul id="messages">
-                    <li>message1</li>
-                    <li>message1</li>
-                    <li>message1</li>
-                    <li>message1</li>
                 </ul>
-                <div class="chat__keyboard">
-                    <input class="chat__message" type="text" id="message-input" name="message-input">
-                    <button class="button" type="button" onclick="sendMessage()">Send</button>
-                </div>
+                <form class="chat__keyboard" id="messageForm" onsubmit="return sendMessage(this)">
+                    <input class="chat__message" type="text" id="newMessage" name="newMessage">
+                    <input class="button" type="submit" value="Send">
+                </form>
             </main>
 
             <aside class="chat__users">
@@ -54,6 +48,10 @@
       </body>
 </html>
 
+<script src="../scripts/initChat.js"></script>
 <script src="../scripts/createRoom.js"></script>
 <script src="../scripts/logout.js"></script>
-<script src="../scripts/initChat.js"></script>
+<script src="../scripts/sendMessage.js"></script>
+
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="../scripts/sockets.js"></script>
