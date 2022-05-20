@@ -1,4 +1,3 @@
-
 // Check if this user has a valid jwt
 fetch('http://localhost:8080/auth', {
     method: 'post',

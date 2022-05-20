@@ -22,8 +22,7 @@
                     <input class="chat__roomInput" type="text" id="newRoom" name="newRoom" placeholder="New room... " required>
                     <input class="button" type="submit" value="Create">
                 </form>
-                <ul id="roomList">
-                </ul>
+                <ul id="roomList"></ul>
             </aside>
           
             <main class="chat__messages">
@@ -49,9 +48,10 @@
 </html>
 
 <script src="../scripts/initChat.js"></script>
-<script src="../scripts/createRoom.js"></script>
+<script src="../scripts/utils.js"></script>
+<script src="../scripts/rooms.js"></script>
 <script src="../scripts/logout.js"></script>
-<script src="../scripts/sendMessage.js"></script>
+<script src="../scripts/messages.js"></script>
 
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
 <script src="../scripts/sockets.js"></script>

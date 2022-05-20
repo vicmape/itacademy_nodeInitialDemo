@@ -10,9 +10,9 @@ const io = require('socket.io')(server, {
 });
 
 
-
 // Create Database if not exists
 require('./models/models.js')();
+const {getRooms, createRoom} = require('../backend/services/rooms')
 
 //Middlewares
 app.use(express.json())
@@ -25,7 +25,35 @@ app.use((req, res) => res.status(404).send({ status: "fail", message: "PAGE NOT 
 
 
 io.on('connection', socket => {
-    console.log(socket.id)
+    let result;
+
+    socket.on('new-message', message => {
+        console.log(message);
+        socket.broadcast.emit('new-message', message);
+    })
+
+    socket.on('new-room', async (roomName) => {
+
+        result = await createRoom(roomName);
+        if (result.status === 'success') {
+            io.emit('new-room', result.room);
+        } else {
+            io.to(socket.id).emit('error', result.message)
+        }
+    })
+
+    socket.on('cmd', async (cmd) => {
+
+        if (cmd === 'get-rooms') {
+            result = await getRooms();
+            if (result.status === 'success') {
+                result.rooms.forEach (room => io.to(socket.id).emit('new-room', room))
+            } else {
+                io.to(socket.id).emit('error', result.message)
+            }
+        }
+    })
+
 })
 
 
