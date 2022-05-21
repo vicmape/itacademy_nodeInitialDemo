@@ -12,7 +12,7 @@ async function getUsers(room) {
         result = {status: 'success', users};
 
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
     return result;
@@ -22,25 +22,25 @@ async function userSocket (userId, socketId) {
 
     let result;
     try {
-
+        Users.findOneAndUpdate
         // Push this user into the current room
-        const update = await Users.updateOne(
+        const oldUser = await Users.findOneAndUpdate(
             { _id: userId }, 
-            { socketId: socketId }
+            { socketId: socketId, roomId: '' }
+            );
+
+        const user = await Users.findOneAndUpdate(
+            { _id: userId }, 
+            { oldSocketId: oldUser.socketId,  roomId: ''}
             );
             
-        if (update.acknowledged === true &&
-            update.modifiedCount === 1 &&
-            update.upsertedId === null &&
-            update.upsertedCount === 0 &&
-            update.matchedCount === 1 ) {
-
+        if (user) {
             result = {status: 'success'};
         } else {
             result = {status: 'fail', message: update}
         }
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
         return result;
@@ -51,21 +51,31 @@ async function disconnectUser (socketId) {
     let result;
 
     try {
+        console.log('socketid', socketId)
         const userUpdate = await Users.findOneAndUpdate(
             { socketId: socketId }, 
-            { roomId: null, socketId: null }
+            { roomId: null }
             );
+        console.log('userUpdate', userUpdate)
+        const userUpdate2 = await Users.findOneAndUpdate(
+            { oldSocketId: socketId }, 
+            { roomId: null }
+            );
+            console.log('userUpdate2', userUpdate2)
 
-        console.log('disconnectUser', userUpdate)
         if (userUpdate) {
             result = {status: 'success', 
                       user: {userId: userUpdate._id, userName: userUpdate.userName},
                       roomId: userUpdate.roomId}
+        } else if (userUpdate2) {
+            result = {status: 'success', 
+                      user: {userId: userUpdate2._id, userName: userUpdate2.userName},
+                      roomId: userUpdate2.roomId}
         } else {
-            result = {status: 'fail', message: 'user not found'}
+            result = {status: 'fail', message: 'socketid for user disconnect not found'}
         }
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
         return result;
@@ -76,13 +86,11 @@ async function joinRoom (userId, room) {
 
     let result;
     try {
-        console.log("joinRoom server")
         // Push this user into the current room
         const updateUser = await Users.findOneAndUpdate(
             { _id: userId }, 
             { roomId: room.roomId }
             );
-            console.log(updateUser)
 
         if (updateUser) {
             result = {status: 'success',
@@ -92,7 +100,7 @@ async function joinRoom (userId, room) {
             result = {status: 'fail', message: 'Error joining room'}
         }
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
         return result;

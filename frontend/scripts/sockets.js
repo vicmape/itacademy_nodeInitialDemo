@@ -7,6 +7,9 @@ socket.on('new-message', message => {
     displayMessage(message);
 })
 
+socket.on('new-join-message', message => {
+    displayMessage(message);
+})
 
 socket.on('new-room', room => {
     displayRoom(room);

@@ -2,7 +2,7 @@ function sendMessage(form) {
     const newMessage = form.newMessage.value
 
     if (newMessage) {
-        socket.emit('new-message', (sessionStorage.roomId, newMessage));
+        socket.emit('new-message', sessionStorage.roomId, newMessage);
         displayMessage(newMessage)
         form.newMessage.value = '';
     }

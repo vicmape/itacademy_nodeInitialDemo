@@ -17,7 +17,7 @@ async function createRoom(roomName) {
             result = {status: 'success', room: {roomId: room._id, roomName: room.roomName}}
         }
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
     return result;
@@ -38,7 +38,7 @@ async function getRooms() {
         result = {status: 'success', rooms};
 
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
     return result;

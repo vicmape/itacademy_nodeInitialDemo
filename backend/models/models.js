@@ -11,6 +11,7 @@ module.exports = () => {
         userName: String,
         password: String,
         roomId: String,
+        oldSocketId: String,
         socketId: String
     }, { timestamps: true });
 

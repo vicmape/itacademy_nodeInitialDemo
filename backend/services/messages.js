@@ -12,7 +12,7 @@ async function getMessages(room) {
         result = {status: 'success', messages};
 
     } catch (err) {
-        result =  {status:'fail', message: err.message};
+        result =  {status:'error', message: err.message};
     }
 
     return result;

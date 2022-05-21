@@ -34,13 +34,14 @@ io.on('connection', socket => {
     })
 
     socket.on('new-message', (roomId, message) => {
+        console.log(`broadcast to ${roomId}`)
         socket.broadcast.to(roomId).emit('new-message', message);
     })
 
     socket.on('new-room', async (roomName) => {
 
         result = await createRoom(roomName);
-        console.log(`createRoom`, result)
+        //console.log(`createRoom`, result)
         if (result.status === 'success') {
             io.emit('new-room', result.room);
         } else {
@@ -50,7 +51,7 @@ io.on('connection', socket => {
 
     socket.on('get-rooms', async () => {
         result = await getRooms();
-         console.log(`getRooms`, result)
+         //console.log(`getRooms`, result)
         if (result.status === 'success') {
             result.rooms.forEach (room => io.to(socket.id).emit('new-room', room))
         } else {
@@ -60,7 +61,7 @@ io.on('connection', socket => {
 
     socket.on('get-users', async (room) => {
         result = await getUsers(room);
-        console.log(`getUsers`, result)
+        //console.log(`getUsers`, result)
         if (result.status === 'success') {
             result.users.forEach (user => io.to(socket.id).emit('new-user', user))
         } else {
@@ -70,7 +71,7 @@ io.on('connection', socket => {
 
     socket.on('get-messages', async (room) => {
         result = await getMessages(room);
-        console.log(`getMessages`, result)
+        //console.log(`getMessages`, result)
         if (result.status === 'success') {
             result.messages.forEach (message => io.to(socket.id).emit('new-message', message))
         } else {
@@ -81,21 +82,27 @@ io.on('connection', socket => {
 
     socket.on('join-room', async (userId, room) => {
         result = await joinRoom(userId, room);
-        console.log(`joinRoom`, result)
+        //console.log(`joinRoom`, result)
         if (result.status === 'success') {
             // Success
-            io.to(result.roomId).emit('delete-user', result.user);
+            // old room stuff
             socket.leave(result.roomId);
+            socket.broadcast.to(result.roomId).emit('delete-user', result.user);
+            socket.broadcast.to(result.roomId).emit('new-join-message', `${result.user.userName} left the room`);
+            
+            // new room stuff
             socket.join(room.roomId);
+            socket.broadcast.to(room.roomId).emit('new-user', result.user);
+            socket.broadcast.to(room.roomId).emit('new-join-message', `${result.user.userName} joined the room`);
         } else {
             io.to(socket.id).emit('error', result.message)
         }
     })
 
     socket.on('disconnect', async () => {
-        console.log('user disconnected');
+        // console.log('user disconnected', socket.id);
         result = await disconnectUser(socket.id);
-        console.log(`disconnectUser`, result)
+        console.log('disconnect', result)
         if (result.status === 'success') {
             // Success
             io.to(result.roomId).emit('delete-user', result.user)
