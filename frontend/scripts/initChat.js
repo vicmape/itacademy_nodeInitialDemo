@@ -17,12 +17,9 @@ fetch('http://localhost:8080/auth', {
         // Set username in chat window
         document.getElementById("userName").innerHTML = `USER: ${sessionStorage.userName}`;
 
-        // Set the room name in chat window
-        if (sessionStorage.roomName) {
-            document.getElementById("roomName").innerHTML = `ROOM: ${sessionStorage.roomName}`;
-        } else {
-            document.getElementById("roomName").innerHTML = `ROOM: General room`;
-        }
+        document.getElementById("roomName").innerHTML = 'ROOM: General room';
+        sessionStorage.roomId = '';
+        sessionStorage.roomName = '';
     } else {
         // jwt verification failed
         logout()

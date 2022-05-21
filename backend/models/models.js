@@ -7,10 +7,15 @@ module.exports = () => {
 
     mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
     
-    const usersSchema = new mongoose.Schema({ userName: String, password: String }, { timestamps: true });
+    const usersSchema = new mongoose.Schema({
+        userName: String,
+        password: String,
+        roomId: String,
+        socketId: String
+    }, { timestamps: true });
+
     const roomsSchema = new mongoose.Schema({
         roomName: String,
-        usersConnected: [{userName: String, userId: String}],
         messages: [{ userName: String, userId: String, message: String }]
     }, { timestamps: true });
 

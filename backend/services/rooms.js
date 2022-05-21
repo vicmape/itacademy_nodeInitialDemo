@@ -1,5 +1,6 @@
 require('dotenv').config()
 const Rooms = require('mongoose').model("Rooms")
+const Users = require('mongoose').model("Users")
 
 async function createRoom(roomName) {
 
@@ -42,5 +43,6 @@ async function getRooms() {
 
     return result;
 }
+
 
 module.exports = {createRoom, getRooms}

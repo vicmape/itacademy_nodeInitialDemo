@@ -26,8 +26,7 @@
             </aside>
           
             <main class="chat__messages">
-                <ul id="messages">
-                </ul>
+                <ul id="messageList"></ul>
                 <form class="chat__keyboard" id="messageForm" onsubmit="return sendMessage(this)">
                     <input class="chat__message" type="text" id="newMessage" name="newMessage">
                     <input class="button" type="submit" value="Send">
@@ -36,10 +35,7 @@
 
             <aside class="chat__users">
                 <h1 class="chat__headers">USERS</h1>
-                <ul id="userList">
-                    <li>User1</li>
-                    <li>User2</li>
-                </ul>
+                <ul id="userList"></ul>
             </aside>
 
         </div>
@@ -47,11 +43,13 @@
       </body>
 </html>
 
-<script src="../scripts/initChat.js"></script>
 <script src="../scripts/utils.js"></script>
 <script src="../scripts/rooms.js"></script>
+<script src="../scripts/users.js"></script>
 <script src="../scripts/logout.js"></script>
 <script src="../scripts/messages.js"></script>
 
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
 <script src="../scripts/sockets.js"></script>
+
+<script src="../scripts/initChat.js"></script>

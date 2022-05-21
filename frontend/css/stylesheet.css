@@ -35,12 +35,14 @@
     padding: 0 1rem;
     align-items: center;
     justify-content: space-between;
+    border: 2px solid;
+    border-bottom: 0;
 }
 
 /* CHAT */
 
 .chat {
-    border: solid;
+    border: 2px solid;
     height: calc(85vh); /* 100px del header */
     display:flex;
 }
@@ -52,19 +54,23 @@
 
 .chat__roomForm {
     display: flex;
-    padding: 0.75rem 0.3rem;
+    padding: 1.25rem 0.5rem;
 }
 
 .chat__roomInput {
     width: 100%;
     border-radius: 2rem;
     border: solid;
-    padding: 0rem 0.25rem;
+    padding: 0rem 0.75rem;
 }
 
 .chat__roomInput:focus {
     box-shadow: 0px 0px 20px lime;
     outline: none;
+}
+
+.chat__roomName {
+    list-style-type: none
 }
 
 .chat__headers {
@@ -78,6 +84,10 @@
 .chat__users {
     border-left: solid;
     width: 20%;
+}
+
+.chat__userName {
+    list-style-type: none
 }
 
 .chat__messages {
