@@ -14,7 +14,7 @@ const io = require('socket.io')(server, {
 require('./models/models.js')();
 const {getRooms, createRoom} = require('../backend/services/rooms')
 const {getUsers, userSocket, disconnectUser, joinRoom} = require('../backend/services/users')
-const {getMessages} = require('../backend/services/messages')
+const {getMessages, storeMessage} = require('../backend/services/messages')
 
 //Middlewares
 app.use(express.json())
@@ -33,9 +33,10 @@ io.on('connection', socket => {
         await userSocket(userId, socket.id);
     })
 
-    socket.on('new-message', (roomId, message) => {
-        console.log(`broadcast to ${roomId}`)
-        socket.broadcast.to(roomId).emit('new-message', message);
+    socket.on('new-message', (user, room, message) => {
+        // console.log(`broadcast to ${roomId}`)
+        storeMessage(user, room, message);
+        socket.broadcast.to(room.roomId).emit('new-message', message);
     })
 
     socket.on('new-room', async (roomName) => {
@@ -71,9 +72,9 @@ io.on('connection', socket => {
 
     socket.on('get-messages', async (room) => {
         result = await getMessages(room);
-        //console.log(`getMessages`, result)
+
         if (result.status === 'success') {
-            result.messages.forEach (message => io.to(socket.id).emit('new-message', message))
+            result.messages.forEach (m => io.to(socket.id).emit('new-message', m.message))
         } else {
             io.to(socket.id).emit('error', result.message)
         }

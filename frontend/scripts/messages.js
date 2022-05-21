@@ -1,8 +1,10 @@
 function sendMessage(form) {
     const newMessage = form.newMessage.value
+    const user = {userId:sessionStorage.userId, userName: sessionStorage.userName}
+    const room = {roomId:sessionStorage.roomId, roomName: sessionStorage.roomName}
 
     if (newMessage) {
-        socket.emit('new-message', sessionStorage.roomId, newMessage);
+        socket.emit('new-message', user, room, newMessage);
         displayMessage(newMessage)
         form.newMessage.value = '';
     }

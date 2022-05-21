@@ -18,4 +18,25 @@ async function getMessages(room) {
     return result;
 }
 
-module.exports = {getMessages}
+async function storeMessage(user, room, message) {
+
+    let result;
+
+    try {
+
+        // Push this user into the current room
+        result = await Rooms.updateOne(
+            { _id: room.roomId }, 
+            { $push: { messages: {userName: user.userName, userId: user.userId, message} }}
+        );
+            console.log(result)
+            result = {status: 'success'};
+
+    } catch (err) {
+        result =  {status:'error', message: err.message};
+    }
+
+    return result;
+}
+
+module.exports = {getMessages, storeMessage}
