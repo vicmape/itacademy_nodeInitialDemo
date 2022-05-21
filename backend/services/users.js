@@ -51,17 +51,15 @@ async function disconnectUser (socketId) {
     let result;
 
     try {
-        console.log('socketid', socketId)
         const userUpdate = await Users.findOneAndUpdate(
             { socketId: socketId }, 
             { roomId: null }
             );
-        console.log('userUpdate', userUpdate)
+
         const userUpdate2 = await Users.findOneAndUpdate(
             { oldSocketId: socketId }, 
             { roomId: null }
             );
-            console.log('userUpdate2', userUpdate2)
 
         if (userUpdate) {
             result = {status: 'success', 

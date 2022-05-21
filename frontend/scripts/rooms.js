@@ -54,7 +54,6 @@ function displayRoom(room) {
         }
 
         roomBtn.classList.add('chat__roomName--active')
-        console.log("COLOR TO: ", sessionStorage.roomId);
         joinRoom(room);
     }
     

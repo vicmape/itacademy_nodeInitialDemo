@@ -7,7 +7,10 @@ async function getMessages(room) {
 
     try {
 
-        const {messages} = await Rooms.findOne({_id: room.roomId});
+        let {messages} = await Rooms.findOne({_id: room.roomId});
+        console.log('inside get-messages 1', messages)
+        messages = messages.map(({ user, room, text}) => ({ user, room, text }));
+        console.log('inside get-messages 2', messages)
 
         result = {status: 'success', messages};
 
@@ -18,19 +21,21 @@ async function getMessages(room) {
     return result;
 }
 
-async function storeMessage(user, room, message) {
+async function storeMessage(message) {
 
     let result;
 
     try {
-
+        console.log('inside storeMessage', message)
         // Push this user into the current room
         result = await Rooms.updateOne(
-            { _id: room.roomId }, 
-            { $push: { messages: {userName: user.userName, userId: user.userId, message} }}
+            { _id: message.room.roomId }, 
+            { $push: { messages: message }}
         );
-            console.log(result)
-            result = {status: 'success'};
+
+        result = {status: 'success', message};
+
+        return result;
 
     } catch (err) {
         result =  {status:'error', message: err.message};

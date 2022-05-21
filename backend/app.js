@@ -33,16 +33,21 @@ io.on('connection', socket => {
         await userSocket(userId, socket.id);
     })
 
-    socket.on('new-message', (user, room, message) => {
+    socket.on('new-message', async (message) => {
         // console.log(`broadcast to ${roomId}`)
-        storeMessage(user, room, message);
-        socket.broadcast.to(room.roomId).emit('new-message', message);
+        result = await storeMessage(message);
+        console.log('new-message', result)
+        if (result.status === 'success') {
+            socket.broadcast.to(message.room.roomId).emit('new-message', result.message);
+        } else {
+            io.to(socket.id).emit('error', result.message)
+        }
     })
 
     socket.on('new-room', async (roomName) => {
 
         result = await createRoom(roomName);
-        //console.log(`createRoom`, result)
+        //console.log(`new-room`, result)
         if (result.status === 'success') {
             io.emit('new-room', result.room);
         } else {
@@ -52,7 +57,7 @@ io.on('connection', socket => {
 
     socket.on('get-rooms', async () => {
         result = await getRooms();
-         //console.log(`getRooms`, result)
+         //console.log(`get-rooms`, result)
         if (result.status === 'success') {
             result.rooms.forEach (room => io.to(socket.id).emit('new-room', room))
         } else {
@@ -62,7 +67,7 @@ io.on('connection', socket => {
 
     socket.on('get-users', async (room) => {
         result = await getUsers(room);
-        //console.log(`getUsers`, result)
+        //console.log(`get-users`, result)
         if (result.status === 'success') {
             result.users.forEach (user => io.to(socket.id).emit('new-user', user))
         } else {
@@ -72,9 +77,9 @@ io.on('connection', socket => {
 
     socket.on('get-messages', async (room) => {
         result = await getMessages(room);
-
+        console.log('get-messages', result)
         if (result.status === 'success') {
-            result.messages.forEach (m => io.to(socket.id).emit('new-message', m.message))
+            result.messages.forEach (message => io.to(socket.id).emit('new-message', message))
         } else {
             io.to(socket.id).emit('error', result.message)
         }
@@ -103,7 +108,7 @@ io.on('connection', socket => {
     socket.on('disconnect', async () => {
         // console.log('user disconnected', socket.id);
         result = await disconnectUser(socket.id);
-        console.log('disconnect', result)
+        //console.log('disconnect', result)
         if (result.status === 'success') {
             // Success
             io.to(result.roomId).emit('delete-user', result.user)

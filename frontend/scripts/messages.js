@@ -1,11 +1,12 @@
 function sendMessage(form) {
-    const newMessage = form.newMessage.value
+    const text = form.newMessage.value
     const user = {userId:sessionStorage.userId, userName: sessionStorage.userName}
     const room = {roomId:sessionStorage.roomId, roomName: sessionStorage.roomName}
 
-    if (newMessage) {
-        socket.emit('new-message', user, room, newMessage);
-        displayMessage(newMessage)
+    if (text) {
+        let message = {user, room, text}
+        socket.emit('new-message', message);
+        displayMessage(message)
         form.newMessage.value = '';
     }
 
@@ -14,10 +15,15 @@ function sendMessage(form) {
 
 function displayMessage(message) {
     const item = document.createElement('li');
-    item.textContent = message;
+    item.textContent = message.text;
+    item.setAttribute('id', `m_${message.user.userId}`); // m_userId to avoid colission with userList
+
     console.log(message)
 
-    if (message.userId === sessionStorage.userId)
+    // my messages will be aligned different
+    console.log('displayMessage', message.user.userId);
+    console.log('displayMessage', sessionStorage.userId);
+    if (message.user.userId === sessionStorage.userId)
     {
         item.classList.add('myMessage')
     }

@@ -17,7 +17,7 @@ module.exports = () => {
 
     const roomsSchema = new mongoose.Schema({
         roomName: String,
-        messages: [{ userName: String, userId: String, message: String }]
+        messages: [{ user:{userName: String, userId: String}, room:{roomName: String, roomId: String}, text: String }]
     }, { timestamps: true });
 
     mongoose.model('Users', usersSchema);
