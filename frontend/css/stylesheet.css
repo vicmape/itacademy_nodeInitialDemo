@@ -180,7 +180,22 @@ ul,li {
     box-shadow: 0px 0px 20px lime;
 }
 
+.notMyMessage {
+    width: 50%;
+    margin: auto;
+    margin-left: 0;
+    padding: .25rem 1rem;
+    text-align: left;
+    background-color: black;
+    color: lime;
+}
+
 .myMessage {
+    width: 50%;
+    margin: auto;
+    margin-right: 0;
+    padding: .25rem 1rem;
     text-align: right;
-    background-color: red;
+    background-color: lime;
+    color: black;
   }

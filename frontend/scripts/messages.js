@@ -26,6 +26,8 @@ function displayMessage(message) {
     if (message.user.userId === sessionStorage.userId)
     {
         item.classList.add('myMessage')
+    } else {
+        item.classList.add('notMyMessage')
     }
 
     let messages = document.getElementById("messageList");
