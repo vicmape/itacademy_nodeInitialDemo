@@ -11,6 +11,12 @@
     background-color: black;
 }
 
+ul,li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .button {
     height: 30px;
     border: solid;
@@ -70,7 +76,23 @@
 }
 
 .chat__roomName {
-    list-style-type: none
+    padding: 0.25rem 1rem;
+
+}
+
+.chat__roomName button {
+    width: 100%;
+    text-align: left;
+}
+
+.chat__roomName button:hover {
+    box-shadow: 0px 0px 20px lime;
+}
+
+
+.chat__roomName--active {
+    background-color: lime;
+    color: black;
 }
 
 .chat__headers {
@@ -86,8 +108,12 @@
     width: 20%;
 }
 
+.chat__users ul {
+    padding: 1rem
+}
+
 .chat__userName {
-    list-style-type: none
+    padding: 0.25rem 1rem;
 }
 
 .chat__messages {
@@ -95,6 +121,7 @@
     flex-direction: column;
     justify-content: flex-end;
     position: relative;
+    padding: 1rem;
 }
 
 .chat__messages li {
@@ -152,3 +179,8 @@
 .card__button:hover {
     box-shadow: 0px 0px 20px lime;
 }
+
+.myMessage {
+    text-align: right;
+    background-color: red;
+  }

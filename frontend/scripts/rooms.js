@@ -46,14 +46,20 @@ function displayRoom(room) {
 
     const roomBtn = document.createElement('button');
     roomBtn.textContent = room.roomName;
-    roomBtn.classList.add('button');
-    roomBtn.onclick = function () {
+    roomBtn.setAttribute("id", room.roomId);
+    roomBtn.onclick = () => {
+
+        if (sessionStorage.roomId) {
+            document.getElementById(sessionStorage.roomId).classList.remove('chat__roomName--active')
+        }
+
+        roomBtn.classList.add('chat__roomName--active')
+        console.log("COLOR TO: ", sessionStorage.roomId);
         joinRoom(room);
     }
     
     const item = document.createElement('li');
     item.classList.add('chat__roomName');
-    item.setAttribute("id", room.roomId);
     item.append(roomBtn)
 
     const rooms = document.getElementById("roomList");

@@ -15,6 +15,12 @@ function sendMessage(form) {
 function displayMessage(message) {
     const item = document.createElement('li');
     item.textContent = message;
+    console.log(message)
+
+    if (message.userId === sessionStorage.userId)
+    {
+        item.classList.add('myMessage')
+    }
 
     let messages = document.getElementById("messageList");
     messages.appendChild(item);

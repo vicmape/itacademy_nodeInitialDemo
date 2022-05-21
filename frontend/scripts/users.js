@@ -4,9 +4,7 @@ function displayUser(user) {
 
     // if user already exists do nothing (due to synchronous with sockets...)
     const exists = document.getElementById(user.userId);
-    console.log(exists)
     if (exists) return;
-    console.log('displaying', user);
 
     const item = document.createElement('li');
     item.classList.add('chat__userName');
