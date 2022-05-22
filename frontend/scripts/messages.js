@@ -13,24 +13,47 @@ function sendMessage(form) {
     return false;
 }
 
+
 function displayMessage(message) {
-    const item = document.createElement('li');
-    item.textContent = message.text;
-    item.setAttribute('id', `m_${message.user.userId}`); // m_userId to avoid colission with userList
 
-    console.log(message)
+    let messageList = document.getElementById("messageList");
 
-    // my messages will be aligned different
-    console.log('displayMessage', message.user.userId);
-    console.log('displayMessage', sessionStorage.userId);
-    if (message.user.userId === sessionStorage.userId)
-    {
-        item.classList.add('myMessage')
+    // Create the element to append
+    console.log('creating li')
+    let li = document.createElement('li');
+    li.textContent = message.text;
+
+    // Get the last inserted Ul
+    let ul = document.getElementById('lastUl');
+
+    // If last inserted ul has the same userId then append and we are done.
+    if (ul && (ul.getAttribute('userId') === message.user.userId)) {
+        // Same user, append message to last ul.
+        ul.appendChild(li)
     } else {
-        item.classList.add('notMyMessage')
+        if (ul) document.getElementById("lastUl").removeAttribute("id");
+
+        // Create new ul
+        ul = document.createElement('ul');
+        ul.setAttribute('id', 'lastUl');
+        ul.setAttribute('userId', message.user.userId)
+
+
+
+        // my messages will be aligned different
+        if (message.user.userId === sessionStorage.userId) {
+            ul.classList.add('myMessage')
+        } else {
+            const name = document.createElement('li')
+            name.textContent = message.user.userName;
+            messageList.appendChild(name);
+            ul.classList.add('notMyMessage')
+        }
+        
+        ul.appendChild(li);
+
+        messageList.appendChild(ul);
     }
 
-    let messages = document.getElementById("messageList");
-    messages.appendChild(item);
-    messages.scrollTop = messages.scrollHeight;
+    messageList.scrollTop = messageList.scrollHeight;
 }
