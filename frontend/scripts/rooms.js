@@ -66,5 +66,5 @@ function displayRoom(room) {
     const rooms = document.getElementById("roomList");
     rooms.appendChild(li);
 
-    sortUlList("roomList");
+    sortBtnList("roomList");
 }
