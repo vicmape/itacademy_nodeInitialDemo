@@ -78,7 +78,7 @@ io.on('connection', socket => {
     socket.on('get-messages', async (room) => {
         result = await getMessages(room);
         console.log('get-messages', result)
-        if (result.status === 'success') {
+        if ((result.status === 'success') && (result.messages !== null)) {
             result.messages.forEach (message => io.to(socket.id).emit('new-message', message))
         } else {
             io.to(socket.id).emit('error', result.message)

@@ -7,10 +7,20 @@ async function getMessages(room) {
 
     try {
 
-        let {messages} = await Rooms.findOne({_id: room.roomId});
-        console.log('inside get-messages 1', messages)
-        messages = messages.map(({ user, room, text}) => ({ user, room, text }));
-        console.log('inside get-messages 2', messages)
+        let roomInfo = '';
+        let messages = '';
+
+        if (room.roomId) {
+            roomInfo = await Rooms.findOne({_id: room.roomId});
+        } else if (room.roomName) {
+            roomInfo = await Rooms.findOne({roomName: room.roomName});
+        }else {
+            throw new Error('roomId nor roomName provided');
+        }
+
+        if (roomInfo.messages !== null) {
+            messages = roomInfo.messages.map(({ user, room, text}) => ({ user, room, text }));
+        }
 
         result = {status: 'success', messages};
 

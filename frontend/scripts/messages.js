@@ -19,8 +19,8 @@ function displayMessage(message) {
     let messageList = document.getElementById("messageList");
 
     // Create the element to append
-    console.log('creating li')
     let li = document.createElement('li');
+    li.classList.add('chat__li')
     li.textContent = message.text;
 
     // Get the last inserted Ul

@@ -14,7 +14,7 @@ function joinRoom(room) {
     // If we are in the same room do nothing
     if (sessionStorage.roomId === room.roomId) return;
 
-    // Join new room
+    // Inform the server we are joining new room
     socket.emit('join-room', sessionStorage.userId, room);
 
     // Update session storage variables
@@ -44,25 +44,27 @@ function joinRoom(room) {
 
 function displayRoom(room) {
 
-    const roomBtn = document.createElement('button');
-    roomBtn.textContent = room.roomName;
-    roomBtn.setAttribute("id", room.roomId);
-    roomBtn.onclick = () => {
+    // We use this spot to set the sessionStorage.roomId as we do not not its ID at the beggining.
+    if (room.roomName === 'Lobby' && sessionStorage.roomName === 'Lobby') {
+        sessionStorage.roomId = room.roomId;
+    }
+
+    const li = document.createElement('button');
+    li.textContent = room.roomName;
+    li.setAttribute("id", room.roomId);
+    li.classList.add('room__li');
+    li.onclick = () => {
 
         if (sessionStorage.roomId) {
-            document.getElementById(sessionStorage.roomId).classList.remove('chat__roomName--active')
+            document.getElementById(sessionStorage.roomId).classList.remove('room__li--active')
         }
 
-        roomBtn.classList.add('chat__roomName--active')
+        li.classList.add('room__li--active')
         joinRoom(room);
     }
-    
-    const item = document.createElement('li');
-    item.classList.add('chat__roomName');
-    item.append(roomBtn)
 
     const rooms = document.getElementById("roomList");
-    rooms.appendChild(item);
+    rooms.appendChild(li);
 
     sortUlList("roomList");
 }

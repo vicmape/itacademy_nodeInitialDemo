@@ -15,27 +15,27 @@
           <button class="button" type="button" onclick="logout()">Logout</button>
         </header>
     
-        <div class="chat">
-            <aside class="chat__rooms">
-                <h1 class="chat__headers">ROOMS</h1>
-                <form class="chat__roomForm" id="roomForm" onsubmit="return createRoom(this)">
-                    <input class="chat__roomInput" type="text" id="newRoom" name="newRoom" placeholder="New room... " required>
+        <div class="layout">
+            <aside class="room">
+                <h1 class="header-section">ROOMS</h1>
+                <form id="roomForm" class="form" onsubmit="return createRoom(this)">
+                    <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" required>
                     <input class="button" type="submit" value="Create">
                 </form>
-                <ul id="roomList"></ul>
+                <ul id="roomList" class="room__ul"></ul>
             </aside>
           
-            <main class="chat__messages">
-                <ul id="messageList"></ul>
-                <form class="chat__keyboard" id="messageForm" onsubmit="return sendMessage(this)">
-                    <input class="chat__message" type="text" id="newMessage" name="newMessage">
+            <main class="chat">
+                <ul id="messageList" class="chat__ul"></ul>
+                <form id="messageForm" class="form chat__form"  onsubmit="return sendMessage(this)">
+                    <input class="input" type="text" id="newMessage" name="newMessage">
                     <input class="button" type="submit" value="Send">
                 </form>
             </main>
 
-            <aside class="chat__users">
-                <h1 class="chat__headers">USERS</h1>
-                <ul id="userList"></ul>
+            <aside class="user">
+                <h1 class="header-section">USERS</h1>
+                <ul id="userList" class="user__ul"></ul>
             </aside>
 
         </div>

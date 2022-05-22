@@ -7,7 +7,7 @@ function displayUser(user) {
     if (exists) return;
 
     const item = document.createElement('li');
-    item.classList.add('chat__userName');
+    item.classList.add('user__li');
     item.textContent = user.userName;
     item.setAttribute("id", user.userId);
 
