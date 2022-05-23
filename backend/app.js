@@ -63,8 +63,11 @@ io.on('connection', socket => {
         // console.log(`new-room`, newRoomRes)
 
         if (newRoomRes.status === 'success') {
-            // get the old room #users
-            io.emit('new-room', newRoomRes.room);
+
+            // get the old new room #users
+            let getUsersRes = await getUsers(newRoomRes.room);
+            // inform about new room #users
+            io.emit('new-room', newRoomRes.room, getUsersRes.users);
         } else {
             io.to(socket.id).emit('error', newRoomRes.message);
         }
