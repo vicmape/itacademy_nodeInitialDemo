@@ -66,49 +66,34 @@ io.on('connection', socket => {
         }
     })
 
-    socket.on('get-users', async (room) => {
-        let getUsersRes = await getUsers(room);
-        //console.log(`get-users`, getUsersRes)
-        if (getUsersRes.status === 'success') {
-            getUsersRes.users.forEach (user => io.to(socket.id).emit('new-user', user));
-        } else {
-            io.to(socket.id).emit('error', getUsersRes.message);
-        }
-    })
+    socket.on('join-room', async (user, room) => {
 
-    socket.on('get-messages', async (room) => {
-        let getMessagesRes = await getMessages(room);
-        //console.log('get-messages', getMessagesRes)
-        if ((getMessagesRes.status === 'success') && (getMessagesRes.messages !== null)) {
-            getMessagesRes.messages.forEach (message => io.to(socket.id).emit('new-message', message))
-        } else {
-            io.to(socket.id).emit('error', getMessagesRes.message)
-        }
-    })
+        let joinRoomRes = await joinRoom(user.userId, room);
 
-    socket.on('join-room', async (userId, room) => {
-
-        let joinRoomRes = await joinRoom(userId, room);
-
-        // console.log('join-room', joinRoomRes);
+        console.log('join-room', joinRoomRes);
 
         if (joinRoomRes.status === 'success') {
 
             // If we are joining a different room then do some stuff
             if (room.roomId !== joinRoomRes.oldRoom.roomId) {
 
-                // old room stuff
                 if (room.roomId) {
+                    //console.log(`leaving ${joinRoomRes.oldRoom.roomName}`)
+
                     // leave the old room
                     socket.leave(joinRoomRes.oldRoom.roomId);
+
                     // inform old room we left
                     socket.broadcast.to(joinRoomRes.oldRoom.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
 
                     // get the old room #users
                     let getUsersRes = await getUsers(joinRoomRes.oldRoom);
+
                     // inform everyone about the old room #users
                     io.emit('update-room-users', joinRoomRes.oldRoom, getUsersRes.users);
                 }
+
+                //console.log(`joining ${room.roomName}`)
 
                 // join the new room
                 socket.join(room.roomId);
@@ -119,6 +104,15 @@ io.on('connection', socket => {
                 let getUsersRes = await getUsers(room);
                 // inform everyone about the new room #users
                 io.emit('update-room-users', room, getUsersRes.users);
+
+                // Get the messages of the new room
+                let getMessagesRes = await getMessages(room);
+                //console.log('get-messages', getMessagesRes)
+                if ((getMessagesRes.status === 'success') && (getMessagesRes.messages !== null)) {
+                    getMessagesRes.messages.forEach (message => io.to(socket.id).emit('new-message', message))
+                } else {
+                    io.to(socket.id).emit('error', getMessagesRes.message)
+                }
             }
         } else {
             io.to(socket.id).emit('error', joinRoomRes.message);

@@ -14,8 +14,10 @@ function joinRoom(room) {
     // If we are in the same room do nothing
     if (sessionStorage.roomId === room.roomId && room.roomName !== 'Lobby') return;
 
+    const user = {userId: sessionStorage.userId, userName: sessionStorage.userName}
+
     // Inform the server we are joining new room
-    socket.emit('join-room', sessionStorage.userId, room);
+    socket.emit('join-room', user, room);
 
     // Update session storage variables
     sessionStorage.roomName = room.roomName;
@@ -26,17 +28,7 @@ function joinRoom(room) {
 
     // Delete messages
     document.getElementById("messageList").innerHTML = "";
-
-    // Display self on our user list
-    let user = {userName: sessionStorage.userName, userId: sessionStorage.userId};
-
-    // Get new users
-    socket.emit('get-users', room);
-
-    // Get new messages
-    socket.emit('get-messages', room);
 }
-
 
 function displayRoom(room) {
 
