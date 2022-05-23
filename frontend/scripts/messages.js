@@ -24,18 +24,18 @@ function displayMessage(message) {
     li.textContent = message.text;
 
     // Get the last inserted Ul
-    let ul = document.getElementById('lastUl');
+    let ul = document.getElementById('lastMessage');
 
     // If last inserted ul has the same userId then append and we are done.
     if (ul && (ul.getAttribute('userId') === message.user.userId)) {
         // Same user, append message to last ul.
         ul.appendChild(li)
     } else {
-        if (ul) document.getElementById("lastUl").removeAttribute("id");
+        if (ul) document.getElementById("lastMessage").removeAttribute("id");
 
         // Create new ul
         ul = document.createElement('ul');
-        ul.setAttribute('id', 'lastUl');
+        ul.setAttribute('id', 'lastMessage');
         ul.setAttribute('userId', message.user.userId)
 
 
@@ -59,14 +59,19 @@ function displayMessage(message) {
 }
 
 function displayJoinMessage(message) {
-    console.log('displayJoinMessage', message)
-    let messageList = document.getElementById("messageList");
-    console.log(messageList)
+
+    //console.log('displayJoinMessage', message)
+
+    document.getElementById('lastMessage').removeAttribute('id');
+
+    let messageList = document.getElementById('messageList');
+
     // Create the element to append
     let li = document.createElement('li');
     li.classList.add('chat__li--join')
     li.textContent = message;
-    messageList.appendChild(li);
+    li.setAttribute('id', 'lastMessage');
 
+    messageList.appendChild(li);
     messageList.scrollTop = messageList.scrollHeight;
 }
