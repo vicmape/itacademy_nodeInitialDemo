@@ -10,7 +10,7 @@ let socketConnected = false;
 
 socket.on('connect', () => {
 
-    console.log('Socket connected');
+  // console.log('Socket connected');
 
     // TODO: we make sure we only connect once. 
     // This prevents the client to connect again when server disconnects.
@@ -18,9 +18,9 @@ socket.on('connect', () => {
     if (socketConnected) return;
     socketConnected = true;
 
-    console.log(`userName: ${sessionStorage.userName}`)
-    console.log(`userId: ${sessionStorage.userId}`)
-    console.log(`accessToken: ${sessionStorage.accessToken}`)
+  // console.log(`userName: ${sessionStorage.userName}`)
+  // console.log(`userId: ${sessionStorage.userId}`)
+  // console.log(`accessToken: ${sessionStorage.accessToken}`)
 
     socket.on('new-message', message => {
         //console.log("new-message", message);
@@ -51,7 +51,7 @@ socket.on('connect', () => {
     })
 
     socket.on('disconnect', () => {
-        console.log('Socket disconnected')
+      // console.log('Socket disconnected')
     });
 
     // Delete room list

@@ -10,7 +10,7 @@ function createRoom(form) {
     return false;
 }
 function joinRoom(room) {
-    console.log('joinRoom', room)
+    //console.log('joinRoom', room)
 
     // If we are in the same room do nothing
     if (sessionStorage.roomId === room.roomId) return;

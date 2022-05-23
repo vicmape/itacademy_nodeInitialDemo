@@ -21,7 +21,7 @@ async function disconnectUser (user) {
     let result;
 
     try {
-        console.log('disconnectUser', user);
+        //console.log('disconnectUser', user);
 
         const userDisconnected = await Users.findOneAndUpdate(
             { _id: user.userId }, 
