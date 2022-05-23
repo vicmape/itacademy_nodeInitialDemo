@@ -1,7 +1,7 @@
 // Dummy anti hotlinking
 // TODO: Do this properly once this is in production.
 if (!sessionStorage.accessToken) {
-    window.location.assign = 'index.html'
+    window.location.assign('index.html');
 }
 
 document.getElementById("userName").innerHTML = `USER: ${sessionStorage.userName}`;
