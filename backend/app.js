@@ -70,7 +70,7 @@ io.on('connection', socket => {
 
         let joinRoomRes = await joinRoom(user.userId, room);
 
-        console.log('join-room', joinRoomRes);
+        //console.log('join-room', joinRoomRes);
 
         if (joinRoomRes.status === 'success') {
 
