@@ -10,7 +10,7 @@ module.exports = async () => {
     const usersSchema = new mongoose.Schema({
         userName: String,
         password: String,
-        roomId: String,
+        room:{roomId: String,roomName: String},
         oldSocketId: String,
         socketId: String
     }, { timestamps: true });

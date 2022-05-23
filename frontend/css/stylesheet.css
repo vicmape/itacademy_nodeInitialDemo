@@ -163,6 +163,7 @@ ul,li {
 .chat__li--join {
     font-style: italic;
     text-align: center;
+    font-size: 12px;
 }
 
 .chat__ul {

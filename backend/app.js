@@ -13,17 +13,17 @@ const io = require('socket.io')(server, {
 
 // Create Database if not exists
 require('./models/models.js')();
-const {getRooms, createRoom, getLobbyId} = require('../backend/services/rooms')
-const {getUsers, userSocket, disconnectUser, joinRoom} = require('../backend/services/users')
-const {getMessages, newMessage} = require('../backend/services/messages')
+const {getRooms, createRoom, getLobbyId} = require('../backend/services/rooms');
+const {getUsers, userSocket, disconnectUser, joinRoom} = require('../backend/services/users');
+const {getMessages, newMessage} = require('../backend/services/messages');
 
 //Middlewares
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 app.use('/register', require('./routes/register'));
-app.use('/login', require('./routes/login'))
-app.use('/auth', require('./routes/auth'))
+app.use('/login', require('./routes/login'));
+app.use('/auth', require('./routes/auth'));
 app.use((req, res) => res.status(404).send({ status: "fail", message: "PAGE NOT FOUND"}));
 
 
@@ -36,11 +36,11 @@ io.on('connection', socket => {
     socket.on('new-message', async (message) => {
 
         let newMessageRes = await newMessage(message);
-        console.log('new-message', newMessageRes)
+        //console.log('new-message', newMessageRes);
         if (newMessageRes.status === 'success') {
             socket.broadcast.to(message.room.roomId).emit('new-message', newMessageRes.message);
         } else {
-            io.to(socket.id).emit('error', newMessageRes.message)
+            io.to(socket.id).emit('error', newMessageRes.message);
         }
     })
 
@@ -51,7 +51,7 @@ io.on('connection', socket => {
         if (newRoomRes.status === 'success') {
             io.emit('new-room', newRoomRes.room);
         } else {
-            io.to(socket.id).emit('error', newRoomRes.message)
+            io.to(socket.id).emit('error', newRoomRes.message);
         }
     })
 
@@ -60,9 +60,9 @@ io.on('connection', socket => {
         let getRoomsRes = await getRooms();
          //console.log(`get-rooms`, getRoomsRes)
         if (getRoomsRes.status === 'success') {
-            getRoomsRes.rooms.forEach (room => io.to(socket.id).emit('new-room', room))
+            getRoomsRes.rooms.forEach (room => io.to(socket.id).emit('new-room', room));
         } else {
-            io.to(socket.id).emit('error', getRoomsRes.message)
+            io.to(socket.id).emit('error', getRoomsRes.message);
         }
     })
 
@@ -70,9 +70,9 @@ io.on('connection', socket => {
         let getUsersRes = await getUsers(room);
         //console.log(`get-users`, getUsersRes)
         if (getUsersRes.status === 'success') {
-            getUsersRes.users.forEach (user => io.to(socket.id).emit('new-user', user))
+            getUsersRes.users.forEach (user => io.to(socket.id).emit('new-user', user));
         } else {
-            io.to(socket.id).emit('error', getUsersRes.message)
+            io.to(socket.id).emit('error', getUsersRes.message);
         }
     })
 
@@ -89,31 +89,47 @@ io.on('connection', socket => {
     socket.on('join-room', async (userId, room) => {
 
         let joinRoomRes = await joinRoom(userId, room);
-        //console.log(`join-room`, joinRoomRes)
+
+        // console.log('join-room', joinRoomRes);
+
         if (joinRoomRes.status === 'success') {
+            // If we are joining a different room then do some stuff
+            if (room.roomId !== joinRoomRes.room.roomId) {
+                    // old room stuff
+                if (room.roomId) {
+                        // leave the old room
+                        socket.leave(joinRoomRes.room.roomId);
+                        // inform old room we left
+                        socket.broadcast.to(joinRoomRes.room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
 
-            // old room stuff
-            if (room.roomId){
-                socket.leave(joinRoomRes.roomId);
-                socket.broadcast.to(joinRoomRes.roomId).emit('delete-user', joinRoomRes.user);
-                socket.broadcast.to(joinRoomRes.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
+                    // get the old room #users
+                    let users = await getUsers(joinRoomRes.room);
+                    // inform everyone about the old room #users
+                    io.emit('update-room-users', joinRoomRes.room, users);
+                }
+                
+                // join the new room
+                socket.join(room.roomId);
+                // inform new room we came
+                socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
+
+                // get the new room #users
+                let users = await getUsers(room);
+                // inform everyone about the new room #users
+                io.emit('update-room-users', room, users);
             }
-
-            socket.join(room.roomId);
-            socket.broadcast.to(room.roomId).emit('new-user', joinRoomRes.user);
-            socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
         } else {
-            io.to(socket.id).emit('error', joinRoomRes.message)
+            io.to(socket.id).emit('error', joinRoomRes.message);
         }
     })
-
+    
     socket.on('disconnect', async () => {
-
+        
         let disconnectRes = await disconnectUser(socket.id);
         //console.log('disconnectRes', disconnectRes)
         if (disconnectRes.status === 'success') {
             // Success
-            io.to(disconnectRes.roomId).emit('delete-user', disconnectRes.user)
+            io.to(disconnectRes.room.roomId).emit('delete-user', disconnectRes.user);
         }
       });
 })
