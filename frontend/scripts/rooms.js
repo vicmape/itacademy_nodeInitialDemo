@@ -38,10 +38,6 @@ function displayRoom(room) {
         joinRoom(room);
     }
 
-    const span = document.createElement('span');
-    span.innerText = 'test'
-    li.append(span)
-
     li.textContent = room.roomName;
     li.setAttribute('id', room.roomId);
     li.classList.add('room__li');
