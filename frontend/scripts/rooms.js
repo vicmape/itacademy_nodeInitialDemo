@@ -40,7 +40,7 @@ function displayRoom(room) {
 
     btn.textContent = room.roomName;
     btn.setAttribute('id', room.roomId);
-    btn.classList.add('room__li');
+    btn.classList.add('room__btn');
     btn.onclick = () => {
 
         if (sessionStorage.roomId) {

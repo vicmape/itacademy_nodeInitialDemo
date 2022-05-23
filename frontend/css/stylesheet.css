@@ -9,12 +9,13 @@
     font-family: 'Hack';
 }
 
-*::-webkit-scrollbar {
+::-webkit-scrollbar {
+    height: 5px;
     width: 5px;
 }
 
-*::-webkit-scrollbar-thumb {
-    background-color: lime;
+::-webkit-scrollbar-thumb {
+    background-color: black;
     border-radius: 15px;
 }
 
@@ -29,6 +30,7 @@ ul,li {
 }
 
 /* DARK MODE */
+
 .dark-mode {
     color: lime;
     background-color: black;
@@ -54,7 +56,7 @@ ul,li {
     box-shadow: 0px 0px 20px lime;
 }
 
-.dark-mode .room__li:hover{
+.dark-mode .room__btn:hover{
     box-shadow: 0px 0px 20px lime;
 }
 
@@ -70,9 +72,14 @@ ul,li {
 .dark-mode .myMessage li {
     background-color: lime;
     color: black;
-  }
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+    background-color: lime;
+}
 
 /* LAYOUT */
+
 .layout {
     height: calc(100vh - 10vh - 2rem);
     display:flex;
@@ -149,16 +156,17 @@ ul,li {
     margin-right: 2px;
 }
 
-.room__li {
+.room__btn {
     padding: 0.25rem 1rem;
     display: block;
     width: calc(100% - 1rem);
     text-align: left;
     border-radius: 8px;
     margin: 0.25rem 0.5rem;
+    word-break: break-all;
 }
 
-.room__li:hover {
+.room__btn:hover {
     box-shadow: 0px 0px 20px black;
 }
 
@@ -184,6 +192,7 @@ ul,li {
 
 .user__li {
     padding: 0.25rem 1rem;
+    word-break: break-all;
 }
 
 /* CHAT */
