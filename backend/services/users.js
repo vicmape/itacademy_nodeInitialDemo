@@ -21,7 +21,7 @@ async function disconnectUser (user) {
     let result;
 
     try {
-        //console.log('disconnectUser', user);
+        // console.log('disconnectUser', user);
 
         const userDisconnected = await Users.findOneAndUpdate(
             { _id: user.userId }, 
@@ -47,7 +47,7 @@ async function joinRoom (user, room) {
 
     let result;
     try {
-        //console.log('joinRoom', room);
+        // console.log('joinRoom', room);
 
         // Push this user into the current room
         const oldUser = await Users.findOneAndUpdate(
@@ -55,7 +55,7 @@ async function joinRoom (user, room) {
             { 'room.roomId': room.roomId, 'room.roomName': room.roomName }
             );
 
-        //console.log("oldUser", oldUser)
+        // console.log("oldUser", oldUser)
 
         if (oldUser) {
             result = {status: 'success',

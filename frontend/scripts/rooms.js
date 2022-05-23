@@ -10,7 +10,7 @@ function createRoom(form) {
     return false;
 }
 function joinRoom(room) {
-    //console.log('joinRoom', room)
+    // console.log('joinRoom', room)
 
     // If we are in the same room do nothing
     if (sessionStorage.roomId === room.roomId) return;
@@ -38,6 +38,10 @@ function displayRoom(room) {
         joinRoom(room);
     }
 
+    const span = document.createElement('span');
+    span.innerText = 'test'
+    li.append(span)
+
     li.textContent = room.roomName;
     li.setAttribute('id', room.roomId);
     li.classList.add('room__li');
@@ -59,7 +63,5 @@ function displayRoom(room) {
 
 
 function displayRoomUsers(room, users) {
-    console.log(room);
-    console.log(users);
     document.getElementById(room.roomId).textContent = `${room.roomName} (${users.length})`
 }

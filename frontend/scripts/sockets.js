@@ -23,12 +23,12 @@ socket.on('connect', () => {
   // console.log(`accessToken: ${sessionStorage.accessToken}`)
 
     socket.on('new-message', message => {
-        //console.log("new-message", message);
+        // console.log("new-message", message);
         displayMessage(message);
     })
 
     socket.on('new-join-message', message => {
-        //console.log("new-join-message", message);
+        // console.log("new-join-message", message);
         displayJoinMessage(message);
     })
 
@@ -39,7 +39,7 @@ socket.on('connect', () => {
     })
 
     socket.on('update-room-users', (room, users) => {
-        console.log('update-room-users', room, users);
+        // console.log('update-room-users', room, users);
 
         // Display users in our console
         if (sessionStorage.roomId === room.roomId) {

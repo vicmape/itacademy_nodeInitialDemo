@@ -58,7 +58,7 @@ function displayMessage(message) {
 
 function displayJoinMessage(message) {
 
-    //console.log('displayJoinMessage', message)
+    // console.log('displayJoinMessage', message)
 
     document.getElementById('lastMessage').removeAttribute('id');
 
