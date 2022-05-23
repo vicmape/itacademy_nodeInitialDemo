@@ -32,18 +32,21 @@ socket.on('connect', () => {
         displayJoinMessage(message);
     })
 
-    socket.on('new-room', room => {
+    socket.on('new-room', (room, users) => {
         // console.log('new-room', room);
         displayRoom(room);
+        displayRoomUsers(room, users);
     })
 
     socket.on('update-room-users', (room, users) => {
-        //console.log('update-room-users', room, users);
+        console.log('update-room-users', room, users);
 
         // Display users in our console
         if (sessionStorage.roomId === room.roomId) {
             displayUsers(users)
         }
+
+        displayRoomUsers(room, users);
     })
 
     socket.on('error', message => {

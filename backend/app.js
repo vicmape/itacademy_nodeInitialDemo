@@ -63,6 +63,7 @@ io.on('connection', socket => {
         // console.log(`new-room`, newRoomRes)
 
         if (newRoomRes.status === 'success') {
+            // get the old room #users
             io.emit('new-room', newRoomRes.room);
         } else {
             io.to(socket.id).emit('error', newRoomRes.message);
@@ -75,7 +76,10 @@ io.on('connection', socket => {
          // console.log(`get-rooms`, getRoomsRes)
 
         if (getRoomsRes.status === 'success') {
-            getRoomsRes.rooms.forEach (room => io.to(socket.id).emit('new-room', room));
+            getRoomsRes.rooms.forEach (async (room) => {
+                let getUsersRes = await getUsers(room);
+                io.to(socket.id).emit('new-room', room, getUsersRes.users)
+            });
         } else {
             io.to(socket.id).emit('error', getRoomsRes.message);
         }
@@ -91,7 +95,7 @@ io.on('connection', socket => {
             // If we are joining a different room then do some stuff
             if (room.roomId !== joinRoomRes.oldRoom.roomId) {
 
-                if (room.roomId) {
+                if (joinRoomRes.oldRoom.roomId) {
 
                     // leave the old room
                     socket.leave(joinRoomRes.oldRoom.roomId);

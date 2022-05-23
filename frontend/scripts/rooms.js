@@ -39,7 +39,7 @@ function displayRoom(room) {
     }
 
     li.textContent = room.roomName;
-    li.setAttribute("id", room.roomId);
+    li.setAttribute('id', room.roomId);
     li.classList.add('room__li');
     li.onclick = () => {
 
@@ -55,4 +55,11 @@ function displayRoom(room) {
     rooms.appendChild(li);
 
     sortBtnList("roomList");
+}
+
+
+function displayRoomUsers(room, users) {
+    console.log(room);
+    console.log(users);
+    document.getElementById(room.roomId).textContent = `${room.roomName} (${users.length})`
 }
