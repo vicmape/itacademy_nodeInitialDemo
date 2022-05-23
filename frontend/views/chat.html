@@ -19,7 +19,7 @@
             <aside class="room">
                 <h1 class="header-section">ROOMS</h1>
                 <form id="roomForm" class="form" onsubmit="return createRoom(this)">
-                    <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" required>
+                    <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
                     <input class="button" type="submit" value="Create">
                 </form>
                 <ul id="roomList" class="room__ul"></ul>
@@ -27,7 +27,7 @@
           
             <main class="chat">
                 <ul id="messageList" class="chat__ul"></ul>
-                <form id="messageForm" class="form chat__form"  onsubmit="return sendMessage(this)">
+                <form id="messageForm" class="form chat__form" onsubmit="return sendMessage(this)">
                     <input class="input" type="text" id="newMessage" name="newMessage">
                     <input class="button" type="submit" value="Send">
                 </form>

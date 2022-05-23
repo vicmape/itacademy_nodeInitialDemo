@@ -12,9 +12,9 @@ const io = require('socket.io')(server, {
 
 // Create Database if not exists
 require('./models/models.js')();
-const {getRooms, createRoom} = require('../backend/services/rooms')
+const {getRooms, createRoom, getLobbyId} = require('../backend/services/rooms')
 const {getUsers, userSocket, disconnectUser, joinRoom} = require('../backend/services/users')
-const {getMessages, storeMessage} = require('../backend/services/messages')
+const {getMessages, newMessage} = require('../backend/services/messages')
 
 //Middlewares
 app.use(express.json())
@@ -27,94 +27,101 @@ app.use((req, res) => res.status(404).send({ status: "fail", message: "PAGE NOT 
 
 
 io.on('connection', socket => {
-    let result;
 
     socket.on('hello', async (userId) => {
         await userSocket(userId, socket.id);
     })
 
     socket.on('new-message', async (message) => {
-        // console.log(`broadcast to ${roomId}`)
-        result = await storeMessage(message);
-        console.log('new-message', result)
-        if (result.status === 'success') {
-            socket.broadcast.to(message.room.roomId).emit('new-message', result.message);
+
+        let newMessageRes = await newMessage(message);
+        //console.log('new-message', newMessageRes)
+        if (newMessageRes.status === 'success') {
+            socket.broadcast.to(message.room.roomId).emit('new-message', newMessageRes.message);
         } else {
-            io.to(socket.id).emit('error', result.message)
+            io.to(socket.id).emit('error', newMessageRes.message)
         }
     })
 
     socket.on('new-room', async (roomName) => {
 
-        result = await createRoom(roomName);
-        //console.log(`new-room`, result)
-        if (result.status === 'success') {
-            io.emit('new-room', result.room);
+        let newRoomRes = await createRoom(roomName);
+        //console.log(`new-room`, newRoomRes)
+        if (newRoomRes.status === 'success') {
+            io.emit('new-room', newRoomRes.room);
         } else {
-            io.to(socket.id).emit('error', result.message)
+            io.to(socket.id).emit('error', newRoomRes.message)
         }
     })
 
     socket.on('get-rooms', async () => {
-        result = await getRooms();
-         //console.log(`get-rooms`, result)
-        if (result.status === 'success') {
-            result.rooms.forEach (room => io.to(socket.id).emit('new-room', room))
+
+        let getRoomsRes = await getRooms();
+         //console.log(`get-rooms`, getRoomsRes)
+        if (getRoomsRes.status === 'success') {
+            getRoomsRes.rooms.forEach (room => io.to(socket.id).emit('new-room', room))
         } else {
-            io.to(socket.id).emit('error', result.message)
+            io.to(socket.id).emit('error', getRoomsRes.message)
         }
     })
 
     socket.on('get-users', async (room) => {
-        result = await getUsers(room);
-        //console.log(`get-users`, result)
-        if (result.status === 'success') {
-            result.users.forEach (user => io.to(socket.id).emit('new-user', user))
+        let getUsersRes = await getUsers(room);
+        //console.log(`get-users`, getUsersRes)
+        if (getUsersRes.status === 'success') {
+            getUsersRes.users.forEach (user => io.to(socket.id).emit('new-user', user))
         } else {
-            io.to(socket.id).emit('error', result.message)
+            io.to(socket.id).emit('error', getUsersRes.message)
         }
     })
 
     socket.on('get-messages', async (room) => {
-        result = await getMessages(room);
-        console.log('get-messages', result)
-        if ((result.status === 'success') && (result.messages !== null)) {
-            result.messages.forEach (message => io.to(socket.id).emit('new-message', message))
+        let getMessagesRes = await getMessages(room);
+        //console.log('get-messages', getMessagesRes)
+        if ((getMessagesRes.status === 'success') && (getMessagesRes.messages !== null)) {
+            getMessagesRes.messages.forEach (message => io.to(socket.id).emit('new-message', message))
         } else {
-            io.to(socket.id).emit('error', result.message)
+            io.to(socket.id).emit('error', getMessagesRes.message)
         }
     })
 
-
     socket.on('join-room', async (userId, room) => {
-        result = await joinRoom(userId, room);
-        //console.log(`joinRoom`, result)
-        if (result.status === 'success') {
-            // Success
+
+        let joinRoomRes = await joinRoom(userId, room);
+        //console.log(`join-room`, joinRoomRes)
+        if (joinRoomRes.status === 'success') {
+
             // old room stuff
-            socket.leave(result.roomId);
-            socket.broadcast.to(result.roomId).emit('delete-user', result.user);
-            socket.broadcast.to(result.roomId).emit('new-join-message', `${result.user.userName} left the room`);
-            
+            if (room.roomId){
+                socket.leave(joinRoomRes.roomId);
+                socket.broadcast.to(joinRoomRes.roomId).emit('delete-user', joinRoomRes.user);
+                socket.broadcast.to(joinRoomRes.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
+            }
+
             // new room stuff
+            if (room.roomName === "Lobby") {
+                let lobby = await getLobbyId();
+                room.roomId = lobby.lobbyId;
+            }
+
+            console.log('joining', room)
             socket.join(room.roomId);
-            socket.broadcast.to(room.roomId).emit('new-user', result.user);
-            socket.broadcast.to(room.roomId).emit('new-join-message', `${result.user.userName} joined the room`);
+            socket.broadcast.to(room.roomId).emit('new-user', joinRoomRes.user);
+            socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
         } else {
-            io.to(socket.id).emit('error', result.message)
+            io.to(socket.id).emit('error', joinRoomRes.message)
         }
     })
 
     socket.on('disconnect', async () => {
-        // console.log('user disconnected', socket.id);
-        result = await disconnectUser(socket.id);
-        //console.log('disconnect', result)
-        if (result.status === 'success') {
+
+        let disconnectRes = await disconnectUser(socket.id);
+        //console.log('disconnectRes', disconnectRes)
+        if (disconnectRes.status === 'success') {
             // Success
-            io.to(result.roomId).emit('delete-user', result.user)
+            io.to(disconnectRes.roomId).emit('delete-user', disconnectRes.user)
         }
       });
-
 })
 
 

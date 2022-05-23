@@ -9,8 +9,15 @@
         <link rel="stylesheet" href="../css/stylesheet.css">
     </head>
     <body>
-        <h1>WELCOME</h1>
-        <p>Have an account? <a href="./login.html">Login</a></p>
-        <p>Don't have an account? <a href="./register.html">Sign up</a></p>
+        <div class="card">
+            <form id="loginForm">
+                <input class="input card__input" type="text" name="userName" placeholder="Username... " maxlength="16" spellcheck="false" required autofocus>
+                <input class="input card__input" type="password" name="password" placeholder="Password... " spellcheck="false" required>
+                <input class="button card__button" type="submit" value="Login">
+            </form>
+            <p>Don't have an account? <a href="./register.html">Sign up</a></p>
+        </div>
     </body>
 </html>
+
+<script src="../scripts/login.js"></script>

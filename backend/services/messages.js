@@ -31,12 +31,11 @@ async function getMessages(room) {
     return result;
 }
 
-async function storeMessage(message) {
+async function newMessage(message) {
 
     let result;
 
     try {
-        console.log('inside storeMessage', message)
         // Push this user into the current room
         result = await Rooms.updateOne(
             { _id: message.room.roomId }, 
@@ -54,4 +53,4 @@ async function storeMessage(message) {
     return result;
 }
 
-module.exports = {getMessages, storeMessage}
+module.exports = {getMessages, newMessage}
