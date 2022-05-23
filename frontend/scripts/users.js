@@ -1,18 +1,21 @@
 
 
-function displayUser(user) {
+function displayUsers(users) {
 
-    // if user already exists do nothing (due to synchronous with sockets...)
-    const exists = document.getElementById(user.userId);
-    if (exists) return;
+    const userList = document.getElementById("userList");
+    userList.innerHTML = "";
 
-    const item = document.createElement('li');
-    item.classList.add('user__li');
-    item.textContent = user.userName;
-    item.setAttribute("id", user.userId);
+    // Iterate over all users array
+    users.forEach(u => {
+        // Create the user 'li' element
+        const li = document.createElement('li');
+        li.classList.add('user__li');
+        li.textContent = u.userName;
+        li.setAttribute("id", u.userId);
 
-    const users = document.getElementById("userList");
-    users.appendChild(item);
+        // Append the user to the userList
+        userList.appendChild(li);
+    });
 
     sortUlList("userList");
 }

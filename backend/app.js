@@ -93,30 +93,32 @@ io.on('connection', socket => {
         // console.log('join-room', joinRoomRes);
 
         if (joinRoomRes.status === 'success') {
+
             // If we are joining a different room then do some stuff
-            if (room.roomId !== joinRoomRes.room.roomId) {
-                    // old room stuff
+            if (room.roomId !== joinRoomRes.oldRoom.roomId) {
+
+                // old room stuff
                 if (room.roomId) {
-                        // leave the old room
-                        socket.leave(joinRoomRes.room.roomId);
-                        // inform old room we left
-                        socket.broadcast.to(joinRoomRes.room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
+                    // leave the old room
+                    socket.leave(joinRoomRes.oldRoom.roomId);
+                    // inform old room we left
+                    socket.broadcast.to(joinRoomRes.oldRoom.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
 
                     // get the old room #users
-                    let users = await getUsers(joinRoomRes.room);
+                    let getUsersRes = await getUsers(joinRoomRes.oldRoom);
                     // inform everyone about the old room #users
-                    io.emit('update-room-users', joinRoomRes.room, users);
+                    io.emit('update-room-users', joinRoomRes.oldRoom, getUsersRes.users);
                 }
-                
+
                 // join the new room
                 socket.join(room.roomId);
                 // inform new room we came
                 socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
 
                 // get the new room #users
-                let users = await getUsers(room);
+                let getUsersRes = await getUsers(room);
                 // inform everyone about the new room #users
-                io.emit('update-room-users', room, users);
+                io.emit('update-room-users', room, getUsersRes.users);
             }
         } else {
             io.to(socket.id).emit('error', joinRoomRes.message);
@@ -125,11 +127,21 @@ io.on('connection', socket => {
     
     socket.on('disconnect', async () => {
         
-        let disconnectRes = await disconnectUser(socket.id);
-        //console.log('disconnectRes', disconnectRes)
-        if (disconnectRes.status === 'success') {
-            // Success
-            io.to(disconnectRes.room.roomId).emit('delete-user', disconnectRes.user);
+        let disconnectUserRes = await disconnectUser(socket.id);
+        //console.log('disconnectUserRes', disconnectUserRes)
+        if (disconnectUserRes.status === 'success') {
+
+            // leave the old room
+            socket.leave(disconnectUserRes.room.roomId);
+
+            // inform old room we left
+            socket.broadcast.to(disconnectUserRes.room.roomId).emit('new-join-message', `${disconnectUserRes.user.userName} left the room`);
+
+            // get the new room #users
+            let getUsersRes = await getUsers(disconnectUserRes.room);
+
+            // inform everyone about the new room #users
+            io.emit('update-room-users', disconnectUserRes.room, getUsersRes.users);
         }
       });
 })

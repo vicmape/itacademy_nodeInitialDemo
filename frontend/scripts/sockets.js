@@ -21,7 +21,10 @@ socket.on('new-room', room => {
 
 socket.on('update-room-users', (room, users) => {
     console.log('update-room-users', room, users);
-    // TODO
+    if (sessionStorage.roomId === room.roomId){
+        console.log(users)
+        displayUsers(users)
+    }
 })
 
 socket.on('error', message => {

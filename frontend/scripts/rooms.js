@@ -27,12 +27,8 @@ function joinRoom(room) {
     // Delete messages
     document.getElementById("messageList").innerHTML = "";
 
-    // Delete users
-    document.getElementById("userList").innerHTML = "";
-
     // Display self on our user list
     let user = {userName: sessionStorage.userName, userId: sessionStorage.userId};
-    displayUser(user)
 
     // Get new users
     socket.emit('get-users', room);

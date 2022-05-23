@@ -79,17 +79,17 @@ async function joinRoom (userId, room) {
         //console.log('joinRoom', room);
 
         // Push this user into the current room
-        const updateUser = await Users.findOneAndUpdate(
+        const oldUser = await Users.findOneAndUpdate(
             { _id: userId }, 
             { 'room.roomId': room.roomId, 'room.roomName': room.roomName }
             );
 
-        //console.log("updateUser", updateUser)
+        //console.log("oldUser", oldUser)
 
-        if (updateUser) {
+        if (oldUser) {
             result = {status: 'success',
-                      user: { userId: updateUser._id, userName: updateUser.userName },
-                      room: updateUser.room
+                      user: { userId: oldUser._id, userName: oldUser.userName },
+                      oldRoom: oldUser.room
                      };
         } else {
             result = {status: 'fail', message: 'Error joining room'}
