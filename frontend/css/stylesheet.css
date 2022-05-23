@@ -7,9 +7,8 @@
 * {
     font-size: 100%;
     font-family: 'Hack';
-    color: lime;
-    background-color: black;
 }
+
 *::-webkit-scrollbar {
     width: 5px;
 }
@@ -29,6 +28,50 @@ ul,li {
     margin: 0;
 }
 
+/* DARK MODE */
+.dark-mode {
+    color: lime;
+    background-color: black;
+}
+
+.dark-mode button {
+    border-color: lime;
+    color: lime;
+    background-color: black;
+}
+
+.dark-mode button:hover {
+    box-shadow: 0px 0px 20px lime;
+}
+
+.dark-mode input {
+    color: lime;
+    border-color: lime;
+    background-color: black;
+}
+
+.dark-mode input:focus {
+    box-shadow: 0px 0px 20px lime;
+}
+
+.dark-mode .room__li:hover{
+    box-shadow: 0px 0px 20px lime;
+}
+
+.dark-mode .room__btn--active {
+    background-color: lime;
+    color: black;
+}
+
+.dark-mode .myMessage {
+    background-color: lime;
+}
+
+.dark-mode .myMessage li {
+    background-color: lime;
+    color: black;
+  }
+
 /* LAYOUT */
 .layout {
     height: calc(100vh - 10vh - 2rem);
@@ -40,7 +83,7 @@ ul,li {
 .button {
     height: 30px;
     border: 2px solid;
-    border-color: lime;
+    border-color: black;
     padding: 0 1rem;
     border-radius: 2rem;
     margin: 0;
@@ -49,7 +92,7 @@ ul,li {
 }
 
 .button:hover {
-    box-shadow: 0px 0px 20px lime;
+    box-shadow: 0px 0px 20px black;
 }
 
 /* INPUT */
@@ -62,7 +105,7 @@ ul,li {
 }
 
 .input:focus {
-    box-shadow: 0px 0px 20px lime;
+    box-shadow: 0px 0px 20px black;
     outline: none;
 }
 
@@ -116,12 +159,12 @@ ul,li {
 }
 
 .room__li:hover {
-    box-shadow: 0px 0px 20px lime;
+    box-shadow: 0px 0px 20px black;
 }
 
 .room__btn--active {
-    background-color: lime;
-    color: black;
+    background-color: black;
+    color: white;
 }
 
 /* USERS */
@@ -153,7 +196,6 @@ ul,li {
     padding: 1rem;
     border-top: 2px solid;
     border-bottom: 2px solid;
-
 }
 
 .chat__li {
@@ -201,16 +243,16 @@ ul,li {
 }
 
 .myMessage {
-    background-color: lime;
+    background-color: black;
     margin-right: 0;
     text-align: right;
     margin-top: 1rem;
-  }
+}
 
 .myMessage li {
-    background-color: lime;
-    color: black;
-  }
+    background-color: black;
+    color: white;
+}
 
 /* LOGIN && REGISTER */
 .card {
