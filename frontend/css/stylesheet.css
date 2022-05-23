@@ -160,6 +160,11 @@ ul,li {
     word-break: break-all;
 }
 
+.chat__li--join {
+    font-style: italic;
+    text-align: center;
+}
+
 .chat__ul {
     overflow: hidden;
     overflow-y: auto;

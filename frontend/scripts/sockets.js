@@ -4,11 +4,13 @@ socket.on('connect', () => {
 })
 
 socket.on('new-message', message => {
+    //console.log("new-message", message)
     displayMessage(message);
 })
 
 socket.on('new-join-message', message => {
-    displayMessage(message);
+    //console.log("new-join-message", message)
+    displayJoinMessage(message);
 })
 
 socket.on('new-room', room => {

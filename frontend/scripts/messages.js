@@ -57,3 +57,16 @@ function displayMessage(message) {
 
     messageList.scrollTop = messageList.scrollHeight;
 }
+
+function displayJoinMessage(message) {
+    console.log('displayJoinMessage', message)
+    let messageList = document.getElementById("messageList");
+    console.log(messageList)
+    // Create the element to append
+    let li = document.createElement('li');
+    li.classList.add('chat__li--join')
+    li.textContent = message;
+    messageList.appendChild(li);
+
+    messageList.scrollTop = messageList.scrollHeight;
+}

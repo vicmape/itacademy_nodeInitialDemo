@@ -1,4 +1,5 @@
 require('dotenv').config();
+const {instrument} = require('@socket.io/admin-ui');
 const express = require('express')
 const cors = require('cors')
 const app = express();
@@ -35,9 +36,10 @@ io.on('connection', socket => {
     socket.on('new-message', async (message) => {
 
         let newMessageRes = await newMessage(message);
-        //console.log('new-message', newMessageRes)
+        console.log('new-message', newMessageRes)
         if (newMessageRes.status === 'success') {
-            socket.broadcast.to(message.room.roomId).emit('new-message', newMessageRes.message);
+            //socket.broadcast.to(message.room.roomId).emit('new-message', newMessageRes.message);
+            io.to(message.room.roomId).emit('new-message', newMessageRes.message);
         } else {
             io.to(socket.id).emit('error', newMessageRes.message)
         }
@@ -98,13 +100,6 @@ io.on('connection', socket => {
                 socket.broadcast.to(joinRoomRes.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
             }
 
-            // new room stuff
-            if (room.roomName === "Lobby") {
-                let lobby = await getLobbyId();
-                room.roomId = lobby.lobbyId;
-            }
-
-            console.log('joining', room)
             socket.join(room.roomId);
             socket.broadcast.to(room.roomId).emit('new-user', joinRoomRes.user);
             socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
@@ -124,6 +119,7 @@ io.on('connection', socket => {
       });
 })
 
+instrument(io, {auth: false});
 
 PORT = process.env.API_PORT || 8080
 server.listen(PORT, console.log(`Server running at http://localhost:${PORT}...`));

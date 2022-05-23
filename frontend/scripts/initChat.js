@@ -17,8 +17,6 @@ fetch('http://localhost:8080/auth', {
         // Set username in chat window
         document.getElementById("userName").innerHTML = `USER: ${sessionStorage.userName}`;
 
-        joinRoom({roomName: 'Lobby', roomId: null});
-
     } else {
         // jwt verification failed
         logout()

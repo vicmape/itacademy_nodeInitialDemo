@@ -12,7 +12,7 @@ function createRoom(form) {
 function joinRoom(room) {
 
     // If we are in the same room do nothing
-    if (sessionStorage.roomId === room.roomId) return;
+    if (sessionStorage.roomId === room.roomId && room.roomName !== 'Lobby') return;
 
     // Inform the server we are joining new room
     socket.emit('join-room', sessionStorage.userId, room);
@@ -44,12 +44,14 @@ function joinRoom(room) {
 
 function displayRoom(room) {
 
-    // We use this spot to set the sessionStorage.roomId as we do not not its ID at the beggining.
-    if (room.roomName === 'Lobby' && sessionStorage.roomName === 'Lobby') {
-        sessionStorage.roomId = room.roomId;
-    }
 
     const li = document.createElement('button');
+    // We use this spot to set the sessionStorage.roomId as we do not not its ID at the beggining.
+    if (room.roomName === 'Lobby') {
+        li.classList.add('room__li--active')
+        joinRoom(room);
+    }
+
     li.textContent = room.roomName;
     li.setAttribute("id", room.roomId);
     li.classList.add('room__li');
