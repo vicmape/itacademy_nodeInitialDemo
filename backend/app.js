@@ -38,8 +38,7 @@ io.on('connection', socket => {
         let newMessageRes = await newMessage(message);
         console.log('new-message', newMessageRes)
         if (newMessageRes.status === 'success') {
-            //socket.broadcast.to(message.room.roomId).emit('new-message', newMessageRes.message);
-            io.to(message.room.roomId).emit('new-message', newMessageRes.message);
+            socket.broadcast.to(message.room.roomId).emit('new-message', newMessageRes.message);
         } else {
             io.to(socket.id).emit('error', newMessageRes.message)
         }
