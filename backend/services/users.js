@@ -16,20 +16,24 @@ async function getUsers(room) {
     return result;
 }
 
-async function userSocket (userId, socketId) {
+async function disconnectUser (user) {
 
     let result;
+
     try {
+        console.log('disconnectUser', user);
 
-        const userUpdateSocket = await Users.findOneAndUpdate({ _id: userId }, { socketId });
-        // console.log('userUpdateSocket', userUpdateSocket)
-        const userUpdateOldSocket = await Users.findOneAndUpdate({ _id: userId }, { oldSocketId: userUpdateSocket.socketId });
-        // console.log('userUpdateOldSocket', userUpdateOldSocket)
+        const userDisconnected = await Users.findOneAndUpdate(
+            { _id: user.userId }, 
+            { 'room.roomId': null, 'room.roomName': null}
+            );
 
-        if (userUpdateOldSocket) {
-            result = {status: 'success'};
+        if (userDisconnected) {
+            result = {status: 'success', 
+                      user,
+                      room: userDisconnected.room}
         } else {
-            result = {status: 'fail', message: update}
+            result = {status: 'fail', message: 'socketid for user disconnect not found'}
         }
     } catch (err) {
         result =  {status:'error', message: err.message};
@@ -39,40 +43,7 @@ async function userSocket (userId, socketId) {
 }
 
 
-async function disconnectUser (socketId) {
-    let result;
-
-    try {
-        const userUpdate = await Users.findOneAndUpdate(
-            { socketId: socketId }, 
-            { 'room.roomId': null, 'room.roomName': null}
-            );
-
-        const userUpdate2 = await Users.findOneAndUpdate(
-            { oldSocketId: socketId }, 
-            { 'room.roomId': null, 'room.roomName': null}
-            );
-
-        if (userUpdate) {
-            result = {status: 'success', 
-                      user: {userId: userUpdate._id, userName: userUpdate.userName},
-                      room: userUpdate.room}
-        } else if (userUpdate2) {
-            result = {status: 'success', 
-                      user: {userId: userUpdate2._id, userName: userUpdate2.userName},
-                      room: userUpdate2.room}
-        } else {
-            result = {status: 'fail', message: 'socketid for user disconnect not found'}
-        }
-    } catch (err) {
-        result =  {status:'error', message: err.message};
-    }
-
-        return result;
-}
-
-
-async function joinRoom (userId, room) {
+async function joinRoom (user, room) {
 
     let result;
     try {
@@ -80,7 +51,7 @@ async function joinRoom (userId, room) {
 
         // Push this user into the current room
         const oldUser = await Users.findOneAndUpdate(
-            { _id: userId }, 
+            { _id: user.userId }, 
             { 'room.roomId': room.roomId, 'room.roomName': room.roomName }
             );
 
@@ -101,4 +72,4 @@ async function joinRoom (userId, room) {
         return result;
 }
 
-module.exports = {getUsers, userSocket, disconnectUser, joinRoom}
+module.exports = {getUsers, disconnectUser, joinRoom}

@@ -19,8 +19,7 @@ module.exports = async (req, res) => {
 
         res.status(201).send({
             status: "success", 
-            userName: user.userName,
-            userId: user.userId,
+            user,
             accessToken
         });
 

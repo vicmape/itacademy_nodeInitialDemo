@@ -44,24 +44,4 @@ async function getRooms() {
     return result;
 }
 
-async function getLobbyId(){
-    
-    let result;
-
-    try {
-
-        let lobbyId = await Rooms.findOne({roomName: 'Lobby'});
-
-        lobbyId = lobbyId._id;
-
-        result = {status: 'success', lobbyId};
-
-    } catch (err) {
-        result =  {status:'error', message: err.message};
-    }
-
-    return result;
-}
-
-
-module.exports = {createRoom, getRooms, getLobbyId}
+module.exports = {createRoom, getRooms}

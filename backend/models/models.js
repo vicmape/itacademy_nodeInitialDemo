@@ -11,8 +11,6 @@ module.exports = async () => {
         userName: String,
         password: String,
         room:{roomId: String,roomName: String},
-        oldSocketId: String,
-        socketId: String
     }, { timestamps: true });
 
     const roomsSchema = new mongoose.Schema({

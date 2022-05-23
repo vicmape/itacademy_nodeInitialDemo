@@ -1,36 +1,62 @@
-const socket = io.connect('http://localhost:8080');
+
+const socket = io('http://localhost:8080', {
+    reconnectionDelayMax: 10000,
+    query: {
+        'token': sessionStorage.accessToken
+    }
+});
+
+let socketConnected = false;
 
 socket.on('connect', () => {
-    // console.log('connect');
-})
 
-socket.on('new-message', message => {
-    //console.log("new-message", message);
-    displayMessage(message);
-})
+    console.log('Socket connected');
 
-socket.on('new-join-message', message => {
-    //console.log("new-join-message", message);
-    displayJoinMessage(message);
-})
+    // TODO: we make sure we only connect once. 
+    // This prevents the client to connect again when server disconnects.
+    // Find the right way to do this.
+    if (socketConnected) return;
+    socketConnected = true;
 
-socket.on('new-room', room => {
-    // console.log('new-room', room);
-    displayRoom(room);
-})
+    console.log(`userName: ${sessionStorage.userName}`)
+    console.log(`userId: ${sessionStorage.userId}`)
+    console.log(`accessToken: ${sessionStorage.accessToken}`)
 
-socket.on('update-room-users', (room, users) => {
-    console.log('update-room-users', room, users);
-    if (sessionStorage.roomId === room.roomId){
-        console.log(users)
-        displayUsers(users)
-    }
-})
+    socket.on('new-message', message => {
+        //console.log("new-message", message);
+        displayMessage(message);
+    })
 
-socket.on('error', message => {
-    alert(message);
-})
+    socket.on('new-join-message', message => {
+        //console.log("new-join-message", message);
+        displayJoinMessage(message);
+    })
 
-socket.emit('get-rooms');
-// TODO JWT over sockets
-socket.emit('hello', sessionStorage.userId)
+    socket.on('new-room', room => {
+        // console.log('new-room', room);
+        displayRoom(room);
+    })
+
+    socket.on('update-room-users', (room, users) => {
+        //console.log('update-room-users', room, users);
+
+        // Display users in our console
+        if (sessionStorage.roomId === room.roomId) {
+            displayUsers(users)
+        }
+    })
+
+    socket.on('error', message => {
+        alert(message);
+    })
+
+    socket.on('disconnect', () => {
+        console.log('Socket disconnected')
+    });
+
+    // Delete room list
+    document.getElementById("roomList").innerHTML = '';
+
+    // Ask for the room list again
+    socket.emit('get-rooms');
+})

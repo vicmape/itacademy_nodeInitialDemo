@@ -1,12 +1,12 @@
 function sendMessage(form) {
-    const text = form.newMessage.value
-    const user = {userId:sessionStorage.userId, userName: sessionStorage.userName}
-    const room = {roomId:sessionStorage.roomId, roomName: sessionStorage.roomName}
+    const text = form.newMessage.value;
+    const user = {userId: sessionStorage.userId, userName: sessionStorage.userName};
+    const room = {roomId: sessionStorage.roomId, roomName: sessionStorage.roomName};
 
     if (text) {
-        let message = {user, room, text}
+        let message = {user, room, text};
         socket.emit('new-message', message);
-        displayMessage(message)
+        displayMessage(message);
         form.newMessage.value = '';
     }
 
@@ -37,8 +37,6 @@ function displayMessage(message) {
         ul = document.createElement('ul');
         ul.setAttribute('id', 'lastMessage');
         ul.setAttribute('userId', message.user.userId)
-
-
 
         // my messages will be aligned different
         if (message.user.userId === sessionStorage.userId) {

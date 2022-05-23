@@ -10,14 +10,13 @@ function createRoom(form) {
     return false;
 }
 function joinRoom(room) {
+    console.log('joinRoom', room)
 
     // If we are in the same room do nothing
-    if (sessionStorage.roomId === room.roomId && room.roomName !== 'Lobby') return;
-
-    const user = {userId: sessionStorage.userId, userName: sessionStorage.userName}
+    if (sessionStorage.roomId === room.roomId) return;
 
     // Inform the server we are joining new room
-    socket.emit('join-room', user, room);
+    socket.emit('join-room', room);
 
     // Update session storage variables
     sessionStorage.roomName = room.roomName;
@@ -32,11 +31,10 @@ function joinRoom(room) {
 
 function displayRoom(room) {
 
-
     const li = document.createElement('button');
-    // We use this spot to set the sessionStorage.roomId as we do not not its ID at the beggining.
+
     if (room.roomName === 'Lobby') {
-        li.classList.add('room__li--active')
+        li.classList.add('room__li--active');
         joinRoom(room);
     }
 

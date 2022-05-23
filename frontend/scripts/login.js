@@ -14,13 +14,18 @@ loginForm.addEventListener("submit", e => {
     .then(response => response.json())
     .then(data => {
         if (data.status === "success") {
-            sessionStorage.userName = data.userName;
-            sessionStorage.userId = data.userId;
+
+            // Store session variables
+            sessionStorage.userId = data.user.userId;
+            sessionStorage.userName = data.user.userName;
             sessionStorage.accessToken = data.accessToken;
+
+            // Go to chat window
             window.location.assign('chat.html');
+
         } else {
-            alert(data.message)
+            alert(data.message);
         }
     }).catch(err => alert(err.message));
+});
 
-})

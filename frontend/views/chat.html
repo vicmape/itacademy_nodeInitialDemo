@@ -14,7 +14,7 @@
             <h1 id="roomName"></h1>
             <button class="button" type="button" onclick="logout()">Logout</button>
         </header>
-    
+        
         <div class="layout">
             <aside class="room">
                 <h1 class="header-section">ROOMS</h1>
@@ -24,7 +24,7 @@
                 </form>
                 <ul id="roomList" class="room__ul"></ul>
             </aside>
-          
+            
             <main class="chat">
                 <ul id="messageList" class="chat__ul"></ul>
                 <form id="messageForm" class="form chat__form" onsubmit="return sendMessage(this)">
@@ -41,13 +41,13 @@
     </body>
 </html>
 
+<script src="../scripts/initDefaults.js"></script>
+
 <script src="../scripts/utils.js"></script>
 <script src="../scripts/rooms.js"></script>
 <script src="../scripts/users.js"></script>
 <script src="../scripts/logout.js"></script>
 <script src="../scripts/messages.js"></script>
-
+    
 <script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
 <script src="../scripts/sockets.js"></script>
-
-<script src="../scripts/initChat.js"></script>
