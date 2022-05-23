@@ -31,28 +31,28 @@ function joinRoom(room) {
 
 function displayRoom(room) {
 
-    const li = document.createElement('button');
+    const btn = document.createElement('button');
 
     if (room.roomName === 'Lobby') {
-        li.classList.add('room__li--active');
+        btn.classList.add('room__btn--active');
         joinRoom(room);
     }
 
-    li.textContent = room.roomName;
-    li.setAttribute('id', room.roomId);
-    li.classList.add('room__li');
-    li.onclick = () => {
+    btn.textContent = room.roomName;
+    btn.setAttribute('id', room.roomId);
+    btn.classList.add('room__li');
+    btn.onclick = () => {
 
         if (sessionStorage.roomId) {
-            document.getElementById(sessionStorage.roomId).classList.remove('room__li--active')
+            document.getElementById(sessionStorage.roomId).classList.remove('room__btn--active')
         }
 
-        li.classList.add('room__li--active')
+        btn.classList.add('room__btn--active')
         joinRoom(room);
     }
 
     const rooms = document.getElementById("roomList");
-    rooms.appendChild(li);
+    rooms.appendChild(btn);
 
     sortBtnList("roomList");
 }
