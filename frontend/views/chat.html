@@ -10,20 +10,12 @@
     </head>
     <body>
         <header class="header">
-
-            <div>
-                <h2 id="userName"></h2>
-            </div>
-
-            <div>
-                <h2 id="roomName"></h2>
-            </div>
-
+            <h2 id="userName"></h2>
+            <h2 id="roomName"></h2>
             <div>
                 <button class="button" id="matrix" type="button" onclick="matrix()">light</button>
                 <button class="button" type="button" onclick="logout()">Logout</button>
             </div>
-
         </header>
         
         <div class="layout">
@@ -35,7 +27,6 @@
                 </form>
                 <ul id="roomList" class="room__ul"></ul>
             </aside>
-            
             <main class="chat">
                 <ul id="messageList" class="chat__ul"></ul>
                 <form id="messageForm" class="form chat__form" onsubmit="return sendMessage(this)">
@@ -43,7 +34,6 @@
                     <input class="button" type="submit" value="Send">
                 </form>
             </main>
-
             <aside class="user">
                 <h1 class="header-section">USERS</h1>
                 <ul id="userList" class="user__ul"></ul>

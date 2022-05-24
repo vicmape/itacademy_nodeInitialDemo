@@ -69,6 +69,7 @@ ul,li {
 .layout {
     height: calc(100vh - 10vh - 2rem);
     display:flex;
+    position: relative;
 }
 
 /* BUTTON */
@@ -165,8 +166,8 @@ ul,li {
 /* ROOM */
 
 .room {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 260px;
+    max-width: 260px;
     border: 2px solid;
     border-top: 0;
     position: relative;
@@ -277,8 +278,8 @@ ul,li {
 /* USERS */
 
 .user {
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 260px;
+    max-width: 260px;
     border: 2px solid;
     border-top: 0;
     border-left: 0;
@@ -306,6 +307,14 @@ ul,li {
 @media (max-width: 1000px) {
 
     .user {
-        display: none;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 50%;
+        border-left: 2px solid var(--color);
+    }
+
+    .room {
+        height: 50%;
     }
 }
