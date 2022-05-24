@@ -21,23 +21,15 @@
         </header>
         
         <div class="layout">
-            <aside class="aside">
-                <div class="room">
-                    <h1 class="aside__header">ROOMS</h1>
-                    <form id="roomForm" class="form" onsubmit="return createRoom(this)">
-                        <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
-                        <input class="button" type="submit" value="Create">
-                    </form>
-                    <ul id="roomList" class="room__ul"></ul>
-                </div>
-
-                <div class="user user__left">
-                    <h1 class="aside__header">USERS</h1>
-                    <ul id="userListLeft" class="user__ul"></ul>
-                </div>
+            <aside class="room">
+                <h1 class="header-section">ROOMS</h1>
+                <form id="roomForm" class="form" onsubmit="return createRoom(this)">
+                    <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
+                    <input class="button" type="submit" value="Create">
+                </form>
+                <ul id="roomList" class="room__ul"></ul>
             </aside>
             
-
             <main class="chat">
                 <ul id="messageList" class="chat__ul"></ul>
                 <form id="messageForm" class="form chat__form" onsubmit="return sendMessage(this)">
@@ -46,11 +38,9 @@
                 </form>
             </main>
 
-            <aside class="aside aside_right">
-                <div class="user user__right">
-                    <h1 class="aside__header">USERS</h1>
-                    <ul id="userListRight" class="user__ul"></ul>
-                </div>
+            <aside class="user">
+                <h1 class="header-section">USERS</h1>
+                <ul id="userList" class="user__ul"></ul>
             </aside>
         </div>
     </body>

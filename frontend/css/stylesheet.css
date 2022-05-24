@@ -132,7 +132,6 @@ ul,li {
     align-items: center;
     justify-content: space-between;
     border: 2px solid;
-    border-bottom: 0;
 }
 
 .header__h1 {
@@ -141,18 +140,7 @@ ul,li {
     background: transparent;
 }
 
-
-
-/* ASIDE */
-
-.aside {
-    border: 2px solid;
-    border-top: 0;
-    position: relative;
-}
-
-.aside__header {
-    border-top: 2px solid;
+.header-section {
     border-bottom: 2px solid;
     text-align: center;
     margin: auto;
@@ -165,6 +153,8 @@ ul,li {
 .room {
     min-width: 250px;
     max-width: 250px;
+    border: 2px solid;
+    border-top: 0;
     overflow: hidden;
 }
 
@@ -201,8 +191,9 @@ ul,li {
     justify-content: flex-end;
     position: relative;
     padding: 1rem;
-    border-top: 2px solid;
-    border-bottom: 2px solid;
+    border: 2px solid;
+    border-top: 0;
+    border-left: 0;
 }
 
 .chat__li {
@@ -269,13 +260,9 @@ ul,li {
     min-width: 250px;
     max-width: 250px;
     overflow: hidden;
-}
-
-.user__left {
-    display: none;
-    height: 30%;
-    position: absolute;
-    bottom: 0;
+    border: 2px solid;
+    border-top: 0;
+    border-left: 0;
 }
 
 .user__ul {
@@ -294,16 +281,12 @@ ul,li {
 
 @media (max-width: 1000px) {
 
-    .user__left {
-        display: unset;
+    .room {
+        max-width: unset;
+        width: 100vh;
     }
 
-    .aside_right {
+    .user {
         display: none;
-    }
-
-    .chat {
-        width: 100%;
-        border-right: 2px solid;
     }
 }
