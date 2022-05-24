@@ -98,6 +98,7 @@ ul,li {
 
 .input::placeholder {
     color: var(--color);
+    opacity: 0.5;
 }
 
 /* FORM */
