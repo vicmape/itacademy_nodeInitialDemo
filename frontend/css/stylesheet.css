@@ -303,14 +303,9 @@ ul,li {
 
 /* MEDIA QUERIES */
 
-/* @media (max-width: 1000px) {
-
-    .room {
-        max-width: unset;
-        width: 100vh;
-    }
+@media (max-width: 1000px) {
 
     .user {
         display: none;
     }
-} */
+}
