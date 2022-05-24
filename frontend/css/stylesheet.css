@@ -9,9 +9,12 @@
     --color: lime;
 }
 
-body {
+* {
     font-size: 100%;
     font-family: 'Hack', sans-serif;
+}
+
+body {
     color: var(--color);
     background-color: var(--background-color);
 }
