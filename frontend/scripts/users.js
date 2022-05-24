@@ -2,8 +2,11 @@
 
 function displayUsers(users) {
 
-    const userList = document.getElementById("userList");
-    userList.innerHTML = "";
+    const userListRight = document.getElementById("userListRight");
+    userListRight.innerHTML = "";
+
+    const userListLeft = document.getElementById("userListLeft");
+    userListLeft.innerHTML = "";
 
     // Iterate over all users array
     users.forEach(u => {
@@ -13,11 +16,18 @@ function displayUsers(users) {
         li.textContent = u.userName;
         li.setAttribute("id", u.userId);
 
-        // Append the user to the userList
-        userList.appendChild(li);
+        const li2 = document.createElement('li');
+        li2.classList.add('user__li');
+        li2.textContent = u.userName;
+        li2.setAttribute("id", u.userId);
+
+        // Append the user to the userListRight
+        userListRight.appendChild(li);
+        userListLeft.appendChild(li2);
     });
 
-    sortUlList("userList");
+    sortUlList("userListRight");
+    sortUlList("userListLeft");
 }
 
 function deleteUser(user){
