@@ -4,9 +4,16 @@
     src: url('../css/font/hack/ttf/Hack-Regular.ttf') format("truetype");
 }
 
+:root {
+    --background-color: white;
+    --color: black;
+}
+
 * {
     font-size: 100%;
     font-family: 'Hack';
+    color: var(--color);
+    background-color: var(--background-color);
 }
 
 ::-webkit-scrollbar {
@@ -15,7 +22,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: black;
+    background-color: var(--color);
     border-radius: 15px;
 }
 
@@ -29,53 +36,11 @@ ul,li {
     margin: 0;
 }
 
-/* DARK MODE */
-
-.dark-mode {
-    color: lime;
-    background-color: black;
-}
-
-.dark-mode button {
-    border-color: lime;
-    color: lime;
-    background-color: black;
-}
-
-.dark-mode button:hover {
-    box-shadow: 0px 0px 20px lime;
-}
-
-.dark-mode input {
-    color: lime;
-    border-color: lime;
-    background-color: black;
-}
-
-.dark-mode input:focus {
-    box-shadow: 0px 0px 20px lime;
-}
-
-.dark-mode .room__btn:hover{
-    box-shadow: 0px 0px 20px lime;
-}
-
-.dark-mode .room__btn--active {
-    background-color: lime;
-    color: black;
-}
-
-.dark-mode .myMessage {
-    background-color: lime;
-}
-
-.dark-mode .myMessage li {
-    background-color: lime;
-    color: black;
-}
-
-.dark-mode ::-webkit-scrollbar-thumb {
-    background-color: lime;
+.error {
+    font-style: italic;
+    text-align: center;
+    font-size: 12px;
+    color: red;
 }
 
 /* LAYOUT */
@@ -90,7 +55,9 @@ ul,li {
 .button {
     height: 30px;
     border: 2px solid;
-    border-color: black;
+    border-color: var(--color);
+    color: var(--color);
+    background-color: var(--background-color);
     padding: 0 1rem;
     border-radius: 2rem;
     margin: 0;
@@ -99,7 +66,7 @@ ul,li {
 }
 
 .button:hover {
-    box-shadow: 0px 0px 20px black;
+    box-shadow: 0px 0px 20px var(--color);
 }
 
 /* INPUT */
@@ -109,10 +76,13 @@ ul,li {
     border-radius: 2rem;
     border:  2px solid;
     padding: 0 1rem;
+    color: var(--color);
+    border-color: var(--color);
+    background-color: var(--background-color);
 }
 
 .input:focus {
-    box-shadow: 0px 0px 20px black;
+    box-shadow: 0px 0px 20px var(--color);
     outline: none;
 }
 
@@ -167,12 +137,12 @@ ul,li {
 }
 
 .room__btn:hover {
-    box-shadow: 0px 0px 20px black;
+    box-shadow: 0px 0px 20px var(--color);
 }
 
 .room__btn--active {
-    background-color: black;
-    color: white;
+    background-color: var(--color);
+    color: var(--background-color);
 }
 
 /* USERS */
@@ -249,18 +219,20 @@ ul,li {
 .notMyMessage {
     margin-left: 0;
     text-align: left;
+    background-color: var(--background-color);
+    color: var(--color);
 }
 
 .myMessage {
-    background-color: black;
     margin-right: 0;
     text-align: right;
     margin-top: 1rem;
+    background-color: var(--color);
 }
 
 .myMessage li {
-    background-color: black;
-    color: white;
+    background-color: var(--color);
+    color: var(--background-color);
 }
 
 /* LOGIN && REGISTER */

@@ -24,8 +24,8 @@ loginForm.addEventListener("submit", e => {
             window.location.assign('chat.html');
 
         } else {
-            alert(data.message);
+            document.getElementById("login_error").innerHTML = data.message;
         }
-    }).catch(err => alert(err.message));
+    }).catch(err => document.getElementById("login_error").innerHTML = err.message);
 });
 
