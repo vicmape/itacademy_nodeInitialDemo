@@ -7,7 +7,7 @@ if (!sessionStorage.accessToken) {
 document.getElementById("userName").innerHTML = `USER: ${sessionStorage.userName}`;
 
 document.getElementById("messageList").innerHTML = '';
-document.getElementById("userList").innerHTML = '';
+//document.getElementById("userList").innerHTML = '';
 document.getElementById("roomList").innerHTML = '';
 
 sessionStorage.roomId = '';

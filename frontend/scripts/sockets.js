@@ -43,7 +43,7 @@ socket.on('connect', () => {
 
         // Display users in our console
         if (sessionStorage.roomId === room.roomId) {
-            displayUsers(users)
+            //displayUsers(users)
         }
 
         displayRoomUsers(room, users);
