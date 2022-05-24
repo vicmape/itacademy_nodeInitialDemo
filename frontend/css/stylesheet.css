@@ -279,7 +279,7 @@ ul,li {
 
 /* MEDIA QUERIES */
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
 
     .room {
         max-width: unset;
@@ -289,4 +289,4 @@ ul,li {
     .user {
         display: none;
     }
-}
+} */
