@@ -148,6 +148,7 @@ ul,li {
 .aside {
     border: 2px solid;
     border-top: 0;
+    position: relative;
 }
 
 .aside__header {
@@ -272,6 +273,9 @@ ul,li {
 
 .user__left {
     display: none;
+    height: 30%;
+    position: absolute;
+    bottom: 0;
 }
 
 .user__ul {
@@ -290,17 +294,10 @@ ul,li {
 
 @media (max-width: 1000px) {
 
-    .room {
-        max-width: unset;
-    }
-
     .user__left {
         display: unset;
     }
 
-    .user__ul {
-        height: unset;
-    }
     .aside_right {
         display: none;
     }
