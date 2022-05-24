@@ -4,7 +4,7 @@ if (!sessionStorage.accessToken) {
     window.location.assign('index.html');
 }
 
-document.getElementById("userName").innerHTML = `USER: ${sessionStorage.userName}`;
+document.getElementById("userName").innerHTML = `${sessionStorage.userName}`;
 
 document.getElementById("messageList").innerHTML = '';
 //document.getElementById("userList").innerHTML = '';

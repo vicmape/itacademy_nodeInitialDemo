@@ -12,8 +12,6 @@ registerForm.addEventListener("submit", e => {
         return;
     }
 
-    
-
     fetch('http://localhost:8080/register', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
