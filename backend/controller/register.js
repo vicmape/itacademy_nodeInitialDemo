@@ -7,11 +7,11 @@ module.exports = async (req, res) => {
         const userName = req.body.userName;
         const password = req.body.password;
 
-        if (!userName) return res.status(400).send({ status: "fail", message: `username not provided`});
-        if (!password) return res.status(400).send({ status: "fail", message: `password not provided`});
+        if (!userName) return res.status(400).send({ status: "fail", message: `Username not provided`});
+        if (!password) return res.status(400).send({ status: "fail", message: `Password not provided`});
 
         const exist = await Users.find({userName});
-        if(exist.length > 0) return res.status(400).send({ status: "fail", message: `user already registered`});
+        if(exist.length > 0) return res.status(400).send({ status: "fail", message: `Username already registered`});
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
