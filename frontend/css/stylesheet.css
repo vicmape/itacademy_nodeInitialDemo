@@ -265,3 +265,27 @@ ul,li {
     padding: 0.25rem 1rem;
     word-break: break-all;
 }
+
+/* MEDIA QUERIES */
+
+/* @media (max-width: 800px) {
+
+    .room {
+        max-width: unset;
+        width: 100vh;
+    }
+
+    .chat
+    {   
+        display: none;
+    }
+
+    .header {
+        display: block;
+        height: unset;
+        padding: 1rem;
+        align-items: center;
+        justify-content: unset;
+        border: 2px solid;
+    }
+} */
