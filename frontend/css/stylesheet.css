@@ -157,8 +157,7 @@ ul,li {
     border-bottom: 2px solid;
     text-align: center;
     margin: auto;
-    padding: 0.75rem;
-    font-size: 24px;
+    padding: 0.5rem;
 }
 
 /* ROOM */
@@ -168,13 +167,17 @@ ul,li {
     max-width: 250px;
     border: 2px solid;
     border-top: 0;
-    overflow: hidden;
+    position: relative;
 }
 
 .room__ul {
-    height: 84%;
     overflow-y: auto;
     margin-right: 2px;
+    position: absolute;
+    top: 130px;
+    bottom: 2px;
+    left: 0;
+    right: 0;
 }
 
 .room__btn {
@@ -274,17 +277,22 @@ ul,li {
 .user {
     min-width: 250px;
     max-width: 250px;
-    overflow: hidden;
     border: 2px solid;
     border-top: 0;
     border-left: 0;
+    position: relative;
 }
 
 .user__ul {
-    height: 90%;
+
     overflow-y: auto;
     padding: 1rem;
     margin-right: 2px;
+    position: absolute;
+    top: 60px;
+    bottom: 2px;
+    left: 0;
+    right: 0;
 }
 
 .user__li {
