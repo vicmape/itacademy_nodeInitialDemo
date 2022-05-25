@@ -17,18 +17,14 @@ function sortBtnList(btn) {
 }
 
 function showUsers() {
-    var x = document.getElementById('userList');
-    x.style['background-color'] = 'red';
-    x.style['display'] = 'block';
+    var userList = document.getElementById('userList');
+    userList.classList.toggle('responsive');
 }
 
 function showRooms() {
-    var x = document.getElementById('roomList');
-    x.style['background-color'] = 'red';
-    x.style['display'] = 'block';
-
-    var x = document.getElementById('room__form');
-    x.style['background-color'] = 'red';
-    x.style['display'] = 'flex';
-
+    var roomList = document.getElementById('roomList');
+    roomList.classList.toggle('responsive');
+    
+    var roomForm = document.getElementById('roomForm');
+    roomForm.classList.toggle('responsive');
 }

@@ -341,7 +341,7 @@ ul,li {
 /* MEDIA QUERIES */
 
 /* TABLET */
-@media all and (max-width: 1100px) {
+@media all and (min-width: 801px)and (max-width: 1100px) {
 
     .user {
         position: absolute;
@@ -362,7 +362,7 @@ ul,li {
 /* MOBILE */
 @media all and (max-width: 800px) {
 
-    .username {
+    .header__username {
         display: none;
     }
 
@@ -387,12 +387,22 @@ ul,li {
     .user {
         right: 0;
     }
+
     .room {
         left: 0;
     }
 
     .user__ul, .room__ul, .room__form {
         display:none;
+    }
+
+    .user__ul.responsive,
+    .room__ul.responsive {
+        display: block;
+    }
+    
+    .room__form.responsive {
+        display: flex;
     }
 
     .room__header {
