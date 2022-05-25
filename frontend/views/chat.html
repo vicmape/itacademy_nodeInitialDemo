@@ -10,12 +10,12 @@
     </head>
     <body>
         <header class="header">
-            <h2 id="userName" class="username"></h2>
-            <div class="header__names">
+            <h2 id="userName" class="header__username"></h2>
+            <div class="header__roomname">
                 <h2>ROOM</h2>
                 <h2 id="roomName"></h2>
             </div>
-            <div>
+            <div class="header__buttons">
                 <button class="button" id="matrix" type="button" onclick="matrix()">light</button>
                 <button class="button" type="button" onclick="logout()">Logout</button>
             </div>
@@ -23,7 +23,7 @@
         
         <div class="layout">
             <aside class="room">
-                <h1 class="header-section">ROOMS</h1>
+                <button class="collapsible" type="button">ROOMS</button>
                 <form id="roomForm" class="form" onsubmit="return createRoom(this)">
                     <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
                     <input class="button" type="submit" value="Create">
@@ -38,7 +38,7 @@
                 </form>
             </main>
             <aside class="user">
-                <h1 class="header-section">USERS</h1>
+                <button class="collapsible" type="button">USERS</button>
                 <ul id="userList" class="user__ul"></ul>
             </aside>
         </div>
