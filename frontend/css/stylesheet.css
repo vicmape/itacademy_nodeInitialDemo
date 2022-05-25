@@ -133,6 +133,8 @@ ul,li {
 }
 
 .chat__form {
+    display: flex;
+    padding: 0.75rem 0.5rem;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -160,13 +162,6 @@ ul,li {
 .input::placeholder {
     color: var(--color);
     opacity: 0.5;
-}
-
-/* FORM */
-
-.form {
-    display: flex;
-    padding: 0.75rem 0.5rem;
 }
 
 /* LOGIN && REGISTER */
@@ -221,6 +216,13 @@ ul,li {
     min-width: 260px;
     max-width: 260px;
     position: relative;
+}
+
+/* FORM */
+
+.roomForm {
+    display: flex;
+    padding: 0.75rem 0.5rem;
 }
 
 .room__header {

@@ -26,5 +26,9 @@ function showRooms() {
     var x = document.getElementById('roomList');
     x.style['background-color'] = 'red';
     x.style['display'] = 'block';
-    
+
+    var x = document.getElementById('roomForm');
+    x.style['background-color'] = 'red';
+    x.style['display'] = 'block';
+
 }
