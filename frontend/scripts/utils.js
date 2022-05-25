@@ -1,30 +1,39 @@
 function sortUlList(ul) {
-    var ul = document.getElementById(ul);
-    Array.from(ul.getElementsByTagName("LI"))
+    let list = document.getElementById(ul);
+    Array.from(list.getElementsByTagName("LI"))
         .sort((a, b) => {
             return a.textContent.localeCompare(b.textContent)
         })
-        .forEach(li => ul.appendChild(li));
+        .forEach(li => list.appendChild(li));
 }
 
 function sortBtnList(btn) {
-    var btn = document.getElementById(btn);
-    Array.from(btn.getElementsByTagName("BUTTON"))
+    let list = document.getElementById(btn);
+    Array.from(list.getElementsByTagName("BUTTON"))
         .sort((a, b) => {
             return a.textContent.localeCompare(b.textContent)
         })
-        .forEach(li => btn.appendChild(li));
+        .forEach(li => list.appendChild(li));
 }
 
 function showUsers() {
-    var userList = document.getElementById('userList');
+    let userList = document.getElementById('user');
     userList.classList.toggle('responsive');
+
+    let roomList = document.getElementById('room');
+    roomList.classList.toggle('d-none');
+
+    let chat = document.getElementById('chat');
+    chat.classList.toggle('d-none');
 }
 
 function showRooms() {
-    var roomList = document.getElementById('roomList');
+    let roomList = document.getElementById('room');
     roomList.classList.toggle('responsive');
-    
-    var roomForm = document.getElementById('roomForm');
-    roomForm.classList.toggle('responsive');
+
+    let userList = document.getElementById('user');
+    userList.classList.toggle('d-none');
+
+    let chat = document.getElementById('chat');
+    chat.classList.toggle('d-none');
 }

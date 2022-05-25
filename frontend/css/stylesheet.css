@@ -374,6 +374,7 @@ ul,li {
         bottom: 0;
         width: auto;
         border: 0;
+        z-index: 1;
     }
 
     .user, .room {
@@ -381,7 +382,6 @@ ul,li {
         top: 0;
         border-top: 0;
         max-width: unset;
-        z-index: 2;
     }
 
     .user {
@@ -396,12 +396,23 @@ ul,li {
         display:none;
     }
 
-    .user__ul.responsive,
-    .room__ul.responsive {
+    .user.responsive,
+    .room.responsive {
+        width: 100%;
+    }
+
+    .user.responsive .user__header,
+    .room.responsive .room__header{
+        background-color: var(--color);
+        color: var(--background-color);
+    }
+
+    .user.responsive .user__ul,
+    .room.responsive .room__ul{
         display: block;
     }
     
-    .room__form.responsive {
+    .room.responsive .room__form {
         display: flex;
     }
 

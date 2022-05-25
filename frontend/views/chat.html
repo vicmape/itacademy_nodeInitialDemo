@@ -20,7 +20,7 @@
         </header>
         
         <div class="layout">
-            <aside class="room">
+            <aside id="room" class="room">
                 <button class="room__header" type="button" ><strong>ROOMS</strong></button>
                 <button class="room__header collapse" type="button" onclick="showRooms()"><strong>ROOMS</strong></button>
                 <form id="roomForm" class="room__form" onsubmit="return createRoom(this)">
@@ -29,14 +29,14 @@
                 </form>
                 <ul id="roomList" class="room__ul"></ul>
             </aside>
-            <main class="chat">
+            <main id="chat" class="chat">
                 <ul id="messageList" class="chat__ul"></ul>
                 <form id="messageForm" class="chat__form" onsubmit="return sendMessage(this)">
                     <input class="input" type="text" id="newMessage" name="newMessage" autocomplete="off" autofocus>
                     <input class="button" type="submit" value="Send">
                 </form>
             </main>
-            <aside class="user">
+            <aside id="user" class="user">
                 <button class="user__header" type="button"><strong>USERS</strong></button>
                 <button class="user__header collapse" type="button" onclick="showUsers()"><strong>USERS</strong></button>
                 <ul id="userList" class="user__ul"></ul>

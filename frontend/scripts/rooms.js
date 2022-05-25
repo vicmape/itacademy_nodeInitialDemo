@@ -47,7 +47,7 @@ function displayRoom(room) {
             document.getElementById(sessionStorage.roomId).classList.remove('room__btn--active')
         }
 
-        btn.classList.add('room__btn--active')
+        btn.classList.add('room__btn--active');
         joinRoom(room);
     }
 
