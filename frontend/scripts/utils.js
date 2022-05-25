@@ -15,3 +15,16 @@ function sortBtnList(btn) {
         })
         .forEach(li => btn.appendChild(li));
 }
+
+function showUsers() {
+    var x = document.getElementById('userList');
+    x.style['background-color'] = 'red';
+    x.style['display'] = 'block';
+}
+
+function showRooms() {
+    var x = document.getElementById('roomList');
+    x.style['background-color'] = 'red';
+    x.style['display'] = 'block';
+    
+}

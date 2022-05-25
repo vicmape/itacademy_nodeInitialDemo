@@ -21,7 +21,8 @@
         
         <div class="layout">
             <aside class="room">
-                <button class="collapsible" type="button"><strong>ROOMS</strong></button>
+                <button class="room__header" type="button" ><strong>ROOMS</strong></button>
+                <button class="room__header collapse" type="button" onclick="showRooms()"><strong>ROOMS</strong></button>
                 <form id="roomForm" class="form" onsubmit="return createRoom(this)">
                     <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
                     <input class="button" type="submit" value="Create">
@@ -36,7 +37,8 @@
                 </form>
             </main>
             <aside class="user">
-                <button class="collapsible" type="button"><strong>USERS</strong></button>
+                <button class="user__header" type="button"><strong>USERS</strong></button>
+                <button class="user__header collapse" type="button" onclick="showUsers()"><strong>USERS</strong></button>
                 <ul id="userList" class="user__ul"></ul>
             </aside>
         </div>

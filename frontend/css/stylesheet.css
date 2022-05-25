@@ -51,6 +51,16 @@ ul,li {
     margin: 0;
 }
 
+/* HANDLERS */
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
 /* ERROR */
 
 .error {
@@ -87,20 +97,6 @@ ul,li {
 .button:hover {
     box-shadow: 0px 0px 20px var(--color);
 }
-
-/* BUTTON COLLAPSIBLE */
-
-.collapsible {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 28px;
-    border: 0;
-    border-bottom: 2px solid var(--color);
-    color: var(--color);
-    background-color: var(--background-color);
-    text-align: center;
-}
-
 
 /* CHAT */
 
@@ -207,24 +203,16 @@ ul,li {
     display:flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 1rem;
 }
 
 .header__username {
-    height: auto;
-    width: 100%;
-    text-align: center;
 }
 
 .header__roomname {
-    height: auto;
-    width: 100%;
-    text-align: center;
 }
 
 .header__buttons {
-    height: auto;
-    width: 100%;
-    text-align: center;
 }
 
 /* ROOM */
@@ -233,6 +221,17 @@ ul,li {
     min-width: 260px;
     max-width: 260px;
     position: relative;
+}
+
+.room__header {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 28px;
+    border: 0;
+    border-bottom: 2px solid var(--color);
+    color: var(--color);
+    background-color: var(--background-color);
+    text-align: center;
 }
 
 .room__ul {
@@ -303,6 +302,17 @@ ul,li {
     position: relative;
 }
 
+.user__header {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 28px;
+    border: 0;
+    border-bottom: 2px solid var(--color);
+    color: var(--color);
+    background-color: var(--background-color);
+    text-align: center;
+}
+
 .user__ul {
     overflow-y: auto;
     padding: 1rem;
@@ -319,6 +329,13 @@ ul,li {
     word-break: break-all;
 }
 
+
+/* COLLAPSIBLE */
+
+.collapse {
+    display: none;
+}
+
 /* MEDIA QUERIES */
 
 /* TABLET */
@@ -330,7 +347,7 @@ ul,li {
         height: 50%;
         border-top: 2px solid var(--color)
     }
-    
+
     .room {
         height: 50%;
     }
@@ -357,34 +374,34 @@ ul,li {
         border: 0;
     }
 
-    .user {
-        min-width: unset;
-        max-width: unset;
+    .user, .room {
         width: 50%;
-        height: min-content;
         top: 0;
-        right: 0;
-        border-left: 1px solid var(--color);
         border-top: 0;
+        max-width: unset;
+        z-index: 2;
     }
-    
-    .user__ul {
+
+    .user {
+        right: 0;
+    }
+    .room {
+        left: 0;
+    }
+
+    .user__ul, .room__ul {
         display:none;
     }
-    
-    .room {
-        min-width: unset;
-        max-width: unset;
-        width: 50%;
-        height: min-content;
-        border-right: 1px solid var(--color);
+
+    .room__header {
+        border-right: 2px solid var(--color)
     }
 
-    .room > form {
+    .room__header, .user__header {
         display: none;
     }
 
-    .room__ul {
-        display: none;
+    .collapse {
+        display: block;
     }
 }
