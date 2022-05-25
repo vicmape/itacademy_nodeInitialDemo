@@ -220,7 +220,7 @@ ul,li {
 
 /* FORM */
 
-.roomForm {
+.room__form {
     display: flex;
     padding: 0.75rem 0.5rem;
 }
@@ -391,7 +391,7 @@ ul,li {
         left: 0;
     }
 
-    .user__ul, .room__ul {
+    .user__ul, .room__ul, .room__form {
         display:none;
     }
 
