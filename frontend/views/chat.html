@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>4CHAT</title>
+        <title>RETROCHAT</title>
         <meta charset="UTF-8">
         <meta name="keywords" content="HTML, CSS, JavaScript, Node">
-        <meta name="description" content="This is my first 4chat">
+        <meta name="description" content="This is my first RETROCHAT">
         <link rel="icon" href="../img/icon.png" type="image/png" sizes="16x16">
         <link rel="stylesheet" href="../css/stylesheet.css">
     </head>
     <body>
         <header class="header">
-            <h2 id="userName" class="header__username"></h2>
-            <div class="header__roomname">
-                <h2>ROOM</h2>
-                <h2 id="roomName"></h2>
-            </div>
+
+            <h1 id="userName" class="header__username"></h1>
+            <h1 id="roomName" class="header__roomname"></h1>
             <div class="header__buttons">
                 <button class="button" id="matrix" type="button" onclick="matrix()">light</button>
                 <button class="button" type="button" onclick="logout()">Logout</button>
@@ -23,7 +21,7 @@
         
         <div class="layout">
             <aside class="room">
-                <button class="collapsible" type="button">ROOMS</button>
+                <button class="collapsible" type="button"><strong>ROOMS</strong></button>
                 <form id="roomForm" class="form" onsubmit="return createRoom(this)">
                     <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
                     <input class="button" type="submit" value="Create">
@@ -38,7 +36,7 @@
                 </form>
             </main>
             <aside class="user">
-                <button class="collapsible" type="button">USERS</button>
+                <button class="collapsible" type="button"><strong>USERS</strong></button>
                 <ul id="userList" class="user__ul"></ul>
             </aside>
         </div>

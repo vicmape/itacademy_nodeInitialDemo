@@ -63,7 +63,7 @@ ul,li {
 /* LAYOUT */
 
 .layout {
-    height: calc(100vh - 10vh - 2rem);
+    height: calc(100vh - 10vh - 22px);
     display:flex;
     position: relative;
     border: 2px solid var(--color);
@@ -93,7 +93,7 @@ ul,li {
 .collapsible {
     width: 100%;
     padding: 0.5rem;
-    font-size: 2em;
+    font-size: 28px;
     border: 0;
     border-bottom: 2px solid var(--color);
     color: var(--color);
@@ -159,7 +159,6 @@ ul,li {
 
 .header {
     height: 10vh;
-    padding: 0 1rem;
     border: 2px solid var(--color);
     display:flex;
     align-items: center;
@@ -168,17 +167,20 @@ ul,li {
 
 .header__username {
     height: auto;
-    width: 50%;
+    width: 100%;
     text-align: center;
-    justify-content: center;
 }
 
 .header__roomname {
-
+    height: auto;
+    width: 100%;
+    text-align: center;
 }
 
 .header__buttons {
-    
+    height: auto;
+    width: 100%;
+    text-align: center;
 }
 
 /* ROOM */
@@ -194,7 +196,7 @@ ul,li {
     margin-right: 2px;
     position: absolute;
     top: 130px;
-    bottom: 4px;
+    bottom: 2px;
     left: 0;
     right: 0;
 }
