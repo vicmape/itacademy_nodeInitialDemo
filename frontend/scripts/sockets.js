@@ -33,7 +33,8 @@ socket.on('connect', () => {
     })
 
     socket.on('new-room', (room, users) => {
-        // console.log('new-room', room);
+        // console.log('new-room room', room);
+        // console.log('new-room users', users);
         displayRoom(room);
         displayRoomUsers(room, users);
     })
