@@ -101,6 +101,50 @@ ul,li {
     text-align: center;
 }
 
+
+/* CHAT */
+
+.chat {
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    padding: 1rem;
+    border-left: 2px solid var(--color);
+    border-right: 2px solid var(--color);
+}
+
+.chat__ul {
+    overflow: hidden;
+    overflow-y: auto;
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 2px;
+    bottom: 58px;
+    padding: 2rem;
+}
+
+.chat__li {
+    word-break: break-all;
+}
+
+.chat__li--join {
+    font-style: italic;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.chat__form {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 2px solid  var(--color);
+}
+
+
 /* INPUT */
 
 .input {
@@ -126,7 +170,7 @@ ul,li {
 
 .form {
     display: flex;
-    padding: 1.25rem 0.5rem;
+    padding: 0.75rem 0.5rem;
 }
 
 /* LOGIN && REGISTER */
@@ -196,7 +240,7 @@ ul,li {
     margin-right: 2px;
     position: absolute;
     top: 130px;
-    bottom: 2px;
+    bottom: 4px;
     left: 0;
     right: 0;
 }
@@ -220,48 +264,6 @@ ul,li {
 .room__btn--active {
     background-color: var(--color);
     color: var(--background-color);
-}
-
-/* CHAT */
-
-.chat {
-    width: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: relative;
-    padding: 1rem;
-    border-left: 2px solid var(--color);
-    border-right: 2px solid var(--color);
-}
-
-.chat__li {
-    word-break: break-all;
-}
-
-.chat__li--join {
-    font-style: italic;
-    text-align: center;
-    font-size: 12px;
-    line-height: 24px;
-}
-
-.chat__ul {
-    overflow: hidden;
-    overflow-y: auto;
-    position: absolute;
-    left: 2px;
-    right: 2px;
-    top: 2px;
-    bottom: 48px;
-    padding: 2rem;
-}
-
-.chat__form {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0.50rem 1rem;
 }
 
 /* These are the ul inside each message */
