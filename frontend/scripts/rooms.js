@@ -23,7 +23,7 @@ function joinRoom(room) {
     sessionStorage.roomId = room.roomId;
 
     // Change room name
-    document.getElementById("roomName").innerHTML = `ROOM: ${room.roomName}`;
+    document.getElementById("roomName").innerHTML = `${room.roomName}`;
 
     // Delete messages
     document.getElementById("messageList").innerHTML = "";
