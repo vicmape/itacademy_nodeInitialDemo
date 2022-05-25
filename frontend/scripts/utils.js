@@ -17,22 +17,31 @@ function sortBtnList(btn) {
 }
 
 function showUsers() {
-    let userList = document.getElementById('user');
-    userList.classList.toggle('responsive');
-
-    let roomList = document.getElementById('room');
-    roomList.classList.toggle('d-none');
-
+    let user = document.getElementById('user');
+    user.classList.toggle('responsive');
+    
+    let room = document.getElementById('room');
+    room.classList.toggle('d-none');
+    
     let chat = document.getElementById('chat');
     chat.classList.toggle('d-none');
+    
+    if (user.classList.contains('responsive')){
+        let userList = document.getElementById('userList');
+        userList.addEventListener('click', e => {
+            user.classList.remove('responsive');
+            room.classList.remove('d-none');
+            chat.classList.remove('d-none');
+        });
+    }
 }
 
 function showRooms() {
-    let roomList = document.getElementById('room');
-    roomList.classList.toggle('responsive');
+    let room = document.getElementById('room');
+    room.classList.toggle('responsive');
 
-    let userList = document.getElementById('user');
-    userList.classList.toggle('d-none');
+    let user = document.getElementById('user');
+    user.classList.toggle('d-none');
 
     let chat = document.getElementById('chat');
     chat.classList.toggle('d-none');

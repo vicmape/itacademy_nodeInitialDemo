@@ -3,9 +3,8 @@ function matrix() {
     let current = document.getElementById("matrix").innerHTML;
 
     if (current === "light") {
-        document.getElementById("matrix").innerHTML = 'dark';
+        document.getElementById("matrix").innerHTML = 'matrix';
 
-        
         r.style.setProperty("--color", "black");
         r.style.setProperty("--background-color", "white");
     } else {

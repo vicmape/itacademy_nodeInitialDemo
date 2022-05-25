@@ -121,6 +121,11 @@ ul,li {
     padding: 2rem;
 }
 
+.chat__ul > li {
+    margin-top: 2rem;
+    font-size: 12px;
+}
+
 .chat__li {
     word-break: break-all;
 }
@@ -378,6 +383,7 @@ ul,li {
     }
 
     .user, .room {
+        min-width: unset;
         width: 50%;
         top: 0;
         border-top: 0;

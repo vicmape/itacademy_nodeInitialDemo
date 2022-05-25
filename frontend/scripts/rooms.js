@@ -49,12 +49,27 @@ function displayRoom(room) {
 
         btn.classList.add('room__btn--active');
         joinRoom(room);
+
+
+        let r = document.getElementById('room');
+        if (r.classList.contains('responsive')) {
+
+            r.classList.remove('responsive');
+            
+            let user = document.getElementById('user');
+            user.classList.remove('d-none');
+            
+            let chat = document.getElementById('chat');
+            chat.classList.remove('d-none');
+        }
     }
 
     const rooms = document.getElementById("roomList");
     rooms.appendChild(btn);
 
     sortBtnList("roomList");
+
+
 }
 
 
