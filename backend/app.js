@@ -76,7 +76,7 @@ io.on('connection', socket => {
     socket.on('get-rooms', async () => {
 
         let getRoomsRes = await getRooms();
-         // console.log(`get-rooms`, getRoomsRes)
+        // console.log(`get-rooms`, getRoomsRes)
 
         if (getRoomsRes.status === 'success') {
             getRoomsRes.rooms.forEach (async (room) => {
@@ -95,47 +95,43 @@ io.on('connection', socket => {
 
         if (joinRoomRes.status === 'success') {
 
-            // If we are joining a different room then do some stuff
-            if (room.roomId !== joinRoomRes.oldRoom.roomId) {
+            if (joinRoomRes.oldRoom.roomId) {
 
-                if (joinRoomRes.oldRoom.roomId) {
+                // leave the old room
+                socket.leave(joinRoomRes.oldRoom.roomId);
+                // console.log(`user ${user.userName} left room ${joinRoomRes.oldRoom.roomName}`);
 
-                    // leave the old room
-                    socket.leave(joinRoomRes.oldRoom.roomId);
-                    // console.log(`user ${user.userName} left room ${joinRoomRes.oldRoom.roomName}`);
+                // inform old room we left
+                socket.broadcast.to(joinRoomRes.oldRoom.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
 
-                    // inform old room we left
-                    socket.broadcast.to(joinRoomRes.oldRoom.roomId).emit('new-join-message', `${joinRoomRes.user.userName} left the room`);
+                // get the old room #users
+                let getUsersRes = await getUsers(joinRoomRes.oldRoom);
 
-                    // get the old room #users
-                    let getUsersRes = await getUsers(joinRoomRes.oldRoom);
+                // inform everyone about the old room #users
+                io.emit('update-room-users', joinRoomRes.oldRoom, getUsersRes.users);
+            }
 
-                    // inform everyone about the old room #users
-                    io.emit('update-room-users', joinRoomRes.oldRoom, getUsersRes.users);
-                }
+            // join the new room
+            socket.join(room.roomId);
+            // console.log(`user ${user.userName} joined room ${room.roomName}`);
 
-                // join the new room
-                socket.join(room.roomId);
-                // console.log(`user ${user.userName} joined room ${room.roomName}`);
+            // inform new room we came
+            socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
 
-                // inform new room we came
-                socket.broadcast.to(room.roomId).emit('new-join-message', `${joinRoomRes.user.userName} joined the room`);
+            // get the new room #users
+            let getUsersRes = await getUsers(room);
 
-                // get the new room #users
-                let getUsersRes = await getUsers(room);
+            // inform everyone about the new room #users
+            io.emit('update-room-users', room, getUsersRes.users);
 
-                // inform everyone about the new room #users
-                io.emit('update-room-users', room, getUsersRes.users);
+            // Get the messages of the new room
+            let getMessagesRes = await getMessages(room);
+            // console.log('get-messages', getMessagesRes)
 
-                // Get the messages of the new room
-                let getMessagesRes = await getMessages(room);
-                // console.log('get-messages', getMessagesRes)
-
-                if ((getMessagesRes.status === 'success') && (getMessagesRes.messages !== null)) {
-                    getMessagesRes.messages.forEach (message => io.to(socket.id).emit('new-message', message))
-                } else {
-                    io.to(socket.id).emit('error', getMessagesRes.message)
-                }
+            if ((getMessagesRes.status === 'success') && (getMessagesRes.messages !== null)) {
+                getMessagesRes.messages.forEach (message => io.to(socket.id).emit('new-message', message))
+            } else {
+                io.to(socket.id).emit('error', getMessagesRes.message)
             }
         } else {
             io.to(socket.id).emit('error', joinRoomRes.message);
