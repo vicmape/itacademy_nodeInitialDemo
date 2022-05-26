@@ -27,6 +27,9 @@ function joinRoom(room) {
 
     // Delete messages
     document.getElementById("messageList").innerHTML = "";
+
+    // Delete every possible error in the room error
+    document.getElementById("room_error").innerHTML = "";
 }
 
 function displayRoom(room) {
@@ -50,7 +53,6 @@ function displayRoom(room) {
         btn.classList.add('room__btn--active');
         joinRoom(room);
 
-
         let r = document.getElementById('room');
         if (r.classList.contains('responsive')) {
 
@@ -68,8 +70,6 @@ function displayRoom(room) {
     rooms.appendChild(btn);
 
     sortBtnList("roomList");
-
-
 }
 
 

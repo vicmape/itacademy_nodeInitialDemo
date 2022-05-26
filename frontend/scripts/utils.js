@@ -19,6 +19,10 @@ function sortBtnList(btn) {
 }
 
 function showUsers() {
+
+    // Delete every possible error in the room error
+    document.getElementById("room_error").innerHTML = "";
+
     let user = document.getElementById('user');
     user.classList.toggle('responsive');
     
@@ -35,11 +39,18 @@ function showUsers() {
             user.classList.remove('responsive');
             room.classList.remove('d-none');
             chat.classList.remove('d-none');
+            
+            // Delete every possible error in the room error
+            document.getElementById("room_error").innerHTML = "";
         });
     }
 }
 
 function showRooms() {
+
+    // Delete every possible error in the room error
+    document.getElementById("room_error").innerHTML = "";
+
     let room = document.getElementById('room');
     room.classList.toggle('responsive');
 
@@ -56,6 +67,10 @@ function showRooms() {
             room.classList.remove('responsive');
             user.classList.remove('d-none');
             chat.classList.remove('d-none');
+
+    
+            // Delete every possible error in the room error
+            document.getElementById("room_error").innerHTML = "";
         });
     }
 }
