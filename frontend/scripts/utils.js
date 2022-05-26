@@ -25,10 +25,10 @@ function showUsers() {
 
     let user = document.getElementById('user');
     user.classList.toggle('responsive');
-    
+
     let room = document.getElementById('room');
     room.classList.toggle('d-none');
-    
+
     let chat = document.getElementById('chat');
     chat.classList.toggle('d-none');
     
@@ -39,7 +39,7 @@ function showUsers() {
             user.classList.remove('responsive');
             room.classList.remove('d-none');
             chat.classList.remove('d-none');
-            
+
             // Delete every possible error in the room error
             document.getElementById("roomError").innerHTML = "";
         });
@@ -68,7 +68,6 @@ function showRooms() {
             user.classList.remove('d-none');
             chat.classList.remove('d-none');
 
-    
             // Delete every possible error in the room error
             document.getElementById("roomError").innerHTML = "";
         });
