@@ -221,6 +221,7 @@ ul,li {
     min-width: 260px;
     max-width: 260px;
     position: relative;
+    background-color: var(--background-color);
 }
 
 /* FORM */
@@ -307,6 +308,7 @@ ul,li {
     min-width: 260px;
     max-width: 260px;
     position: relative;
+    background-color: var(--background-color);
 }
 
 .user__header {
