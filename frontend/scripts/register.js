@@ -22,8 +22,8 @@ registerForm.addEventListener("submit", e => {
         if (data.status === "success") {
             window.location.assign('../views/index.html')
         } else {
-            alert(data.message)
+            document.getElementById("register_error").innerHTML = data.message;
         }
-    }).catch(err => alert(err.message));
+    }).catch(err => document.getElementById("register_error").innerHTML = err.message);
 
 })

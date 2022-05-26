@@ -52,6 +52,7 @@ socket.on('connect', () => {
 
     socket.on('error', message => {
         alert(message);
+        // document.getElementById("chat_error").innerHTML = message;
     })
 
     socket.on('disconnect', () => {
