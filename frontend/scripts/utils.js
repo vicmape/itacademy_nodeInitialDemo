@@ -9,8 +9,10 @@ function sortUlList(ul) {
 
 function sortBtnList(btn) {
     let list = document.getElementById(btn);
-    Array.from(list.getElementsByTagName("BUTTON"))
-        .sort((a, b) => {
+    let arr = Array.from(list.getElementsByTagName("BUTTON"))
+    let lobby = arr.shift(); // Lobby is always first created room ever
+    list.appendChild(lobby);
+        arr.sort((a, b) => {
             return a.textContent.localeCompare(b.textContent)
         })
         .forEach(li => list.appendChild(li));
