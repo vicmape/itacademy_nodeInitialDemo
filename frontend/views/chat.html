@@ -23,11 +23,12 @@
             <aside id="room" class="room">
                 <button class="room__header" type="button" ><strong>ROOMS</strong></button>
                 <button class="room__header collapse" type="button" onclick="showRooms()"><strong>ROOMS</strong></button>
-                <form id="roomForm" class="room__form" onsubmit="return createRoom(this)">
+                <form id="roomForm" class="room__form" onsubmit="return createRoom()">
                     <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
                     <input class="button" type="submit" value="Create">
                 </form>
                 <div id="roomError" class="error"></div>
+                <div id="roomSuccess" class="success"></div>
                 <ul id="roomList" class="room__ul"></ul>
             </aside>
             <main id="chat" class="chat">

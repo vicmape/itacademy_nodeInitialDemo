@@ -54,6 +54,11 @@ socket.on('connect', () => {
         document.getElementById("roomError").innerHTML = message;
     })
 
+    socket.on('success', message => {
+        console.log("here")
+        document.getElementById("roomSuccess").innerHTML = message;
+    })
+
     socket.on('disconnect', () => {
       // console.log('Socket disconnected')
     });

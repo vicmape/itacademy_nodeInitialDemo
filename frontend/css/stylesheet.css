@@ -4,11 +4,33 @@
     src: url('../css/font/hack/ttf/Hack-Regular.ttf') format("truetype");
 }
 
+/* VARIABLES */
+
 :root {
     --background-color: black;
     --color: lime;
 }
 
+/* SCROLL BAR */
+
+* {
+    scrollbar-width: 5px;
+    scrollbar-color:var(--color) var(--background-color);
+}
+
+/* SCROLL BAR WEBKIT */
+
+::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color);
+    border-radius: 15px;
+}
+
+/* GENERIC TAGS */
 * {
     font-size: 100%;
     font-family: 'Hack', sans-serif;
@@ -20,21 +42,13 @@ a {
 
 a:hover {
     box-shadow: 0px 0px 20px var(--color);
+    background-color: var(--color);
+    color: var(--background-color);
 }
 
 body {
     color: var(--color);
     background-color: var(--background-color);
-}
-
-::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--color);
-    border-radius: 15px;
 }
 
 h1 {
@@ -53,11 +67,20 @@ ul,li {
 
 /* ERROR */
 
-.error {
+
+.error, .success {
     font-style: italic;
+    font-weight: bold;
     font-size: 12px;
-    color: red;
     text-align: center;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: var(--color);
 }
 
 /* LAYOUT */
@@ -87,6 +110,8 @@ ul,li {
 
 .button:hover {
     box-shadow: 0px 0px 20px var(--color);
+    background-color: var(--color);
+    color: var(--background-color);
 }
 
 /* CHAT */
@@ -197,15 +222,6 @@ ul,li {
     padding: 0 1rem;
 }
 
-.header__username {
-}
-
-.header__roomname {
-}
-
-.header__buttons {
-}
-
 /* ROOM */
 
 .room {
@@ -244,6 +260,7 @@ ul,li {
 }
 
 .room__btn {
+    border: none;
     padding: 0.25rem 1rem;
     display: block;
     width: calc(100% - 1rem);
@@ -257,6 +274,9 @@ ul,li {
 
 .room__btn:hover {
     box-shadow: 0px 0px 20px var(--color);
+    background-color: var(--color);
+    color: var(--background-color);
+    cursor: pointer;
 }
 
 .room__btn--active {

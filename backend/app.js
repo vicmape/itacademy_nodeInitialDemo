@@ -68,6 +68,7 @@ io.on('connection', socket => {
             let getUsersRes = await getUsers(newRoomRes.room);
             // inform about new room #users
             io.emit('new-room', newRoomRes.room, getUsersRes.users);
+            io.to(socket.id).emit('success', `${roomName} created`);
         } else {
             io.to(socket.id).emit('error', newRoomRes.message);
         }

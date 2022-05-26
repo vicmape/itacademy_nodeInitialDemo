@@ -1,10 +1,21 @@
-function createRoom(form) {
-    const newRoomName = form.newRoom.value
+function createRoom() {
+    const newRoomName = document.getElementById("roomForm").newRoom.value;
 
-    if (newRoomName) {
-        socket.emit('new-room', newRoomName)
-
-        form.newRoom.value = '';
+    document.getElementById("roomSuccess").innerHTML = "";
+    
+    // Check for regex
+    if (/^\s/.test(newRoomName)) {
+        document.getElementById("roomError").innerHTML = "Room name cannot start with space";
+    } else if (/\s$/.test(newRoomName)) {
+        document.getElementById("roomError").innerHTML = "Room name cannot end with space";
+    } else if (/\s{2}/.test(newRoomName)) {
+        document.getElementById("roomError").innerHTML = "Room name cannot have two spaces";
+    } else {
+        // We are good. Then proceed with room creation
+        if (newRoomName) {
+            socket.emit('new-room', newRoomName)
+            document.getElementById("roomForm").newRoom.value = '';
+        }
     }
 
     return false;
@@ -28,8 +39,13 @@ function joinRoom(room) {
     // Delete messages
     document.getElementById("messageList").innerHTML = "";
 
-    // Delete every possible error in the room error
+    // Delete every error/success message
     document.getElementById("roomError").innerHTML = "";
+    document.getElementById("roomSuccess").innerHTML = "";
+    document.getElementById("roomForm").newRoom.value = "";
+    document.getElementById("messageForm").newMessage.value = "";
+
+    document.getElementById("newMessage").focus();
 }
 
 function displayRoom(room) {
