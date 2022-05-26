@@ -31,6 +31,7 @@ function showUsers() {
     if (user.classList.contains('responsive')){
         let userList = document.getElementById('userList');
         userList.addEventListener('click', e => {
+            e.preventDefault();
             user.classList.remove('responsive');
             room.classList.remove('d-none');
             chat.classList.remove('d-none');
@@ -47,4 +48,14 @@ function showRooms() {
 
     let chat = document.getElementById('chat');
     chat.classList.toggle('d-none');
+
+    if (room.classList.contains('responsive')){
+        let roomList = document.getElementById('roomList');
+        roomList.addEventListener('click', e => {
+            e.preventDefault();
+            room.classList.remove('responsive');
+            user.classList.remove('d-none');
+            chat.classList.remove('d-none');
+        });
+    }
 }
