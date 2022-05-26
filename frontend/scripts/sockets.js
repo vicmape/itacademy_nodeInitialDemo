@@ -51,7 +51,7 @@ socket.on('connect', () => {
     })
 
     socket.on('error', message => {
-        document.getElementById("room_error").innerHTML = message;
+        document.getElementById("roomError").innerHTML = message;
     })
 
     socket.on('disconnect', () => {

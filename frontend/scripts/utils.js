@@ -21,7 +21,7 @@ function sortBtnList(btn) {
 function showUsers() {
 
     // Delete every possible error in the room error
-    document.getElementById("room_error").innerHTML = "";
+    document.getElementById("roomError").innerHTML = "";
 
     let user = document.getElementById('user');
     user.classList.toggle('responsive');
@@ -41,7 +41,7 @@ function showUsers() {
             chat.classList.remove('d-none');
             
             // Delete every possible error in the room error
-            document.getElementById("room_error").innerHTML = "";
+            document.getElementById("roomError").innerHTML = "";
         });
     }
 }
@@ -49,7 +49,7 @@ function showUsers() {
 function showRooms() {
 
     // Delete every possible error in the room error
-    document.getElementById("room_error").innerHTML = "";
+    document.getElementById("roomError").innerHTML = "";
 
     let room = document.getElementById('room');
     room.classList.toggle('responsive');
@@ -70,7 +70,7 @@ function showRooms() {
 
     
             // Delete every possible error in the room error
-            document.getElementById("room_error").innerHTML = "";
+            document.getElementById("roomError").innerHTML = "";
         });
     }
 }

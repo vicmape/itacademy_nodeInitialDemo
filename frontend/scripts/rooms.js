@@ -29,7 +29,7 @@ function joinRoom(room) {
     document.getElementById("messageList").innerHTML = "";
 
     // Delete every possible error in the room error
-    document.getElementById("room_error").innerHTML = "";
+    document.getElementById("roomError").innerHTML = "";
 }
 
 function displayRoom(room) {
