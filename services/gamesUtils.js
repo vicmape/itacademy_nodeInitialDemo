@@ -1,4 +1,3 @@
-const database = require('../config/database');
 const {Players, Rolls} = require ('../models/dices');
 
 async function runGame (req, res) {
