@@ -7,6 +7,11 @@ registerForm.addEventListener("submit", e => {
     const password = registerForm.password.value;
     const repassword = registerForm.repassword.value;
 
+    if (/\s/.test(userName)) {
+        document.getElementById("register_error").innerHTML = 'User name cannot contain spaces';
+        return;
+    }
+
     if (password !== repassword) {
         document.getElementById("register_error").innerHTML = 'Your passwords do not match';
         return;
