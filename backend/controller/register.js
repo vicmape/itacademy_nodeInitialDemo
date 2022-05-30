@@ -10,6 +10,8 @@ module.exports = async (req, res) => {
         if (!userName) return res.status(400).send({ status: "fail", message: `Username not provided`});
         if (!password) return res.status(400).send({ status: "fail", message: `Password not provided`});
 
+        if (/\s/.test(userName)) return res.status(400).send({ status: "fail", message: `User name cannot have spaces`});
+
         const exist = await Users.find({userName});
         if(exist.length > 0) return res.status(400).send({ status: "fail", message: `Username already registered`});
 
