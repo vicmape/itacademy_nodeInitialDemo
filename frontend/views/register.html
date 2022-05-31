@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RETROCHAT</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="HTML, CSS, JavaScript, Node">
+        <meta name="description" content="This is my first RETROCHAT">
+        <link rel="icon" href="../img/icon.png" type="image/png" sizes="16x16">
+        <link rel="stylesheet" href="../css/stylesheet.css">
+    </head>
+    <body>
+        <div class="card">
+            <form id="registerForm">
+                <p><input class="input card__input" type="text" name="userName" placeholder="Username... " maxlength="16" spellcheck="false" required autofocus></p>
+                <p><input class="input card__input" type="password" name="password" placeholder="Password... " spellcheck="false" required></p>
+                <p><input class="input card__input" type="password" name="repassword" placeholder="Repeat password... " spellcheck="false" required></p>
+                <p><span id="register_error" class="error"></span></p>
+                <input class="button card__button" type="submit" value="Register">
+            </form>
+            <p>Have an account? <a href="./index.html">Login</a></p>
+        </div>
+    </body>
+</html>
+
+<script src="../scripts/register.js"></script>

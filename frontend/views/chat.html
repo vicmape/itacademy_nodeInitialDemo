@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RETROCHAT</title>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="HTML, CSS, JavaScript, Node">
+        <meta name="description" content="This is my first RETROCHAT">
+        <link rel="icon" href="../img/icon.png" type="image/png" sizes="16x16">
+        <link rel="stylesheet" href="../css/stylesheet.css">
+    </head>
+    <body>
+        <header class="header">
+
+            <h1 id="userName" class="header__username"></h1>
+            <h1 id="roomName" class="header__roomname"></h1>
+            <div class="header__buttons">
+                <button class="button" id="matrix" type="button" onclick="matrix()">light</button>
+                <button class="button" type="button" onclick="logout()">Logout</button>
+            </div>
+        </header>
+        
+        <div class="layout">
+            <aside id="room" class="room">
+                <button class="room__header" type="button" ><strong>ROOMS</strong></button>
+                <button class="room__header collapse" type="button" onclick="showRooms()"><strong>ROOMS</strong></button>
+                <form id="roomForm" class="room__form" onsubmit="return createRoom()">
+                    <input class="input" type="text" id="newRoom" name="newRoom" placeholder="New room... " maxlength="16" spellcheck="false" autocomplete="off" required>
+                    <input class="button" type="submit" value="Create">
+                </form>
+                <div id="roomError" class="error"></div>
+                <div id="roomSuccess" class="success"></div>
+                <ul id="roomList" class="room__ul"></ul>
+            </aside>
+            <main id="chat" class="chat">
+                <ul id="messageList" class="chat__ul"></ul>
+                <form id="messageForm" class="chat__form" onsubmit="return sendMessage(this)">
+                    <input class="input" type="text" id="newMessage" name="newMessage" autocomplete="off" autofocus>
+                    <input class="button" type="submit" value="Send">
+                </form>
+            </main>
+            <aside id="user" class="user">
+                <button class="user__header" type="button"><strong>USERS</strong></button>
+                <button class="user__header collapse" type="button" onclick="showUsers()"><strong>USERS</strong></button>
+                <ul id="userList" class="user__ul"></ul>
+            </aside>
+        </div>
+    </body>
+</html>
+
+<script src="../scripts/initDefaults.js"></script>
+
+<script src="../scripts/utils.js"></script>
+<script src="../scripts/rooms.js"></script>
+<script src="../scripts/users.js"></script>
+<script src="../scripts/logout.js"></script>
+<script src="../scripts/matrix.js"></script>
+<script src="../scripts/messages.js"></script>
+    
+<script src="https://cdn.socket.io/4.5.0/socket.io.min.js" integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous"></script>
+<script src="../scripts/sockets.js"></script>
